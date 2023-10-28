@@ -30,6 +30,17 @@ const LanguageDropdown = ({ settings, saveSettings }) => {
       menuProps={{ sx: { '& .MuiMenu-paper': { mt: 4.25, minWidth: 130 } } }}
       options={[
         {
+          text: 'Spanish',
+          menuItemProps: {
+            sx: { py: 2 },
+            selected: i18n.language === 'es',
+            onClick: () => {
+              handleLangItemClick('es')
+              saveSettings({ ...settings, direction: 'ltr' })
+            }
+          }
+        },
+        {
           text: 'English',
           menuItemProps: {
             sx: { py: 2 },

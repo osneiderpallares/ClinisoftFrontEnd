@@ -10,6 +10,9 @@ import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
 import MuiMenu from '@mui/material/Menu'
 import MuiMenuItem from '@mui/material/MenuItem'
+//Elegir Idioma
+import { useTranslation } from 'react-i18next'
+
 
 //import Infobasic from '/pages/info-basic'
 import { useRouter } from 'next/router'
@@ -86,13 +89,13 @@ const MenuCustomized = () => {
       color: 'text.secondary'
     }
   }
-
+  const {t}=useTranslation();
   return (
     <div>
       <MenuItemStyled sx={{ p: 0 }} onClick={() => handleClose('/pages/moduls')}>
         <Box sx={styles}>
           <Icon icon='tabler:folder' />
-          Módulos
+           {t('Moduls')}
         </Box>
       </MenuItemStyled>
       {/* <Menu

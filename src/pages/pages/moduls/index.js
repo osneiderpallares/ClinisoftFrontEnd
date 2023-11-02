@@ -1,5 +1,8 @@
 import { useState } from 'react'
 
+//Elegir Idioma
+import { useTranslation } from 'react-i18next'
+
 // ** MUI Imports
 import Accordion from '@mui/material/Accordion'
 import Typography from '@mui/material/Typography'
@@ -49,12 +52,12 @@ const moduls = () => {
     }
     setAnchorEl(null)
   }
-
+  const {t}=useTranslation();
   return (
     <Grid container spacing={3}>
       <Grid item xs={12} sm={6} md={4}>
         <Card>
-          <CardHeader title='Información Básica de Terceros' />
+          <CardHeader title={t('Basic Third-Party Information')} />
           <CardContent>
             <Accordion>
               <AccordionSummary
@@ -63,7 +66,7 @@ const moduls = () => {
                 expandIcon={<Icon fontSize='1.25rem' icon='tabler:chevron-down' />}
               >
                 {/* <Icon fontSize='1.25rem' icon='tabler:file-info' /> */}
-                <Typography>Infomación Personal</Typography>
+                <Typography>{t('Personal Information')}</Typography>
               </AccordionSummary>
               <AccordionDetails>
                 <Fragment>
@@ -73,7 +76,7 @@ const moduls = () => {
                         <ListItemIcon>
                           <Icon icon='tabler:mail' fontSize={20} />
                         </ListItemIcon>
-                        <ListItemText primary='Propiedad de Identificación' />
+                        <ListItemText primary={t('Property of Identification')} />
                       </ListItemButton>
                     </ListItem>
                     <ListItem disablePadding>
@@ -81,7 +84,7 @@ const moduls = () => {
                         <ListItemIcon>
                           <Icon icon='tabler:mail' fontSize={20} />
                         </ListItemIcon>
-                        <ListItemText primary='Tipos de Identificación' />
+                        <ListItemText primary={t('Types of Identification')} />
                       </ListItemButton>
                     </ListItem>
                     <ListItem disablePadding>
@@ -89,7 +92,7 @@ const moduls = () => {
                         <ListItemIcon>
                           <Icon icon='tabler:mail' fontSize={20} />
                         </ListItemIcon>
-                        <ListItemText primary='Género' />
+                        <ListItemText primary={t('Gender')} />
                       </ListItemButton>
                     </ListItem>
                     <ListItem disablePadding>
@@ -97,7 +100,7 @@ const moduls = () => {
                         <ListItemIcon>
                           <Icon icon='tabler:mail' fontSize={20} />
                         </ListItemIcon>
-                        <ListItemText primary='Identidad Género' />
+                        <ListItemText primary={t('Gender Identity')} />
                       </ListItemButton>
                     </ListItem>
                     <ListItem disablePadding>
@@ -105,7 +108,7 @@ const moduls = () => {
                         <ListItemIcon>
                           <Icon icon='tabler:mail' fontSize={20} />
                         </ListItemIcon>
-                        <ListItemText primary='Ocupación' />
+                        <ListItemText primary={t('Occupation')} />
                       </ListItemButton>
                     </ListItem>
                     <ListItem disablePadding>
@@ -113,7 +116,7 @@ const moduls = () => {
                         <ListItemIcon>
                           <Icon icon='tabler:mail' fontSize={20} />
                         </ListItemIcon>
-                        <ListItemText primary='Escolaridad' />
+                        <ListItemText primary={t('Education Level')} />
                       </ListItemButton>
                     </ListItem>
                     <ListItem disablePadding>
@@ -121,7 +124,7 @@ const moduls = () => {
                         <ListItemIcon>
                           <Icon icon='tabler:mail' fontSize={20} />
                         </ListItemIcon>
-                        <ListItemText primary='Estado civil' />
+                        <ListItemText primary={t('Marital Status')} />
                       </ListItemButton>
                     </ListItem>
                     <ListItem disablePadding>
@@ -129,7 +132,7 @@ const moduls = () => {
                         <ListItemIcon>
                           <Icon icon='tabler:mail' fontSize={20} />
                         </ListItemIcon>
-                        <ListItemText primary='Grupos poblacionales' />
+                        <ListItemText primary={t('Population Groups')} />
                       </ListItemButton>
                     </ListItem>
                     <ListItem disablePadding>
@@ -137,7 +140,7 @@ const moduls = () => {
                         <ListItemIcon>
                           <Icon icon='tabler:mail' fontSize={20} />
                         </ListItemIcon>
-                        <ListItemText primary='Grupo Étnico' />
+                        <ListItemText primary={t('Ethnic Group')} />
                       </ListItemButton>
                     </ListItem>
                     <ListItem disablePadding>
@@ -145,7 +148,7 @@ const moduls = () => {
                         <ListItemIcon>
                           <Icon icon='tabler:mail' fontSize={20} />
                         </ListItemIcon>
-                        <ListItemText primary='Comunidad Étnica' />
+                        <ListItemText primary={t('Ethnic Community')} />
                       </ListItemButton>
                     </ListItem>
                     <ListItem disablePadding>
@@ -153,7 +156,7 @@ const moduls = () => {
                         <ListItemIcon>
                           <Icon icon='tabler:mail' fontSize={20} />
                         </ListItemIcon>
-                        <ListItemText primary='Discapacidad' />
+                        <ListItemText primary={t('Disability')} />
                       </ListItemButton>
                     </ListItem>
                     <ListItem disablePadding>
@@ -161,7 +164,7 @@ const moduls = () => {
                         <ListItemIcon>
                           <Icon icon='tabler:mail' fontSize={20} />
                         </ListItemIcon>
-                        <ListItemText primary='Grupo Sanguineo' />
+                        <ListItemText primary={t('Blood Type')} />
                       </ListItemButton>
                     </ListItem>
                     <ListItem disablePadding>
@@ -169,7 +172,7 @@ const moduls = () => {
                         <ListItemIcon>
                           <Icon icon='tabler:mail' fontSize={20} />
                         </ListItemIcon>
-                        <ListItemText primary='Parentesco' />
+                        <ListItemText primary={t('Relationship')} />
                       </ListItemButton>
                     </ListItem>
                     <ListItem disablePadding>
@@ -177,7 +180,7 @@ const moduls = () => {
                         <ListItemIcon>
                           <Icon icon='tabler:mail' fontSize={20} />
                         </ListItemIcon>
-                        <ListItemText primary='Causa Muerte' />
+                        <ListItemText primary={t('Cause of Death')} />
                       </ListItemButton>
                     </ListItem>
                   </List>
@@ -191,7 +194,7 @@ const moduls = () => {
                 expandIcon={<Icon fontSize='1.25rem' icon='tabler:chevron-down' />}
               >
                 {/* <Icon fontSize='1.25rem' icon='tabler:file-info' /> */}
-                <Typography>Profesionales</Typography>
+                <Typography>{t('Professionals')}</Typography>
               </AccordionSummary>
               <AccordionDetails>
                 <Fragment>
@@ -201,7 +204,7 @@ const moduls = () => {
                         <ListItemIcon>
                           <Icon icon='tabler:mail' fontSize={20} />
                         </ListItemIcon>
-                        <ListItemText primary='Profesionales' />
+                        <ListItemText primary={t('Professionals')} />
                       </ListItemButton>
                     </ListItem>
                     <ListItem disablePadding>
@@ -209,7 +212,7 @@ const moduls = () => {
                         <ListItemIcon>
                           <Icon icon='tabler:mail' fontSize={20} />
                         </ListItemIcon>
-                        <ListItemText primary='Especialidades' />
+                        <ListItemText primary={t('Specialties')} />
                       </ListItemButton>
                     </ListItem>
                     <ListItem disablePadding>
@@ -217,7 +220,7 @@ const moduls = () => {
                         <ListItemIcon>
                           <Icon icon='tabler:mail' fontSize={20} />
                         </ListItemIcon>
-                        <ListItemText primary='Tipos de profesionales' />
+                        <ListItemText primary={t('Types of professionals')} />
                       </ListItemButton>
                     </ListItem>
                     <ListItem disablePadding>
@@ -225,7 +228,7 @@ const moduls = () => {
                         <ListItemIcon>
                           <Icon icon='tabler:mail' fontSize={20} />
                         </ListItemIcon>
-                        <ListItemText primary='Servicios Profesionales' />
+                        <ListItemText primary={t('Professional Services')} />
                       </ListItemButton>
                     </ListItem>
                   </List>
@@ -239,7 +242,7 @@ const moduls = () => {
                 expandIcon={<Icon fontSize='1.25rem' icon='tabler:chevron-down' />}
               >
                 {/* <Icon fontSize='1.25rem' icon='tabler:file-info' /> */}
-                <Typography sx={{ color: 'text.secondary' }}>Ubicación</Typography>
+                <Typography sx={{ color: 'text.secondary' }}>{t('Location')}</Typography>
               </AccordionSummary>
               <AccordionDetails>
                 <List component='nav' aria-label='main mailbox'>
@@ -248,7 +251,7 @@ const moduls = () => {
                       <ListItemIcon>
                         <Icon icon='tabler:mail' fontSize={20} />
                       </ListItemIcon>
-                      <ListItemText primary='Departamentos' />
+                      <ListItemText primary={t('Departments')} />
                     </ListItemButton>
                   </ListItem>
                   <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
@@ -256,7 +259,7 @@ const moduls = () => {
                       <ListItemIcon>
                         <Icon icon='tabler:mail' fontSize={20} />
                       </ListItemIcon>
-                      <ListItemText primary='Ciudades' />
+                      <ListItemText primary={t('Cities')} />
                     </ListItemButton>
                   </ListItem>
                   <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
@@ -264,7 +267,7 @@ const moduls = () => {
                       <ListItemIcon>
                         <Icon icon='tabler:mail' fontSize={20} />
                       </ListItemIcon>
-                      <ListItemText primary='Barrio' />
+                      <ListItemText primary={t('Neighborhood')} />
                     </ListItemButton>
                   </ListItem>
                   <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
@@ -272,7 +275,7 @@ const moduls = () => {
                       <ListItemIcon>
                         <Icon icon='tabler:mail' fontSize={20} />
                       </ListItemIcon>
-                      <ListItemText primary='Zona Residencial' />
+                      <ListItemText primary={('Residential Area')} />
                     </ListItemButton>
                   </ListItem>
                   <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
@@ -280,7 +283,7 @@ const moduls = () => {
                       <ListItemIcon>
                         <Icon icon='tabler:mail' fontSize={20} />
                       </ListItemIcon>
-                      <ListItemText primary='Estrato' />
+                      <ListItemText primary={t('Socioeconomic Stratum')} />
                     </ListItemButton>
                   </ListItem>
                 </List>
@@ -291,7 +294,8 @@ const moduls = () => {
       </Grid>
       <Grid item xs={12} sm={6} md={4}>
         <Card>
-          <CardHeader title='Información de Afiliación' />
+          {/* <CardHeader title='Información de Afiliación' /> */}
+          <CardHeader title={t('Affiliation Information')} />
           <CardContent>
             <List component='nav' aria-label='main mailbox'>
               <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
@@ -299,7 +303,7 @@ const moduls = () => {
                   <ListItemIcon>
                     <Icon icon='tabler:mail' fontSize={20} />
                   </ListItemIcon>
-                  <ListItemText primary='Tipo Afiliación' />
+                    <ListItemText primary={t('Membership Type')} />
                 </ListItemButton>
               </ListItem>
               <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
@@ -307,7 +311,8 @@ const moduls = () => {
                   <ListItemIcon>
                     <Icon icon='tabler:mail' fontSize={20} />
                   </ListItemIcon>
-                  <ListItemText primary='Tipo de usuario' />
+                  {/* <ListItemText primary='Tipo de usuario' /> */}
+                  <ListItemText primary={t('User type')} />
                 </ListItemButton>
               </ListItem>
               <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
@@ -315,7 +320,7 @@ const moduls = () => {
                   <ListItemIcon>
                     <Icon icon='tabler:mail' fontSize={20} />
                   </ListItemIcon>
-                  <ListItemText primary='Nivel salarial' />
+                  <ListItemText primary={t('Salary level')} />
                 </ListItemButton>
               </ListItem>
               <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
@@ -323,7 +328,8 @@ const moduls = () => {
                   <ListItemIcon>
                     <Icon icon='tabler:mail' fontSize={20} />
                   </ListItemIcon>
-                  <ListItemText primary='Tipo Paciente' />
+                  {/* <ListItemText primary='Tipo Paciente' /> */}
+                  <ListItemText primary={t('Patient Type')} />
                 </ListItemButton>
               </ListItem>
             </List>
@@ -335,7 +341,8 @@ const moduls = () => {
       </Grid>
       <Grid item xs={12} sm={6} md={4}>
         <Card>
-          <CardHeader title='Facturación' />
+          {/* <CardHeader title='Facturación' /> */}
+          <CardHeader title={t('Billing')} />
           <CardContent>
             <Accordion>
               <AccordionSummary
@@ -343,7 +350,7 @@ const moduls = () => {
                 aria-controls='panel-content-3'
                 expandIcon={<Icon fontSize='1.25rem' icon='tabler:chevron-down' />}
               >
-                <Typography>Entidades</Typography>
+                <Typography>{t('Entities')}</Typography>
               </AccordionSummary>
               <AccordionDetails>
                 <List component='nav' aria-label='main mailbox'>
@@ -352,7 +359,7 @@ const moduls = () => {
                       <ListItemIcon>
                         <Icon icon='tabler:mail' fontSize={20} />
                       </ListItemIcon>
-                      <ListItemText primary='Entidades' />
+                      <ListItemText primary={t('Entities')} />
                     </ListItemButton>
                   </ListItem>
                   <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
@@ -360,7 +367,7 @@ const moduls = () => {
                       <ListItemIcon>
                         <Icon icon='tabler:mail' fontSize={20} />
                       </ListItemIcon>
-                      <ListItemText primary='Entidades Contrato' />
+                      <ListItemText primary={t('Contracting entities')} />
                     </ListItemButton>
                   </ListItem>
                   <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
@@ -368,7 +375,7 @@ const moduls = () => {
                       <ListItemIcon>
                         <Icon icon='tabler:mail' fontSize={20} />
                       </ListItemIcon>
-                      <ListItemText primary='PLanes Entidad' />
+                      <ListItemText primary={t('Entity Plans')} />
                     </ListItemButton>
                   </ListItem>
                 </List>
@@ -380,7 +387,7 @@ const moduls = () => {
                 aria-controls='panel-content-3'
                 expandIcon={<Icon fontSize='1.25rem' icon='tabler:chevron-down' />}
               >
-                <Typography>Entidades IPS</Typography>
+                <Typography>{t('IPS Entities')}</Typography>
               </AccordionSummary>
               <AccordionDetails>
                 <List component='nav' aria-label='main mailbox'>
@@ -389,7 +396,7 @@ const moduls = () => {
                       <ListItemIcon>
                         <Icon icon='tabler:mail' fontSize={20} />
                       </ListItemIcon>
-                      <ListItemText primary='Entidad IPS' />
+                      <ListItemText primary={t('IPS Entity')} />
                     </ListItemButton>
                   </ListItem>
                   <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
@@ -397,7 +404,7 @@ const moduls = () => {
                       <ListItemIcon>
                         <Icon icon='tabler:mail' fontSize={20} />
                       </ListItemIcon>
-                      <ListItemText primary='Contrato IPS' />
+                      <ListItemText primary={t('IPS Agreement')} />
                     </ListItemButton>
                   </ListItem>
                 </List>
@@ -409,7 +416,7 @@ const moduls = () => {
                 aria-controls='panel-content-3'
                 expandIcon={<Icon fontSize='1.25rem' icon='tabler:chevron-down' />}
               >
-                <Typography>Servicios</Typography>
+                <Typography>{t('Services')}</Typography>
               </AccordionSummary>
               <AccordionDetails>
                 <List component='nav' aria-label='main mailbox'>
@@ -418,7 +425,7 @@ const moduls = () => {
                       <ListItemIcon>
                         <Icon icon='tabler:mail' fontSize={20} />
                       </ListItemIcon>
-                      <ListItemText primary='Servicios' />
+                      <ListItemText primary={t('Services')} />
                     </ListItemButton>
                   </ListItem>
                   <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
@@ -426,7 +433,7 @@ const moduls = () => {
                       <ListItemIcon>
                         <Icon icon='tabler:mail' fontSize={20} />
                       </ListItemIcon>
-                      <ListItemText primary='Servicios Grupos' />
+                      <ListItemText primary={t('Service Groups')} />
                     </ListItemButton>
                   </ListItem>
                   <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
@@ -434,7 +441,7 @@ const moduls = () => {
                       <ListItemIcon>
                         <Icon icon='tabler:mail' fontSize={20} />
                       </ListItemIcon>
-                      <ListItemText primary='Servicios Tipos' />
+                      <ListItemText primary={t('Service Types')} />
                     </ListItemButton>
                   </ListItem>
                   <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
@@ -442,7 +449,7 @@ const moduls = () => {
                       <ListItemIcon>
                         <Icon icon='tabler:mail' fontSize={20} />
                       </ListItemIcon>
-                      <ListItemText primary='Paquetes Servicios' />
+                      <ListItemText primary={t('Service Packages')} />
                     </ListItemButton>
                   </ListItem>
                 </List>
@@ -453,7 +460,8 @@ const moduls = () => {
       </Grid>
       <Grid item xs={12} sm={6} md={4}>
         <Card>
-          <CardHeader title='Notas Médicas' />
+          {/* <CardHeader title='Notas Médicas' /> */}
+          <CardHeader title={t('Medical Notes')} />
           <CardContent>
             <Accordion>
               <AccordionSummary
@@ -478,7 +486,7 @@ const moduls = () => {
                       <ListItemIcon>
                         <Icon icon='tabler:mail' fontSize={20} />
                       </ListItemIcon>
-                      <ListItemText primary='Agendas Grupo' />
+                      <ListItemText primary={t('Group Agenda')} />
                     </ListItemButton>
                   </ListItem>
                 </List>
@@ -490,7 +498,7 @@ const moduls = () => {
                   <ListItemIcon>
                     <Icon icon='tabler:mail' fontSize={20} />
                   </ListItemIcon>
-                  <ListItemText primary='Tipos de Cita' />
+                  <ListItemText primary={t('Appointment Types')} />
                 </ListItemButton>
               </ListItem>
               <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
@@ -498,7 +506,7 @@ const moduls = () => {
                   <ListItemIcon>
                     <Icon icon='tabler:mail' fontSize={20} />
                   </ListItemIcon>
-                  <ListItemText primary='Tipos de Consulta' />
+                  <ListItemText primary={t('Types of Consultation')} />
                 </ListItemButton>
               </ListItem>
               <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
@@ -506,7 +514,7 @@ const moduls = () => {
                   <ListItemIcon>
                     <Icon icon='tabler:mail' fontSize={20} />
                   </ListItemIcon>
-                  <ListItemText primary='Lugar de atención' />
+                  <ListItemText primary={t('Healthcare location')} />
                 </ListItemButton>
               </ListItem>
               <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
@@ -514,7 +522,7 @@ const moduls = () => {
                   <ListItemIcon>
                     <Icon icon='tabler:mail' fontSize={20} />
                   </ListItemIcon>
-                  <ListItemText primary='Tipo de Admisión' />
+                  <ListItemText primary={t('Type of Admission')} />
                 </ListItemButton>
               </ListItem>
               <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
@@ -522,7 +530,7 @@ const moduls = () => {
                   <ListItemIcon>
                     <Icon icon='tabler:mail' fontSize={20} />
                   </ListItemIcon>
-                  <ListItemText primary='Modalidad de Atención' />
+                  <ListItemText primary={t('Care Modality')} />
                 </ListItemButton>
               </ListItem>
               <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
@@ -530,7 +538,7 @@ const moduls = () => {
                   <ListItemIcon>
                     <Icon icon='tabler:mail' fontSize={20} />
                   </ListItemIcon>
-                  <ListItemText primary='Vias de Ingreso' />
+                  <ListItemText primary={t('Entrance pathways')} />
                 </ListItemButton>
               </ListItem>
             </List>
@@ -540,7 +548,7 @@ const moduls = () => {
                 aria-controls='panel-content-2'
                 expandIcon={<Icon fontSize='1.25rem' icon='tabler:chevron-down' />}
               >
-                <Typography>Indices</Typography>
+                <Typography>{t('Index')}</Typography>
               </AccordionSummary>
               <AccordionDetails>
                 <List component='nav' aria-label='main mailbox'>
@@ -549,7 +557,7 @@ const moduls = () => {
                       <ListItemIcon>
                         <Icon icon='tabler:mail' fontSize={20} />
                       </ListItemIcon>
-                      <ListItemText primary='Grupo Indice' />
+                      <ListItemText primary={t('Index Group')} />
                     </ListItemButton>
                   </ListItem>
                   <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
@@ -557,7 +565,7 @@ const moduls = () => {
                       <ListItemIcon>
                         <Icon icon='tabler:mail' fontSize={20} />
                       </ListItemIcon>
-                      <ListItemText primary='Indices Calidad de Vida' />
+                      <ListItemText primary={t('Quality of Life Indices')} />
                     </ListItemButton>
                   </ListItem>
                 </List>
@@ -569,7 +577,8 @@ const moduls = () => {
                   <ListItemIcon>
                     <Icon icon='tabler:mail' fontSize={20} />
                   </ListItemIcon>
-                  <ListItemText primary='Turnos Digitales' />
+                  {/* <ListItemText primary='Turnos Digitales' /> */}
+                  <ListItemText primary={t('Digital Appointments')} />
                 </ListItemButton>
               </ListItem>
             </List>
@@ -579,7 +588,8 @@ const moduls = () => {
                 aria-controls='panel-content-2'
                 expandIcon={<Icon fontSize='1.25rem' icon='tabler:chevron-down' />}
               >
-                <Typography>Incapacidades</Typography>
+                {/* <Typography>Incapacidades</Typography> */}
+                <Typography>{t('Disabilities')}</Typography>
               </AccordionSummary>
               <AccordionDetails>
                 <List component='nav' aria-label='main mailbox'>
@@ -588,7 +598,7 @@ const moduls = () => {
                       <ListItemIcon>
                         <Icon icon='tabler:mail' fontSize={20} />
                       </ListItemIcon>
-                      <ListItemText primary='Incapacidades' />
+                      <ListItemText primary={t('Disabilities')} />
                     </ListItemButton>
                   </ListItem>
                   <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
@@ -596,7 +606,7 @@ const moduls = () => {
                       <ListItemIcon>
                         <Icon icon='tabler:mail' fontSize={20} />
                       </ListItemIcon>
-                      <ListItemText primary='Incapacidades Tipo' />
+                      <ListItemText primary={t('Type of Disabilities')} />
                     </ListItemButton>
                   </ListItem>
                 </List>
@@ -608,7 +618,8 @@ const moduls = () => {
                 aria-controls='panel-content-2'
                 expandIcon={<Icon fontSize='1.25rem' icon='tabler:chevron-down' />}
               >
-                <Typography>Diagnósticos</Typography>
+                {/* <Typography>Diagnósticos</Typography> */}
+                <Typography>{t('Diagnoses')}</Typography>
               </AccordionSummary>
               <AccordionDetails>
                 <List component='nav' aria-label='main mailbox'>
@@ -617,7 +628,15 @@ const moduls = () => {
                       <ListItemIcon>
                         <Icon icon='tabler:mail' fontSize={20} />
                       </ListItemIcon>
-                      <ListItemText primary='Diagnostico' />
+                      <ListItemText primary={t('Diagnoses')} />
+                     </ListItemButton>
+                  </ListItem>
+                  <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
+                    <ListItemButton>
+                      <ListItemIcon>
+                        <Icon icon='tabler:mail' fontSize={20} />
+                      </ListItemIcon>
+                      <ListItemText primary={t('Diagnostic Groups')} />
                     </ListItemButton>
                   </ListItem>
                   <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
@@ -625,7 +644,7 @@ const moduls = () => {
                       <ListItemIcon>
                         <Icon icon='tabler:mail' fontSize={20} />
                       </ListItemIcon>
-                      <ListItemText primary='Diagnósticos Grupos' />
+                      <ListItemText primary={t('Diagnostic Types')} />
                     </ListItemButton>
                   </ListItem>
                   <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
@@ -633,7 +652,7 @@ const moduls = () => {
                       <ListItemIcon>
                         <Icon icon='tabler:mail' fontSize={20} />
                       </ListItemIcon>
-                      <ListItemText primary='Diagnósticos Tipos' />
+                      <ListItemText primary={t('Stage')} />
                     </ListItemButton>
                   </ListItem>
                   <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
@@ -641,7 +660,7 @@ const moduls = () => {
                       <ListItemIcon>
                         <Icon icon='tabler:mail' fontSize={20} />
                       </ListItemIcon>
-                      <ListItemText primary='Estadio' />
+                      <ListItemText primary={t('Treatment Types')} />
                     </ListItemButton>
                   </ListItem>
                   <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
@@ -649,7 +668,7 @@ const moduls = () => {
                       <ListItemIcon>
                         <Icon icon='tabler:mail' fontSize={20} />
                       </ListItemIcon>
-                      <ListItemText primary='Tipos Tratamientos' />
+                      <ListItemText primary={t('Diagnosing Entity')} />
                     </ListItemButton>
                   </ListItem>
                   <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
@@ -657,15 +676,7 @@ const moduls = () => {
                       <ListItemIcon>
                         <Icon icon='tabler:mail' fontSize={20} />
                       </ListItemIcon>
-                      <ListItemText primary='Entidad que Diagnostica' />
-                    </ListItemButton>
-                  </ListItem>
-                  <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
-                    <ListItemButton>
-                      <ListItemIcon>
-                        <Icon icon='tabler:mail' fontSize={20} />
-                      </ListItemIcon>
-                      <ListItemText primary='Forma de Diagnóstico' />
+                      <ListItemText primary={t('Diagnostic Method')} />
                     </ListItemButton>
                   </ListItem>
                 </List>
@@ -686,7 +697,7 @@ const moduls = () => {
                       <ListItemIcon>
                         <Icon icon='tabler:mail' fontSize={20} />
                       </ListItemIcon>
-                      <ListItemText primary='Motivos Histología' />
+                      <ListItemText primary={t('Histology Reasons')} />
                     </ListItemButton>
                   </ListItem>
                   <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
@@ -694,7 +705,7 @@ const moduls = () => {
                       <ListItemIcon>
                         <Icon icon='tabler:mail' fontSize={20} />
                       </ListItemIcon>
-                      <ListItemText primary='Histologías' />
+                      <ListItemText primary={t('Histologies')} />
                     </ListItemButton>
                   </ListItem>
                   <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
@@ -702,7 +713,7 @@ const moduls = () => {
                       <ListItemIcon>
                         <Icon icon='tabler:mail' fontSize={20} />
                       </ListItemIcon>
-                      <ListItemText primary='Bases Dx Diferenciaciones' />
+                      <ListItemText primary={t('Differential Dx Bases')} />
                     </ListItemButton>
                   </ListItem>
                   <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
@@ -710,7 +721,7 @@ const moduls = () => {
                       <ListItemIcon>
                         <Icon icon='tabler:mail' fontSize={20} />
                       </ListItemIcon>
-                      <ListItemText primary='Objetivos de Tratamientos' />
+                      <ListItemText primary={t('Treatment Objectives')} />
                     </ListItemButton>
                   </ListItem>
                   <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
@@ -718,7 +729,7 @@ const moduls = () => {
                       <ListItemIcon>
                         <Icon icon='tabler:mail' fontSize={20} />
                       </ListItemIcon>
-                      <ListItemText primary='Objetivos de Intervenciones' />
+                      <ListItemText primary={t('Intervention Objectives')} />
                     </ListItemButton>
                   </ListItem>
                   <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
@@ -726,7 +737,7 @@ const moduls = () => {
                       <ListItemIcon>
                         <Icon icon='tabler:mail' fontSize={20} />
                       </ListItemIcon>
-                      <ListItemText primary='Her2 Resultados' />
+                      <ListItemText primary={t('Her2 Results')} />
                     </ListItemButton>
                   </ListItem>
                   <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
@@ -734,7 +745,7 @@ const moduls = () => {
                       <ListItemIcon>
                         <Icon icon='tabler:mail' fontSize={20} />
                       </ListItemIcon>
-                      <ListItemText primary='ColonRec Estadificación' />
+                      <ListItemText primary={t('ColonRec Staging')} />
                     </ListItemButton>
                   </ListItem>
                   <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
@@ -742,7 +753,7 @@ const moduls = () => {
                       <ListItemIcon>
                         <Icon icon='tabler:mail' fontSize={20} />
                       </ListItemIcon>
-                      <ListItemText primary='Hematologicos Estadificación' />
+                      <ListItemText primary={t('Hematological Staging')} />
                     </ListItemButton>
                   </ListItem>
                   <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
@@ -750,7 +761,7 @@ const moduls = () => {
                       <ListItemIcon>
                         <Icon icon='tabler:mail' fontSize={20} />
                       </ListItemIcon>
-                      <ListItemText primary='Prostata Gleason' />
+                      <ListItemText primary={t('Prostate Gleason')} />
                     </ListItemButton>
                   </ListItem>
                   <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
@@ -758,7 +769,7 @@ const moduls = () => {
                       <ListItemIcon>
                         <Icon icon='tabler:mail' fontSize={20} />
                       </ListItemIcon>
-                      <ListItemText primary='Leucemia Clasificada' />
+                      <ListItemText primary={t('Classified Leukemia')} />
                     </ListItemButton>
                   </ListItem>
                   <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
@@ -766,7 +777,7 @@ const moduls = () => {
                       <ListItemIcon>
                         <Icon icon='tabler:mail' fontSize={20} />
                       </ListItemIcon>
-                      <ListItemText primary='Estado Fin Tto' />
+                      <ListItemText primary={t('End of Treatment Status')} />
                     </ListItemButton>
                   </ListItem>
                   <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
@@ -774,7 +785,7 @@ const moduls = () => {
                       <ListItemIcon>
                         <Icon icon='tabler:mail' fontSize={20} />
                       </ListItemIcon>
-                      <ListItemText primary='Motivos Fin Tto' />
+                      <ListItemText primary={t('Reasons For End of Treatment')} />
                     </ListItemButton>
                   </ListItem>
                   <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
@@ -782,7 +793,7 @@ const moduls = () => {
                       <ListItemIcon>
                         <Icon icon='tabler:mail' fontSize={20} />
                       </ListItemIcon>
-                      <ListItemText primary='Quimioterapia Fases' />
+                      <ListItemText primary={t('Chemotherapy Phases')} />
                     </ListItemButton>
                   </ListItem>
                   <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
@@ -790,7 +801,7 @@ const moduls = () => {
                       <ListItemIcon>
                         <Icon icon='tabler:mail' fontSize={20} />
                       </ListItemIcon>
-                      <ListItemText primary='Tipos Tratamientos' />
+                      <ListItemText primary={t('Treatment Types')} />
                     </ListItemButton>
                   </ListItem>
                   <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
@@ -798,7 +809,7 @@ const moduls = () => {
                       <ListItemIcon>
                         <Icon icon='tabler:mail' fontSize={20} />
                       </ListItemIcon>
-                      <ListItemText primary='Resultado Final' />
+                      <ListItemText primary={t('Final Result')} />
                     </ListItemButton>
                   </ListItem>
                   <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
@@ -806,7 +817,7 @@ const moduls = () => {
                       <ListItemIcon>
                         <Icon icon='tabler:mail' fontSize={20} />
                       </ListItemIcon>
-                      <ListItemText primary='Novedad Administratica' />
+                      <ListItemText primary={t('Administrative Novelty')} />
                     </ListItemButton>
                   </ListItem>
                   <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
@@ -814,7 +825,7 @@ const moduls = () => {
                       <ListItemIcon>
                         <Icon icon='tabler:mail' fontSize={20} />
                       </ListItemIcon>
-                      <ListItemText primary='Novedad Clinica' />
+                      <ListItemText primary={t('Clinical novelty')} />
                     </ListItemButton>
                   </ListItem>
                   <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
@@ -822,7 +833,7 @@ const moduls = () => {
                       <ListItemIcon>
                         <Icon icon='tabler:mail' fontSize={20} />
                       </ListItemIcon>
-                      <ListItemText primary='Rtx Estados  Fin Tratamientos' />
+                      <ListItemText primary={t('Rtx End Of Treatment States')} />
                     </ListItemButton>
                   </ListItem>
                   <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
@@ -842,7 +853,8 @@ const moduls = () => {
                 aria-controls='panel-content-3'
                 expandIcon={<Icon fontSize='1.25rem' icon='tabler:chevron-down' />}
               >
-                <Typography>Medicamentos</Typography>
+                {/* <Typography>Medicamentos</Typography> */}
+                <Typography>{t('Medicaments')}</Typography>
               </AccordionSummary>
               <AccordionDetails>
                 <List component='nav' aria-label='main mailbox'>
@@ -851,7 +863,7 @@ const moduls = () => {
                       <ListItemIcon>
                         <Icon icon='tabler:mail' fontSize={20} />
                       </ListItemIcon>
-                      <ListItemText primary='Medicamentos' />
+                      <ListItemText primary={t('Medicaments')} />
                     </ListItemButton>
                   </ListItem>
                   <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
@@ -859,7 +871,7 @@ const moduls = () => {
                       <ListItemIcon>
                         <Icon icon='tabler:mail' fontSize={20} />
                       </ListItemIcon>
-                      <ListItemText primary='Medicamentos Grupos' />
+                      <ListItemText primary={t('Drug Groups')} />
                     </ListItemButton>
                   </ListItem>
                   <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
@@ -867,7 +879,7 @@ const moduls = () => {
                       <ListItemIcon>
                         <Icon icon='tabler:mail' fontSize={20} />
                       </ListItemIcon>
-                      <ListItemText primary='Medicamentos Clases' />
+                      <ListItemText primary={t('Drug Classes')} />
                     </ListItemButton>
                   </ListItem>
                   <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
@@ -875,7 +887,7 @@ const moduls = () => {
                       <ListItemIcon>
                         <Icon icon='tabler:mail' fontSize={20} />
                       </ListItemIcon>
-                      <ListItemText primary='Medicamentos Temperaturas' />
+                      <ListItemText primary={t('Drug temperatures')} />
                     </ListItemButton>
                   </ListItem>
                   <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
@@ -883,7 +895,7 @@ const moduls = () => {
                       <ListItemIcon>
                         <Icon icon='tabler:mail' fontSize={20} />
                       </ListItemIcon>
-                      <ListItemText primary='Presentaciones' />
+                      <ListItemText primary={t('Presentations')} />
                     </ListItemButton>
                   </ListItem>
                   <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
@@ -891,7 +903,7 @@ const moduls = () => {
                       <ListItemIcon>
                         <Icon icon='tabler:mail' fontSize={20} />
                       </ListItemIcon>
-                      <ListItemText primary='Unidades' />
+                      <ListItemText primary={t('Units')} />
                     </ListItemButton>
                   </ListItem>
                   <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
@@ -899,7 +911,7 @@ const moduls = () => {
                       <ListItemIcon>
                         <Icon icon='tabler:mail' fontSize={20} />
                       </ListItemIcon>
-                      <ListItemText primary='Formas Farmacéuticas' />
+                      <ListItemText primary={t('Pharmaceutical Forms')} />
                     </ListItemButton>
                   </ListItem>
                   <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
@@ -907,7 +919,7 @@ const moduls = () => {
                       <ListItemIcon>
                         <Icon icon='tabler:mail' fontSize={20} />
                       </ListItemIcon>
-                      <ListItemText primary='Vias de aplicación' />
+                      <ListItemText primary={t('Routes of Administration')} />
                     </ListItemButton>
                   </ListItem>
                   <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
@@ -915,7 +927,7 @@ const moduls = () => {
                       <ListItemIcon>
                         <Icon icon='tabler:mail' fontSize={20} />
                       </ListItemIcon>
-                      <ListItemText primary='Colores' />
+                      <ListItemText primary={t('Colors')} />
                     </ListItemButton>
                   </ListItem>
                   <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
@@ -923,7 +935,7 @@ const moduls = () => {
                       <ListItemIcon>
                         <Icon icon='tabler:mail' fontSize={20} />
                       </ListItemIcon>
-                      <ListItemText primary='Laboratorios' />
+                      <ListItemText primary={t('Laboratories')} />
                     </ListItemButton>
                   </ListItem>
                   <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
@@ -931,7 +943,7 @@ const moduls = () => {
                       <ListItemIcon>
                         <Icon icon='tabler:mail' fontSize={20} />
                       </ListItemIcon>
-                      <ListItemText primary='Grupos Terapeuticos' />
+                      <ListItemText primary={t('Therapeutic Groups')} />
                     </ListItemButton>
                   </ListItem>
                   <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
@@ -939,7 +951,7 @@ const moduls = () => {
                       <ListItemIcon>
                         <Icon icon='tabler:mail' fontSize={20} />
                       </ListItemIcon>
-                      <ListItemText primary='Vehiculos' />
+                      <ListItemText primary={t('Vehicles')} />
                     </ListItemButton>
                   </ListItem>
                 </List>
@@ -951,7 +963,8 @@ const moduls = () => {
                 aria-controls='panel-content-3'
                 expandIcon={<Icon fontSize='1.25rem' icon='tabler:chevron-down' />}
               >
-                <Typography>Insumos</Typography>
+                {/* <Typography>Insumos</Typography> */}
+                <Typography>{t('Medical Supplies')}</Typography>
               </AccordionSummary>
               <AccordionDetails>
                 <List component='nav' aria-label='main mailbox'>
@@ -960,7 +973,7 @@ const moduls = () => {
                       <ListItemIcon>
                         <Icon icon='tabler:mail' fontSize={20} />
                       </ListItemIcon>
-                      <ListItemText primary='Insumos' />
+                      <ListItemText primary={t('Medical Supplies')} />
                     </ListItemButton>
                   </ListItem>
                   <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
@@ -968,7 +981,7 @@ const moduls = () => {
                       <ListItemIcon>
                         <Icon icon='tabler:mail' fontSize={20} />
                       </ListItemIcon>
-                      <ListItemText primary='Insumos Grupos' />
+                      <ListItemText primary={t('Supply Groups')} />
                     </ListItemButton>
                   </ListItem>
                   <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
@@ -976,7 +989,7 @@ const moduls = () => {
                       <ListItemIcon>
                         <Icon icon='tabler:mail' fontSize={20} />
                       </ListItemIcon>
-                      <ListItemText primary='Insumos Tipo Riesgos' />
+                      <ListItemText primary={t('Risk Type Supplies')} />
                     </ListItemButton>
                   </ListItem>
                 </List>
@@ -987,7 +1000,9 @@ const moduls = () => {
       </Grid>
       <Grid item xs={12} sm={6} md={4}>
         <Card>
-          <CardHeader title='Seguridad' />
+          {/* <CardHeader title='Seguridad' /> */}
+          <CardHeader title={t('Security')} />
+          
           <CardContent>
             <Accordion>
               <AccordionSummary
@@ -995,7 +1010,7 @@ const moduls = () => {
                 aria-controls='panel-content-2'
                 expandIcon={<Icon fontSize='1.25rem' icon='tabler:chevron-down' />}
               >
-                <Typography>Usuarios</Typography>
+                <Typography>{t('Users')}</Typography>
               </AccordionSummary>
               <AccordionDetails>
                 <List component='nav' aria-label='main mailbox'>
@@ -1004,7 +1019,7 @@ const moduls = () => {
                       <ListItemIcon>
                         <Icon icon='tabler:mail' fontSize={20} />
                       </ListItemIcon>
-                      <ListItemText primary='Usuarios' />
+                      <ListItemText primary={t('Users')} />
                     </ListItemButton>
                   </ListItem>
                 </List>

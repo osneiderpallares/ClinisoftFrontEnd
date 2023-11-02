@@ -580,14 +580,15 @@ const navigation = [
         action: 'read',
         subject: 'acl-page',
         icon: 'tabler:user',
-        title: 'Pacientes'
+        title: 'Patients'
       },
       {
         path: '/admisiones/turno',
         action: 'read',
         subject: 'acl-page',
         icon: 'tabler:shield',
-        title: 'Turnos digitales'
+        // title: 'Turnos digitales'
+        title: 'Turns Digitals'
       },
       {
         path: '/admisiones/admision',

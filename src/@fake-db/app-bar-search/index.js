@@ -720,14 +720,14 @@ const searchData = [
     id: 103,
     url: '/admisiones/paciente',
     icon: 'tabler:user',
-    title: 'Pacientes',
+    title: 'Patients',
     category: 'formsTables'
   },
   {
     id: 104,
     url: '/admisiones/turno',
-    icon: 'tabler:shield',
-    title: 'Turnos',
+    icon: 'tabler:shield',    
+    title: 'Turns Digitals',
     category: 'formsTables'
   },
   {

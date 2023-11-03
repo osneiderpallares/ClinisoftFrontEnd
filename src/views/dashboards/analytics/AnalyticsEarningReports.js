@@ -1,3 +1,6 @@
+//Traducir
+import { useTranslation } from 'react-i18next'
+
 // ** MUI Imports
 import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
@@ -112,13 +115,13 @@ const AnalyticsEarningReports = () => {
     },
     yaxis: { show: false }
   }
-
+  const {t}=useTranslation();
   return (
     <Card>
       <CardHeader
         sx={{ pb: 0 }}
-        title='Earning Reports'
-        subheader='Weekly Earnings Overview'
+        title={t('Earning Reports')}
+        subheader={t('Weekly Earnings Overview')}
         action={
           <OptionsMenu
             options={['Last Week', 'Last Month', 'Last Year']}
@@ -135,10 +138,10 @@ const AnalyticsEarningReports = () => {
             sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'flex-end' }}
           >
             <Box sx={{ mb: 3, rowGap: 1, columnGap: 2.5, display: 'flex', flexWrap: 'wrap', alignItems: 'center' }}>
-              <Typography variant='h1'>$468</Typography>
+              <Typography variant='h1'>$568</Typography>
               <CustomChip rounded size='small' skin='light' color='success' label='+4.2%' />
             </Box>
-            <Typography variant='body2'>You informed of this week compared to last week</Typography>
+            <Typography variant='body2'>{t('Informed Week')}</Typography>
           </StyledGrid>
           <StyledGrid item xs={12} sm={7}>
             <ReactApexcharts type='bar' height={163} series={series} options={options} />

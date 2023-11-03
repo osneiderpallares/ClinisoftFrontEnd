@@ -1,3 +1,6 @@
+//Traducir
+import { useTranslation } from 'react-i18next'
+
 // ** MUI Imports
 import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
@@ -128,11 +131,11 @@ const AnalyticsTotalEarning = () => {
       }
     ]
   }
-
+  const {t}=useTranslation();
   return (
     <Card>
       <CardHeader
-        title='Total Earning'
+        title={t('Total Earning')}
         action={
           <OptionsMenu
             options={['Refresh', 'Share', 'Update']}

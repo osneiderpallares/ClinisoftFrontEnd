@@ -1,3 +1,6 @@
+//Traducir
+import { useTranslation } from 'react-i18next'
+
 // ** React Imports
 import { useState } from 'react'
 
@@ -51,9 +54,11 @@ const data = [
 ]
 
 const Slides = ({ theme }) => {
+  const {t}=useTranslation();
   return (
     <>
       {data.map((slide, index) => {
+        
         return (
           <Box
             key={index}
@@ -61,10 +66,10 @@ const Slides = ({ theme }) => {
             sx={{ p: 6, '& .MuiTypography-root': { color: 'common.white' } }}
           >
             <Typography variant='h5' sx={{ mb: 0.5 }}>
-              Website Analytics
+              {t('Website Analytics')}
             </Typography>
             <Typography variant='body2' sx={{ mb: 4.5 }}>
-              Total 28.5% Conversion Rate
+              {t('Total 28.5% Conversion Rate')}
             </Typography>
             <Grid container>
               <Grid item xs={12} sm={8} sx={{ order: [2, 1] }}>

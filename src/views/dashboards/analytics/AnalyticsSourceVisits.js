@@ -1,3 +1,6 @@
+//Traducir
+import { useTranslation } from 'react-i18next'
+
 // ** MUI Imports
 import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
@@ -60,10 +63,11 @@ const data = [
 ]
 
 const AnalyticsSourceVisits = () => {
+  const {t}=useTranslation();
   return (
     <Card>
       <CardHeader
-        title='Source Visits'
+        title={t('Source Visits')}
         subheader='38.4k Visitors'
         action={
           <OptionsMenu

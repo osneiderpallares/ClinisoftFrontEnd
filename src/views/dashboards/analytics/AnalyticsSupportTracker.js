@@ -1,3 +1,6 @@
+//Traducir
+import { useTranslation } from 'react-i18next'
+
 // ** MUI Imports
 import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
@@ -120,12 +123,12 @@ const AnalyticsSupportTracker = () => {
       }
     ]
   }
-
+  const {t}=useTranslation();
   return (
     <Card>
       <CardHeader
-        title='Support Tracker'
-        subheader='Last 7 Days'
+        title={t('Support Tracker')}
+        subheader={t('Last 7 Days')}
         action={
           <OptionsMenu
             options={['Refresh', 'Edit', 'Share']}

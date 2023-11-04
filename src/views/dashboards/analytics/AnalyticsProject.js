@@ -1,3 +1,6 @@
+//Traducir
+import { useTranslation } from 'react-i18next'
+
 // ** React Imports
 import { useState, useEffect } from 'react'
 
@@ -157,13 +160,13 @@ const AnalyticsProject = () => {
   const handleFilter = val => {
     setValue(val)
   }
-
+  const {t}=useTranslation();
   return data ? (
     <Card>
       <CardHeader
-        title='Projects'
+        title={t('Projects')}
         titleTypographyProps={{ sx: { mb: [2, 0] } }}
-        action={<CustomTextField value={value} placeholder='Search' onChange={e => handleFilter(e.target.value)} />}
+        action={<CustomTextField value={value} placeholder={t('Search')} onChange={e => handleFilter(e.target.value)} />}
         sx={{
           py: 4,
           flexDirection: ['column', 'row'],
@@ -171,18 +174,18 @@ const AnalyticsProject = () => {
           alignItems: ['flex-start', 'center']
         }}
       />
-      <DataGrid
+      <DataGrid 
         autoHeight
         pagination
         rows={data}
         rowHeight={62}
         columns={columns}
         checkboxSelection
-        pageSizeOptions={[5, 10]}
+        pageSizeOptions={[5,10]}
         disableRowSelectionOnClick
         paginationModel={paginationModel}
-        onPaginationModelChange={setPaginationModel}
-      />
+        onPaginationModelChange={setPaginationModel} 
+       /> 
     </Card>
   ) : null
 }

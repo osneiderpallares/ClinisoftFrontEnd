@@ -1,3 +1,6 @@
+//Traducir
+import { useTranslation } from 'react-i18next'
+
 // ** MUI Imports
 import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
@@ -53,11 +56,12 @@ const data = [
 ]
 
 const AnalyticsSalesByCountries = () => {
+  const {t}=useTranslation();
   return (
     <Card>
       <CardHeader
-        title='Sales by Countries'
-        subheader='Monthly Sales Overview'
+        title={t('Sales by Countries')}
+        subheader={t('Monthly Sales Overview')}
         action={
           <OptionsMenu
             options={['Last Week', 'Last Month', 'Last Year']}

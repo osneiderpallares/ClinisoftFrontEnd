@@ -2,6 +2,8 @@ import axios from 'axios'
 
 //const baseUrl = process.env.REACT_APP_BASE_URL
 
+const baseURL_SHOW = 'http://127.0.0.1:8000/show_prodid/'
+
 const baseURL_GET = 'http://127.0.0.1:8000/get_prodid/'
 
 const baseURL_POST = 'http://127.0.0.1:8000/store_prodid/'
@@ -18,17 +20,17 @@ export async function savePropiedadDid(dataPropiedadDid) {
     formData.append('abreviacion', dataPropiedadDid.abreviacion)
     formData.append('estado', dataPropiedadDid.estado)
 
-    const response = await axios({
+    await axios({
       url: baseURL_POST,
       method: 'POST',
       data: formData
     })
 
-    return response.data
+    return true
   } catch (e) {
     console.log(e)
 
-    return ''
+    return false
   }
 }
 
@@ -58,6 +60,20 @@ export async function getPropiedadDid(id) {
   } catch (e) {
     console.log(e)
 
-    return e
+    return ''
+  }
+}
+
+export async function showPropiedadDid() {
+  try {
+    await axios.get(baseURL_SHOW).then(response => {
+      console.log(response.data)
+
+      return response.data
+    })
+  } catch (e) {
+    console.log(e)
+
+    return ''
   }
 }

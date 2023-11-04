@@ -1,5 +1,5 @@
 import { useState, useEffect, forwardRef, Fragment } from 'react'
-
+import { useTranslation } from 'react-i18next'
 import axios from 'axios'
 
 // ** MUI Imports
@@ -20,10 +20,12 @@ import Fade from '@mui/material/Fade'
 import DialogContent from '@mui/material/DialogContent'
 import DialogActions from '@mui/material/DialogActions'
 import IconButton from '@mui/material/IconButton'
+import Tooltip from '@mui/material/Tooltip'
 
 //import TableBasic from 'src/pages/info-personal/propiedad-did/table/index.js'
 import DialogTitle from '@mui/material/DialogTitle'
 import DialogContentText from '@mui/material/DialogContentText'
+import { GridLocaleTextES } from 'src/pages/info-personal/constants'
 
 // ** Icon Imports
 import Icon from 'src/@core/components/icon'
@@ -46,12 +48,13 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { savePropiedadDid } from './peticiones.js'
 import { deletePropiedadDid } from './peticiones.js'
 import { getPropiedadDid } from './peticiones.js'
+import { showPropiedadDid } from './peticiones.js'
 
 const Transition = forwardRef(function Transition(props, ref) {
   return <Fade ref={ref} {...props} />
 })
 
-const baseURL = 'http://127.0.0.1:8000/show_prodid/'
+const endPoint = 'http://127.0.0.1:8000/show_prodid/'
 
 //const baseUrl = process.env.REACT_APP_BASE_URL
 
@@ -75,28 +78,12 @@ const CustomCloseButton = styled(IconButton)(({ theme }) => ({
 }))
 
 const AppPage = ({}) => {
+  const { t } = useTranslation()
+
   //DataGrid
-  const [rows, setRows] = useState(null)
-
-  const peticionGet = async () => {
-    await axios.get(baseURL).then(response => {
-      setRows(response.data)
-    })
-  }
-  useEffect(() => {
-    peticionGet()
-  }, [])
-
-  const [show, setShow] = useState(false)
-
-  const [data] = useState(rows)
-  const [searchText, setSearchText] = useState('')
-  const [filteredData, setFilteredData] = useState([])
-  const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 7 })
-  const [languages, setLanguages] = useState([])
-
   const columns = [
     {
+      type: 'number',
       flex: 0.1,
       field: 'id',
       minWidth: 80,
@@ -128,28 +115,56 @@ const AppPage = ({}) => {
 
       renderCell: params => {
         return (
-          <Grid container spacing={2}>
-            <Grid item sm={4} xs={4}>
-              <Fab color='warning' aria-label='Editar' size='small' onClick={() => Edit(params)}>
-                <Icon icon='tabler:pencil' />
-              </Fab>
+          <Grid container>
+            <Grid sx={2} mx={2}>
+              <div>
+                <Tooltip title={t('Edit')}>
+                  <IconButton color='warning' aria-label='Editar' size='small' onClick={() => Edit(params)}>
+                    <Icon icon='tabler:pencil' fontSize='inherit' />
+                  </IconButton>
+                </Tooltip>
+              </div>
             </Grid>
-            <Grid item sm={4} xs={4}>
-              <Fab color='error' aria-label='Eliminar' size='small' onClick={() => Delete(params)}>
-                <Icon icon='tabler:trash' />
-              </Fab>
+            <Grid sx={2} mx={2}>
+              <div>
+                <Tooltip title={t('Delete')}>
+                  <IconButton color='error' aria-label='Eliminar' size='small' onClick={() => Delete(params)}>
+                    <Icon icon='tabler:trash' fontSize='inherit' />
+                  </IconButton>
+                </Tooltip>
+              </div>
             </Grid>
           </Grid>
         )
       }
     }
   ]
+  const [rows, setRows] = useState(null)
+
+  const peticionGet = async () => {
+    await axios.get(endPoint).then(response => {
+      setRows(response.data)
+    })
+  }
+  useEffect(() => {
+    peticionGet()
+  }, [])
+
+  const [show, setShow] = useState(false)
+  const [showEdit, setShowEdit] = useState(false)
+
+  const [data] = useState(rows)
+  const [searchText, setSearchText] = useState('')
+  const [filteredData, setFilteredData] = useState([])
+  const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 7 })
+
+  //const [languages, setLanguages] = useState([])
 
   const handleSearch = searchValue => {
     setSearchText(searchValue)
     const searchRegex = new RegExp(escapeRegExp(searchValue), 'i')
 
-    const filteredRows = data.filter(row => {
+    const filteredRows = data?.filter(row => {
       return Object.keys(row).some(field => {
         // @ts-ignore
         return searchRegex.test(row[field].toString())
@@ -170,19 +185,6 @@ const AppPage = ({}) => {
     estado: '1'
   })
 
-  const handleChange = e => {
-    const [name, value] = e.target
-    setRegistroSeleccionado(prevState => ({
-      ...prevState,
-      [name]: value
-    }))
-  }
-
-  // const [id, setId] = useState(null)
-  // const [nombre, setNombre] = useState('')
-  // const [abreviacion, setAbreviacion] = useState('')
-  // const [estado, setEstado] = useState('')
-
   const Delete = form => {
     setRegistroSeleccionado(form)
     handleClickOpen()
@@ -198,31 +200,16 @@ const AppPage = ({}) => {
   const handleSi = () => {
     if (deletePropiedadDid(registroSeleccionado.id)) {
       toast.success('Registro eliminado correctamente!')
+      peticionGet()
+    } else {
+      toast.error('Hubo un error al intentar eliminar el registro')
     }
     setOpen(false)
-    axios.get(baseURL).then(response => {
-      setRows(response.data)
-    })
-  }
-
-  //Editar registro
-  const [modoEdit, setModoEdit] = useState(false)
-
-  const Edit = params => {
-    setModoEdit(true)
-    setShow(true)
-
-    setRegistroSeleccionado(params.row)
-    console.log(params.row)
-
-    // setId(params.row.id)
-    // setNombre(params.row.nombre)
-    // setAbreviacion(params.row.abreviacion)
-    // setEstado(params.row.estado)
   }
 
   //Guardar registro y validar
   const schema = yup.object().shape({
+    id: yup.number(),
     nombre: yup
       .string()
       .min(3, obj => showErrors('nombre', obj.value.length, obj.min))
@@ -234,20 +221,15 @@ const AppPage = ({}) => {
     estado: yup.string()
   })
 
-  // const defaultValues = {
-  //   nombre: '',
-  //   abreviacion: '',
-  //   estado: '1'
-  // }
+  const defaultValues = {
+    nombre: '',
+    abreviacion: '',
+    estado: '1'
+  }
 
   const openModal = () => {
     registroSeleccionado.id = null
-    setModoEdit(false)
 
-    // setId(null)
-    // setNombre('')
-    // setAbreviacion('')
-    // setEstado('1')
     setShow(true)
   }
 
@@ -266,74 +248,88 @@ const AppPage = ({}) => {
     handleSubmit,
     formState: { errors }
   } = useForm({
-    // //defaultValues,
-    //handleChange,
+    defaultValues,
     mode: 'onChange',
     resolver: yupResolver(schema)
   })
 
   const onSubmit = data => {
-    setShow(false)
-    if (modoEdit) {
-      data.id = registroSeleccionado.id
-    }
-    console.log(data)
-    if (registroSeleccionado.id != null) {
-      if (savePropiedadDid(data)) {
-        axios.get(baseURL).then(response => {
-          setRows(response.data)
-        })
-        toast.success('Registro actualizado correctamente!')
-        setModoEdit(false)
-      } else {
-        toast.error('Hubo un error al actualizar el registro')
-        setModoEdit(false)
-      }
+    if (savePropiedadDid(data)) {
+      toast.success('Registro guardado correctamente!')
     } else {
-      if (savePropiedadDid(data)) {
-        axios.get(baseURL).then(response => {
-          setRows(response.data)
-        })
-        toast.success('Registro guardado correctamente!')
-      } else {
-        toast.error('Hubo un error al guardar el registro')
-      }
+      toast.error('Hubo un error al guardar el registro')
     }
+    setShow(false)
   }
+
+  //Editar registro
+  const Edit = params => {
+    setShowEdit(true)
+    setRegistroSeleccionado(params.row)
+  }
+
+  const onSubmitEdit = e => {
+    e.preventDefault()
+    if (savePropiedadDid(registroSeleccionado)) {
+      toast.success('Registro actualizado correctamente!')
+      rows.map(row => {
+        if (row.id == registroSeleccionado.id) {
+          row.nombre = registroSeleccionado.nombre
+          row.abreviacion = registroSeleccionado.abreviacion
+          row.estado = registroSeleccionado.estado
+        }
+      })
+    } else {
+      toast.error('Hubo un error al actualizar el registro')
+    }
+    setShowEdit(false)
+  }
+
+  const table = (
+    <DataGrid
+      columnHeaderHeight={38}
+      rowHeight={38}
+      stickyHeader
+      rows={rows}
+      columns={columns}
+      pageSizeOptions={[7, 10, 25, 50]}
+      paginationModel={paginationModel}
+      slots={{ toolbar: QuickSearchToolbar }}
+      onPaginationModelChange={setPaginationModel}
+      columnVisibilityModel={{ id: false }}
+      slotProps={{
+        baseButton: {
+          size: 'medium',
+          variant: 'outlined'
+        },
+        toolbar: {
+          value: searchText,
+          clearSearch: () => handleSearch(''),
+          onChange: event => handleSearch(event.target.value)
+        }
+      }}
+      localeText={GridLocaleTextES}
+    />
+  )
 
   if (!rows) return null
 
   return (
     <Card>
-      <CardHeader title='Propiedad DID' />
+      <CardHeader
+        title='Propiedad DID'
+        action={
+          <div>
+            <Tooltip title={t('Add')}>
+              <Fab color='primary' aria-label='Add' size='small' onClick={openModal}>
+                <Icon icon='tabler:plus' fontSize={35} />
+              </Fab>
+            </Tooltip>
+          </div>
+        }
+      />
       <CardContent>
-        <Box sx={{ textAlign: right }}>
-          <Fab color='primary' aria-label='add' size='small' onClick={openModal}>
-            <Icon icon='tabler:plus' />
-          </Fab>
-        </Box>
-        <Box sx={{ height: 500 }}>
-          <DataGrid
-            autoHeight
-            rows={rows}
-            columns={columns}
-            pageSizeOptions={[7, 10, 25, 50]}
-            paginationModel={paginationModel}
-            slots={{ toolbar: QuickSearchToolbar }}
-            onPaginationModelChange={setPaginationModel}
-            slotProps={{
-              baseButton: {
-                size: 'medium',
-                variant: 'outlined'
-              },
-              toolbar: {
-                value: searchText,
-                clearSearch: () => handleSearch(''),
-                onChange: event => handleSearch(event.target.value)
-              }
-            }}
-          />
-        </Box>
+        <Box sx={{ height: 500 }}>{table}</Box>
       </CardContent>
       {/* Modal insertar registro */}
       <Dialog
@@ -365,22 +361,12 @@ const AppPage = ({}) => {
               <Typography sx={{ color: 'text.secondary' }}>Ingresa la información requerida</Typography>
             </Box>
             <Grid container spacing={6}>
-              <Grid item sm={6} xs={6}>
-                <Controller
-                  name='id'
-                  control={control}
-                  rules={{ required: true }}
-                  render={({ field: { value = registroSeleccionado && registroSeleccionado.id, onChange } }) => (
-                    <input type='text' value={value} onChange={onChange}></input>
-                  )}
-                />
-              </Grid>
               <Grid item sm={12} xs={12}>
                 <Controller
                   name='nombre'
                   control={control}
                   rules={{ required: true }}
-                  render={({ field: { value = registroSeleccionado && registroSeleccionado.nombre, onChange } }) => (
+                  render={({ field: { value, onChange } }) => (
                     <CustomTextField
                       fullWidth
                       value={value}
@@ -399,9 +385,7 @@ const AppPage = ({}) => {
                   name='abreviacion'
                   control={control}
                   rules={{ required: true }}
-                  render={({
-                    field: { value = registroSeleccionado && registroSeleccionado.abreviacion, onChange }
-                  }) => (
+                  render={({ field: { value, onChange } }) => (
                     <CustomTextField
                       fullWidth
                       value={value}
@@ -420,7 +404,7 @@ const AppPage = ({}) => {
                   name='estado'
                   control={control}
                   rules={{ required: true }}
-                  render={({ field: { value = registroSeleccionado && registroSeleccionado.estado, onChange } }) => (
+                  render={({ field: { value, onChange } }) => (
                     <CustomTextField
                       select
                       fullWidth
@@ -459,6 +443,135 @@ const AppPage = ({}) => {
         </form>
       </Dialog>
 
+      {/* Modal editar registro */}
+      <Dialog
+        fullWidth
+        open={showEdit}
+        maxWidth='md'
+        scroll='body'
+        onClose={() => setShowEdit(false)}
+        TransitionComponent={Transition}
+        onBackdropClick={() => setShowEdit(false)}
+        sx={{ '& .MuiDialog-paper': { overflow: 'visible' } }}
+        errors=''
+      >
+        <form onSubmit={onSubmitEdit}>
+          <DialogContent
+            sx={{
+              pb: theme => `${theme.spacing(8)} !important`,
+              px: theme => [`${theme.spacing(5)} !important`, `${theme.spacing(15)} !important`],
+              pt: theme => [`${theme.spacing(8)} !important`, `${theme.spacing(12.5)} !important`]
+            }}
+          >
+            <CustomCloseButton onClick={() => setShowEdit(false)}>
+              <Icon icon='tabler:x' fontSize='1.25rem' />
+            </CustomCloseButton>
+            <Box sx={{ mb: 8, textAlign: 'center' }}>
+              <Typography variant='h3' sx={{ mb: 3 }}>
+                Editar Registro Propiedad DID
+              </Typography>
+              <Typography sx={{ color: 'text.secondary' }}>Editar la información requerida</Typography>
+            </Box>
+            <Grid container spacing={6}>
+              <input
+                name='id'
+                type='hidden'
+                value={registroSeleccionado.id}
+                onChange={e => {
+                  setRegistroSeleccionado({
+                    id: registroSeleccionado.id,
+                    nombre: e.target.value,
+                    abreviacion: registroSeleccionado.abreviacion,
+                    estado: registroSeleccionado.estado
+                  })
+                }}
+              ></input>
+              <Grid item sm={12} xs={12}>
+                <CustomTextField
+                  fullWidth
+                  name='nombre'
+                  value={registroSeleccionado.nombre}
+                  label='Nombre'
+                  onChange={e => {
+                    setRegistroSeleccionado({
+                      id: registroSeleccionado.id,
+                      nombre: e.target.value,
+                      abreviacion: registroSeleccionado.abreviacion,
+                      estado: registroSeleccionado.estado
+                    })
+                  }}
+                  placeholder='Escriba Nombre'
+                  error={Boolean(errors.nombre)}
+                  aria-describedby='validation-schema-nombre'
+                  {...(errors.nombre && { helperText: errors.nombre.message })}
+                />
+              </Grid>
+              <Grid item sm={6} xs={6}>
+                <CustomTextField
+                  fullWidth
+                  name='abreviacion'
+                  value={registroSeleccionado.abreviacion}
+                  label='Abreviación'
+                  onChange={e => {
+                    setRegistroSeleccionado({
+                      id: registroSeleccionado.id,
+                      nombre: registroSeleccionado.nombre,
+                      abreviacion: e.target.value,
+                      estado: registroSeleccionado.estado
+                    })
+                  }}
+                  placeholder='Escriba Abreviación'
+                  error={Boolean(errors.abreviacion)}
+                  aria-describedby='validation-schema-abreviacion'
+                  {...(errors.abreviacion && { helperText: errors.abreviacion.message })}
+                />
+              </Grid>
+              <Grid item sm={6} xs={6}>
+                <CustomTextField
+                  select
+                  fullWidth
+                  id='estado'
+                  name='estado'
+                  label='Estado'
+                  SelectProps={{
+                    value: registroSeleccionado.estado,
+                    onChange: e => {
+                      setRegistroSeleccionado({
+                        id: registroSeleccionado.id,
+                        nombre: registroSeleccionado.nombre,
+                        abreviacion: registroSeleccionado.abreviacion,
+                        estado: e.target.value
+                      })
+                    }
+                  }}
+                  error={Boolean(errors.estado)}
+                  aria-describedby='validation-basic-estado'
+                  {...(errors.estado && { helperText: 'Este campo es requerido' })}
+                >
+                  <MenuItem value='1'>Activo</MenuItem>
+                  <MenuItem value='2'>Inactivo</MenuItem>
+                </CustomTextField>
+              </Grid>
+            </Grid>
+          </DialogContent>
+          <DialogActions
+            sx={{
+              justifyContent: 'center',
+              px: theme => [`${theme.spacing(5)} !important`, `${theme.spacing(15)} !important`],
+              pb: theme => [`${theme.spacing(8)} !important`, `${theme.spacing(12.5)} !important`]
+            }}
+          >
+            <Button variant='contained' sx={{ mr: 1 }} type='submit'>
+              Guardar
+            </Button>
+            <Button variant='tonal' color='secondary' onClick={() => setShowEdit(false)}>
+              Cancelar
+            </Button>
+          </DialogActions>
+        </form>
+      </Dialog>
+
+      {/* Confimrar si desea eliminar o no */}
       <Fragment>
         <Dialog
           open={open}

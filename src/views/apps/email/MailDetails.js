@@ -1,3 +1,6 @@
+//Traducir
+import { useTranslation } from 'react-i18next'
+
 // ** React Imports
 import { Fragment, useState } from 'react'
 
@@ -59,6 +62,7 @@ const HiddenReplyFront = styled(Box)(({ theme }) => ({
 }))
 
 const MailDetails = props => {
+  const {t}=useTranslation();
   // ** Props
   const {
     mail,
@@ -543,19 +547,19 @@ const MailDetails = props => {
                   }}
                 >
                   <Typography sx={{ fontWeight: 500, color: 'text.secondary' }}>
-                    Click here to{' '}
+                    {t('Click here to')}{' '}
                     <Typography
                       component='span'
                       sx={{ cursor: 'pointer', color: 'primary.main', fontWeight: 'inherit' }}
                     >
-                      Reply
+                      {t('Reply')}
                     </Typography>{' '}
                     or{' '}
                     <Typography
                       component='span'
                       sx={{ cursor: 'pointer', color: 'primary.main', fontWeight: 'inherit' }}
                     >
-                      Forward
+                      {t('Forward')}
                     </Typography>
                   </Typography>
                 </Box>

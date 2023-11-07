@@ -1,3 +1,6 @@
+//Traducir
+import { useTranslation } from 'react-i18next'
+
 // ** React Imports
 import { Fragment, useState } from 'react'
 
@@ -29,6 +32,7 @@ import OptionsMenu from 'src/@core/components/option-menu'
 // ** Email App Component Imports
 import { setTimeout } from 'timers'
 import MailDetails from './MailDetails'
+import { t } from 'i18next'
 
 const MailItem = styled(ListItem)(({ theme }) => ({
   cursor: 'pointer',
@@ -299,7 +303,7 @@ const MailLog = props => {
     setMailDetailsOpen,
     mail: store && store.currentMail ? store.currentMail : null
   }
-
+  const {t}=useTranslation();
   return (
     <Box sx={{ width: '100%', overflow: 'hidden', position: 'relative', '& .ps__rail-y': { zIndex: 5 } }}>
       <Box sx={{ height: '100%', backgroundColor: 'background.paper' }}>
@@ -312,7 +316,7 @@ const MailLog = props => {
             )}
             <Input
               value={query}
-              placeholder='Search mail'
+              placeholder={t('Search mail')}
               onChange={e => setQuery(e.target.value)}
               sx={{ width: '100%', '&:before, &:after': { display: 'none' } }}
               startAdornment={
@@ -442,7 +446,7 @@ const MailLog = props => {
                         sx={{ display: 'none', alignItems: 'center', justifyContent: 'flex-end' }}
                       >
                         {routeParams && routeParams.folder !== 'trash' ? (
-                          <Tooltip placement='top' title='Delete Mail'>
+                          <Tooltip placement='top' title={t('Delete Mail')}>
                             <IconButton
                               onClick={e => {
                                 e.stopPropagation()
@@ -454,7 +458,7 @@ const MailLog = props => {
                           </Tooltip>
                         ) : null}
 
-                        <Tooltip placement='top' title={mail.isRead ? 'Unread Mail' : 'Read Mail'}>
+                        <Tooltip placement='top' title={mail.isRead ? t('Unread Mail') : t('Read Mail')}>
                           <IconButton
                             onClick={e => {
                               e.stopPropagation()
@@ -464,7 +468,7 @@ const MailLog = props => {
                             <Icon icon={mailReadToggleIcon} />
                           </IconButton>
                         </Tooltip>
-                        <Tooltip placement='top' title='Move to Spam'>
+                        <Tooltip placement='top' title={t('Move to Spam')}>
                           <IconButton
                             onClick={e => {
                               e.stopPropagation()

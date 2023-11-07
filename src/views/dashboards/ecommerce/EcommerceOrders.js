@@ -1,3 +1,6 @@
+//Traducir
+import { useTranslation } from 'react-i18next'
+
 // ** React Imports
 import { Fragment, useState } from 'react'
 
@@ -107,6 +110,7 @@ const Timeline = styled(MuiTimeline)({
 })
 
 const EcommerceOrders = () => {
+  const {t}=useTranslation();
   // ** State
   const [value, setValue] = useState('new')
 
@@ -118,8 +122,8 @@ const EcommerceOrders = () => {
     <Card>
       <CardHeader
         sx={{ pb: 4 }}
-        title='Orders'
-        subheader='62 deliveries in progress'
+        title={t('Orders')}
+        subheader={t('62 deliveries in progress')}
         action={
           <OptionsMenu
             options={['Show all orders', 'Share', 'Refresh']}
@@ -129,9 +133,9 @@ const EcommerceOrders = () => {
       />
       <TabContext value={value}>
         <TabList variant='fullWidth' onChange={handleChange} aria-label='tabs in orders card'>
-          <Tab value='new' label='New' />
-          <Tab value='preparing' label='Preparing' />
-          <Tab value='shipping' label='Shipping' />
+          <Tab value='new' label={t('New')} />
+          <Tab value='preparing' label={t('Preparing')} />
+          <Tab value='shipping' label={t('Shipping')} />
         </TabList>
         <TabPanel value={value}>
           {data[value].map((item, index) => {

@@ -1,3 +1,6 @@
+//Traducir
+import { useTranslation } from 'react-i18next'
+
 // ** MUI Imports
 import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
@@ -48,11 +51,12 @@ const data = [
 ]
 
 const EcommercePopularProducts = () => {
+  const {t}=useTranslation();
   return (
     <Card>
       <CardHeader
-        title='Popular Products'
-        subheader='Total 10.4k Visitors'
+        title={t('Popular Products')}
+        subheader={t('Total 10.4k Visitors')}
         action={
           <OptionsMenu
             iconButtonProps={{ size: 'small', sx: { color: 'text.disabled' } }}

@@ -1,3 +1,6 @@
+//Traducir
+import { useTranslation } from 'react-i18next'
+
 // ** React Imports
 import { useEffect, useState } from 'react'
 
@@ -165,14 +168,14 @@ const EcommerceInvoiceTable = () => {
       )
     }
   ]
-
+  const {t}=useTranslation();
   return (
     <Card>
       <CardContent
         sx={{ gap: 4, display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between' }}
       >
         <Button component={Link} variant='contained' href='/apps/invoice/add' startIcon={<Icon icon='tabler:plus' />}>
-          Create Invoice
+          {t('Create Invoice')}
         </Button>
         <Box sx={{ gap: 4, display: 'flex', flexWrap: 'wrap', alignItems: 'center' }}>
           <CustomTextField value={value} placeholder='Search Invoice' onChange={e => setValue(e.target.value)} />

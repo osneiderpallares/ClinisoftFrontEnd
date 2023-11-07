@@ -1,3 +1,6 @@
+//Traducir
+import { useTranslation } from 'react-i18next'
+
 // ** MUI Imports
 import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
@@ -48,6 +51,7 @@ const data = [
 ]
 
 const EcommerceEarningReports = () => {
+  const {t}=useTranslation();
   // ** Hooks
   const theme = useTheme()
   const bgColors = UseBgColor()
@@ -135,8 +139,8 @@ const EcommerceEarningReports = () => {
   return (
     <Card>
       <CardHeader
-        title='Earning Reports'
-        subheader='Weekly Earnings Overview'
+        title={t('Earning Reports')}
+        subheader={t('Weekly Earnings Overview')}
         action={
           <OptionsMenu
             options={['Refresh', 'Update', 'Share']}

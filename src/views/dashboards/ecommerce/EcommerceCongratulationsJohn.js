@@ -1,3 +1,6 @@
+//Traducir
+import { useTranslation } from 'react-i18next'
+
 // ** MUI Imports
 import Card from '@mui/material/Card'
 import Button from '@mui/material/Button'
@@ -16,13 +19,14 @@ const Illustration = styled('img')(({ theme }) => ({
 }))
 
 const EcommerceCongratulationsJohn = () => {
+  const {t}=useTranslation();
   return (
     <Card sx={{ position: 'relative' }}>
       <CardContent>
         <Typography variant='h5' sx={{ mb: 0.5 }}>
-          Congratulations John! 🎉
+          {t('Congratulations')} John! 🎉
         </Typography>
-        <Typography sx={{ mb: 2, color: 'text.secondary' }}>Best seller of the month</Typography>
+        <Typography sx={{ mb: 2, color: 'text.secondary' }}>{t('Best seller')}</Typography>
         <Typography variant='h4' sx={{ mb: 0.75, color: 'primary.main' }}>
           $48.9k
         </Typography>

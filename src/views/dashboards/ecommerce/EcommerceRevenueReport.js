@@ -1,3 +1,6 @@
+//Traducir
+import { useTranslation } from 'react-i18next'
+
 // ** React Imports
 import { useState } from 'react'
 
@@ -47,6 +50,7 @@ const StyledGrid = styled(Grid)(({ theme }) => ({
 }))
 
 const EcommerceRevenueReport = () => {
+  const {t}=useTranslation();
   // ** State
   const [anchorEl, setAnchorEl] = useState(null)
 
@@ -255,7 +259,7 @@ const EcommerceRevenueReport = () => {
             '& .apexcharts-series[rel="2"]': { transform: 'translateY(-9px)' }
           }}
         >
-          <CardHeader title='Revenue Report' />
+          <CardHeader title={t('Revenue Report')} />
           <CardContent>
             <ReactApexcharts type='bar' height={301} series={barSeries} options={barOptions} />
           </CardContent>
@@ -298,12 +302,12 @@ const EcommerceRevenueReport = () => {
             <Box
               sx={{ mb: 8, gap: 1, display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center' }}
             >
-              <Typography variant='h6'>Budget:</Typography>
+              <Typography variant='h6'>{t('Budget')}:</Typography>
               <Typography sx={{ color: 'text.secondary' }}>56,800</Typography>
             </Box>
             <ReactApexcharts type='line' height={80} series={lineSeries} options={lineOptions} />
             <Button sx={{ mt: 8 }} variant='contained'>
-              Increase Budget
+              {t('Increase Budget')}
             </Button>
           </CardContent>
         </Grid>

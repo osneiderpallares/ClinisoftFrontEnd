@@ -1,3 +1,6 @@
+//Traducir
+import { useTranslation } from 'react-i18next'
+
 // ** MUI Imports
 import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
@@ -17,6 +20,7 @@ import { hexToRGBA } from 'src/@core/utils/hex-to-rgba'
 const series = [32, 41, 41, 70]
 
 const EcommerceGeneratedLeads = () => {
+  const {t}=useTranslation();
   // ** Hook
   const theme = useTheme()
 
@@ -101,7 +105,7 @@ const EcommerceGeneratedLeads = () => {
           <Box sx={{ gap: 1.75, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
             <div>
               <Typography variant='h5' sx={{ mb: 0.5 }}>
-                Generated Leads
+                {t('Generated Leads')}
               </Typography>
               <Typography variant='body2'>Monthly Report</Typography>
             </div>

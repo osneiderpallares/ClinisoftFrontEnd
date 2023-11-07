@@ -1,3 +1,6 @@
+//Traducir
+import { useTranslation } from 'react-i18next'
+
 // ** MUI Imports
 import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
@@ -65,10 +68,11 @@ const statusObj = {
 }
 
 const CrmLastTransaction = () => {
+  const {t}=useTranslation();
   return (
     <Card>
       <CardHeader
-        title='Last Transaction'
+        title={t('Last Transaction')}
         action={
           <OptionsMenu
             options={['Show all entries', 'Refresh', 'Download']}
@@ -82,10 +86,10 @@ const CrmLastTransaction = () => {
             <TableRow
               sx={{ '& .MuiTableCell-root': { py: 2, borderTop: theme => `1px solid ${theme.palette.divider}` } }}
             >
-              <TableCell>Card</TableCell>
-              <TableCell>Date</TableCell>
-              <TableCell>Status</TableCell>
-              <TableCell>Trend</TableCell>
+              <TableCell>{t('Card')}</TableCell>
+              <TableCell>{t('Date')}</TableCell>
+              <TableCell>{t('Status')}</TableCell>
+              <TableCell>{t('Trend')}</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -115,7 +119,7 @@ const CrmLastTransaction = () => {
                   <TableCell>
                     <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
                       <Typography noWrap sx={{ fontWeight: 500, color: 'text.secondary' }}>
-                        Sent
+                        {t('Sent')}
                       </Typography>
                       <Typography noWrap variant='body2' sx={{ color: 'text.disabled' }}>
                         {row.date}

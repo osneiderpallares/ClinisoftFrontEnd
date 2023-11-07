@@ -1,3 +1,6 @@
+//Traducir
+import { useTranslation } from 'react-i18next'
+
 // ** MUI Imports
 import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
@@ -71,13 +74,13 @@ const CrmSalesWithAreaChart = () => {
     },
     yaxis: { show: false }
   }
-
+  const {t}=useTranslation();
   return (
     <Card>
       <CardContent sx={{ pb: 0 }}>
-        <Typography variant='h5'>Sales</Typography>
+        <Typography variant='h5'>{t('Sales')}</Typography>
         <Typography variant='body2' sx={{ color: 'text.disabled' }}>
-          Last Year
+          {t('Last Year')}
         </Typography>
       </CardContent>
       <ReactApexcharts type='area' height={96} series={series} options={options} />

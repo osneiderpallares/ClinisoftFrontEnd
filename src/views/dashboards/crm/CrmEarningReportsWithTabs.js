@@ -1,3 +1,6 @@
+//Traducir
+import { useTranslation } from 'react-i18next'
+
 // ** React Imports
 import { useState } from 'react'
 
@@ -101,6 +104,7 @@ const renderTabPanels = (value, theme, options, colors) => {
 }
 
 const CrmEarningReportsWithTabs = () => {
+  const {t}=useTranslation()  
   // ** State
   const [value, setValue] = useState('orders')
 
@@ -192,12 +196,12 @@ const CrmEarningReportsWithTabs = () => {
       }
     ]
   }
-
+ 
   return (
     <Card>
       <CardHeader
-        title='Earning Reports'
-        subheader='Yearly Earnings Overview'
+        title={t('Earning Reports')}
+        subheader={t('Yearly Earnings Overview')}
         action={
           <OptionsMenu
             options={['Last Week', 'Last Month', 'Last Year']}

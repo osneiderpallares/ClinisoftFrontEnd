@@ -1,3 +1,6 @@
+//Traducir
+import { useTranslation } from 'react-i18next'
+
 // ** MUI Imports
 import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
@@ -76,7 +79,7 @@ const CrmRevenueGrowth = () => {
     },
     yaxis: { show: false }
   }
-
+  const {t}=useTranslation();
   return (
     <Card>
       <CardContent>
@@ -84,9 +87,9 @@ const CrmRevenueGrowth = () => {
           <Box sx={{ gap: 3, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
             <div>
               <Typography variant='h5' sx={{ mb: 2 }}>
-                Revenue Growth
+                {t('Revenue Growth')}
               </Typography>
-              <Typography variant='body2'>Weekly Report</Typography>
+              <Typography variant='body2'>{t('Weekly Report')}</Typography>
             </div>
             <div>
               <Typography variant='h3' sx={{ mb: 2 }}>

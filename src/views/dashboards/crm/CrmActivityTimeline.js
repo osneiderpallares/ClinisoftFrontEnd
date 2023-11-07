@@ -1,3 +1,6 @@
+//Traducir
+import { useTranslation } from 'react-i18next'
+
 // ** MUI Import
 import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
@@ -42,18 +45,19 @@ const CardHeader = styled(MuiCardHeader)(({ theme }) => ({
 }))
 
 const CrmActivityTimeline = () => {
+  const {t}=useTranslation();
   return (
     <Card>
       <CardHeader
         title={
           <Box sx={{ display: 'flex', alignItems: 'center', '& svg': { mr: 3 } }}>
             <Icon fontSize='1.25rem' icon='tabler:list-details' />
-            <Typography>Activity Timeline</Typography>
+            <Typography>{t('Activity Timeline')}</Typography>
           </Box>
         }
         action={
           <OptionsMenu
-            options={['Share timeline', 'Suggest edits', 'Report bug']}
+            options={[t('Share timeline'), 'Suggest edits', 'Report bug']}
             iconButtonProps={{ size: 'small', sx: { color: 'text.disabled' } }}
           />
         }
@@ -76,22 +80,23 @@ const CrmActivityTimeline = () => {
                 }}
               >
                 <Typography variant='h6' sx={{ mr: 2 }}>
-                  Client Meeting
+                  {t('Client Meeting')}
                 </Typography>
                 <Typography variant='caption' sx={{ color: 'text.disabled' }}>
-                  Today
+                  {t('Today')}
                 </Typography>
               </Box>
               <Typography variant='body2' sx={{ mb: 2.5 }}>
-                Project meeting with john @10:15am
+              {/* Project meeting with john @10:15am */}
+                {t('Project meeting')}
               </Typography>
               <Box sx={{ display: 'flex', alignItems: 'center' }}>
                 <Avatar src='/images/avatars/3.png' sx={{ mr: 3, width: 38, height: 38 }} />
                 <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
                   <Typography variant='body2' sx={{ fontWeight: 500, color: 'text.primary' }}>
-                    Lester McCarthy (Client)
+                    Lester McCarthy ({t('Client')})
                   </Typography>
-                  <Typography variant='caption'>CEO of Infibeam</Typography>
+                  <Typography variant='caption'>{t('CEO of Infibeam')}</Typography>
                 </Box>
               </Box>
             </TimelineContent>
@@ -113,13 +118,13 @@ const CrmActivityTimeline = () => {
                 }}
               >
                 <Typography variant='h6' sx={{ mr: 2 }}>
-                  Create a new project for client
+                  {t('Create a new project for client')}
                 </Typography>
                 <Typography variant='caption' sx={{ color: 'text.disabled' }}>
                   2 days ago
                 </Typography>
               </Box>
-              <Typography variant='body2'>Add files to new design folder</Typography>
+              <Typography variant='body2'>{t('Add Files')}</Typography>
             </TimelineContent>
           </TimelineItem>
 
@@ -139,26 +144,26 @@ const CrmActivityTimeline = () => {
                 }}
               >
                 <Typography variant='h6' sx={{ mr: 2 }}>
-                  Shared 2 New Project Files
+                  {t('Shared 2 Project')}
                 </Typography>
                 <Typography variant='caption' sx={{ color: 'text.disabled' }}>
                   6 days ago
                 </Typography>
               </Box>
               <Typography variant='body2' sx={{ mb: 2.5 }}>
-                Sent by Mollie Dixon
+                {t('Sent by')} Mollie Dixon
               </Typography>
               <Box sx={{ rowGap: 1, columnGap: 3, display: 'flex', flexWrap: 'wrap', alignItems: 'center' }}>
                 <Box sx={{ display: 'flex', alignItems: 'center', '& svg': { mr: 2, color: 'warning.main' } }}>
                   <Icon fontSize='1.25rem' icon='tabler:file-text' />
                   <Typography variant='body2' sx={{ fontWeight: 500, color: 'text.primary' }}>
-                    App Guidelines
+                    {t('App Guidelines')}
                   </Typography>
                 </Box>
                 <Box sx={{ display: 'flex', alignItems: 'center', '& svg': { mr: 2, color: 'success.main' } }}>
                   <Icon fontSize='1.25rem' icon='tabler:table' />
                   <Typography variant='body2' sx={{ fontWeight: 500, color: 'text.primary' }}>
-                    Testing Results
+                    {t('Testing Results')}
                   </Typography>
                 </Box>
               </Box>
@@ -180,13 +185,13 @@ const CrmActivityTimeline = () => {
                 }}
               >
                 <Typography variant='h6' sx={{ mr: 2 }}>
-                  Project status updated
+                  {t('Project status updated')}
                 </Typography>
                 <Typography variant='caption' sx={{ color: 'text.disabled' }}>
                   10 days ago
                 </Typography>
               </Box>
-              <Typography variant='body2'>WooCommerce iOS App Completed</Typography>
+              <Typography variant='body2'>{t('WooCommerce iOS App Completed')}</Typography>
             </TimelineContent>
           </TimelineItem>
         </Timeline>

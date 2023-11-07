@@ -1,3 +1,6 @@
+//Traducir
+import { useTranslation } from 'react-i18next'
+
 // ** MUI Imports
 import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
@@ -55,11 +58,12 @@ const data = [
 ]
 
 const CrmBrowserStates = () => {
+  const {t}=useTranslation();
   return (
     <Card>
       <CardHeader
-        title='Browser States'
-        subheader={`Counter April ${new Date().getFullYear()}`}
+        title={t('Browser States')}
+        subheader={`${t('Counter April')} ${new Date().getFullYear()}`}
         action={
           <OptionsMenu
             options={['Last 28 Days', 'Last Month', 'Last Year']}

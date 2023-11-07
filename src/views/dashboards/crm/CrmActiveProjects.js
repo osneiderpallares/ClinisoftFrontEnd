@@ -1,3 +1,6 @@
+//Traducir
+import { useTranslation } from 'react-i18next'
+
 // ** MUI Imports
 import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
@@ -55,11 +58,12 @@ const data = [
 ]
 
 const CrmActiveProjects = () => {
+  const {t}=useTranslation();
   return (
     <Card>
       <CardHeader
-        title='Active Projects'
-        subheader='Average 72% completed'
+        title={t('Active Projects')}
+        subheader={t('Average 72% completed')}
         action={
           <OptionsMenu
             options={['Refresh', 'Update', 'Share']}

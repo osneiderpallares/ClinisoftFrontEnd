@@ -1,3 +1,6 @@
+//Traducir
+import { useTranslation } from 'react-i18next'
+
 // ** MUI Import
 import Grid from '@mui/material/Grid'
 
@@ -18,6 +21,7 @@ import ApexChartWrapper from 'src/@core/styles/libs/react-apexcharts'
 import CardStatsVertical from 'src/@core/components/card-statistics/card-stats-vertical'
 
 const CrmDashboard = () => {
+  const {t}=useTranslation();
   return (
     <ApexChartWrapper>
       <Grid container spacing={6}>
@@ -33,8 +37,8 @@ const CrmDashboard = () => {
             chipText='-12.2%'
             chipColor='default'
             avatarColor='error'
-            title='Total Profit'
-            subtitle='Last week'
+            title={t('Total Profit')}
+            subtitle={t('Last week')}
             avatarIcon='tabler:currency-dollar'
           />
         </Grid>
@@ -44,8 +48,8 @@ const CrmDashboard = () => {
             chipText='+25.2%'
             avatarColor='info'
             chipColor='default'
-            title='Total Sales'
-            subtitle='Last week'
+            title={t('Total Sales')}
+            subtitle={t('Last week')}
             avatarIcon='tabler:chart-bar'
           />
         </Grid>

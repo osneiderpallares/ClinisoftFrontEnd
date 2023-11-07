@@ -1,3 +1,6 @@
+//Traducir
+import { useTranslation } from 'react-i18next'
+
 // ** MUI Imports
 import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
@@ -121,13 +124,13 @@ const CrmSessions = () => {
       }
     ]
   }
-
+  const {t}=useTranslation();
   return (
     <Card>
       <CardContent>
-        <Typography variant='h5'>Sessions</Typography>
+        <Typography variant='h5'>{t('Sessions')}</Typography>
         <Typography variant='body2' sx={{ color: 'text.disabled' }}>
-          This Month
+          {t('This Month')}
         </Typography>
         <ReactApexcharts type='bar' height={96} series={series} options={options} />
         <Box sx={{ gap: 2, display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between' }}>

@@ -1,3 +1,6 @@
+//Traducir
+import { useTranslation } from 'react-i18next'
+
 // ** React Imports
 import { useState } from 'react'
 
@@ -86,8 +89,8 @@ const schema = yup.object().shape({
 })
 
 const defaultValues = {
-  password: 'client',
-  email: 'client@vuexy.com'
+  password: 'admin',
+  email: 'admin@vuexy.com'
 }
 
 const LoginPage = () => {
@@ -126,7 +129,7 @@ const LoginPage = () => {
     })
   }
   const imageSource = skin === 'bordered' ? 'auth-v2-login-illustration-bordered' : 'auth-v2-login-illustration'
-
+  const {t}=useTranslation();
   return (
     <Box className='content-right' sx={{ backgroundColor: 'background.paper' }}>
       {!hidden ? (
@@ -187,10 +190,11 @@ const LoginPage = () => {
             </svg>
             <Box sx={{ my: 6 }}>
               <Typography variant='h3' sx={{ mb: 1.5 }}>
-                {`Welcome to ${themeConfig.templateName}! 👋🏻`}
+                {`${t('Welcome to')} ${themeConfig.templateName}! 👋🏻`}
               </Typography>
               <Typography sx={{ color: 'text.secondary' }}>
-                Please sign-in to your account and start the adventure
+                 {/* Please sign-in to your account and start the adventure  */}
+                {t('Please sign-in')}
               </Typography>
             </Box>
             <Alert icon={false} sx={{ py: 3, mb: 6, ...bgColors.primaryLight, '& .MuiAlert-message': { p: 0 } }}>
@@ -211,7 +215,7 @@ const LoginPage = () => {
                     <CustomTextField
                       fullWidth
                       autoFocus
-                      label='Email'
+                      label={t('Email')}
                       value={value}
                       onBlur={onBlur}
                       onChange={onChange}
@@ -232,7 +236,7 @@ const LoginPage = () => {
                       fullWidth
                       value={value}
                       onBlur={onBlur}
-                      label='Password'
+                      label={t('Password')}
                       onChange={onChange}
                       id='auth-login-v2-password'
                       error={Boolean(errors.password)}
@@ -265,20 +269,20 @@ const LoginPage = () => {
                 }}
               >
                 <FormControlLabel
-                  label='Remember Me'
+                  label={t('Remember Me')}
                   control={<Checkbox checked={rememberMe} onChange={e => setRememberMe(e.target.checked)} />}
                 />
                 <Typography component={LinkStyled} href='/forgot-password'>
-                  Forgot Password?
+                  {t('Forgot Password?')}
                 </Typography>
               </Box>
               <Button fullWidth type='submit' variant='contained' sx={{ mb: 4 }}>
-                Login
+                {t('Login')}
               </Button>
               <Box sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center' }}>
-                <Typography sx={{ color: 'text.secondary', mr: 2 }}>New on our platform?</Typography>
+                <Typography sx={{ color: 'text.secondary', mr: 2 }}>{t('New on our platform?')}</Typography>
                 <Typography href='/register' component={LinkStyled}>
-                  Create an account
+                  {t('Create an account')}
                 </Typography>
               </Box>
               <Divider

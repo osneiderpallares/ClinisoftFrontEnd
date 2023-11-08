@@ -31,7 +31,6 @@ import { GridLocaleTextES } from 'src/pages/info-personal/constants'
 import Icon from 'src/@core/components/icon'
 
 import Fab from '@mui/material/Fab'
-import { right } from '@popperjs/core'
 
 //import { textAlign } from '@mui/system'
 import { CardContent, TextField } from '@mui/material'
@@ -47,8 +46,6 @@ import { yupResolver } from '@hookform/resolvers/yup'
 
 import { savePropiedadDid } from './peticiones.js'
 import { deletePropiedadDid } from './peticiones.js'
-import { getPropiedadDid } from './peticiones.js'
-import { showPropiedadDid } from './peticiones.js'
 
 const Transition = forwardRef(function Transition(props, ref) {
   return <Fade ref={ref} {...props} />
@@ -116,7 +113,7 @@ const AppPage = ({}) => {
       renderCell: params => {
         return (
           <Grid container>
-            <Grid sx={2} mx={2}>
+            <Grid mx={2}>
               <div>
                 <Tooltip title={t('Edit')}>
                   <IconButton color='warning' aria-label='Editar' size='small' onClick={() => Edit(params)}>
@@ -125,7 +122,7 @@ const AppPage = ({}) => {
                 </Tooltip>
               </div>
             </Grid>
-            <Grid sx={2} mx={2}>
+            <Grid mx={2}>
               <div>
                 <Tooltip title={t('Delete')}>
                   <IconButton color='error' aria-label='Eliminar' size='small' onClick={() => Delete(params)}>
@@ -146,9 +143,6 @@ const AppPage = ({}) => {
       setRows(response.data)
     })
   }
-  useEffect(() => {
-    peticionGet()
-  }, [])
 
   const [show, setShow] = useState(false)
   const [showEdit, setShowEdit] = useState(false)
@@ -256,6 +250,7 @@ const AppPage = ({}) => {
   const onSubmit = data => {
     if (savePropiedadDid(data)) {
       toast.success('Registro guardado correctamente!')
+      peticionGet()
     } else {
       toast.error('Hubo un error al guardar el registro')
     }
@@ -284,6 +279,10 @@ const AppPage = ({}) => {
     }
     setShowEdit(false)
   }
+
+  useEffect(() => {
+    peticionGet()
+  }, [])
 
   const table = (
     <DataGrid

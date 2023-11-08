@@ -7,6 +7,8 @@ import { useRouter } from 'next/router'
 // ** Axios
 import axios from 'axios'
 
+import jwt from 'jsonwebtoken'
+
 // ** Config
 import authConfig from 'src/configs/auth'
 
@@ -61,22 +63,55 @@ const AuthProvider = ({ children }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  const jwtConfig = {
+    secret: process.env.NEXT_PUBLIC_JWT_SECRET,
+    expirationTime: process.env.NEXT_PUBLIC_JWT_EXPIRATION,
+    refreshTokenSecret: process.env.NEXT_PUBLIC_JWT_REFRESH_TOKEN_SECRET
+  }
+
   const handleLogin = (params, errorCallback) => {
-    axios
-      .post(authConfig.loginEndpoint, params)
-      .then(async response => {
-        params.rememberMe
-          ? window.localStorage.setItem(authConfig.storageTokenKeyName, response.data.accessToken)
-          : null
+    const { email, password } = params
+
+    const formData = new FormData()
+    formData.append('email', email)
+    formData.append('password', password)
+    axios({
+      url: 'http://127.0.0.1:8000/api/login/',
+      method: 'POST',
+      data: formData
+    })
+      .then(response => {
+        const accessToken = jwt.sign({ id: response.data[0].id }, jwtConfig.secret, {
+          expiresIn: jwtConfig.expirationTime
+        })
+        params.rememberMe ? window.localStorage.setItem(authConfig.storageTokenKeyName, accessToken) : null
         const returnUrl = router.query.returnUrl
-        setUser({ ...response.data.userData })
-        params.rememberMe ? window.localStorage.setItem('userData', JSON.stringify(response.data.userData)) : null
+        setUser(response.data[0])
+        params.rememberMe ? window.localStorage.setItem('userData', JSON.stringify(response.data)) : null
         const redirectURL = returnUrl && returnUrl !== '/' ? returnUrl : '/'
         router.replace(redirectURL)
       })
       .catch(err => {
+        console.log(err.response.data.detail)
+
         if (errorCallback) errorCallback(err)
       })
+
+    // axios
+    //   .post(authConfig.loginEndpoint, params)
+    //   .then(async response => {
+    //     params.rememberMe
+    //       ? window.localStorage.setItem(authConfig.storageTokenKeyName, response.data.accessToken)
+    //       : null
+    //     const returnUrl = router.query.returnUrl
+    //     setUser({ ...response.data.userData })
+    //     params.rememberMe ? window.localStorage.setItem('userData', JSON.stringify(response.data.userData)) : null
+    //     const redirectURL = returnUrl && returnUrl !== '/' ? returnUrl : '/'
+    //     router.replace(redirectURL)
+    //   })
+    //   .catch(err => {
+    //     if (errorCallback) errorCallback(err)
+    //   })
   }
 
   const handleLogout = () => {

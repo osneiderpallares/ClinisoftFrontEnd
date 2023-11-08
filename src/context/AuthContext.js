@@ -92,7 +92,7 @@ const AuthProvider = ({ children }) => {
         router.replace(redirectURL)
       })
       .catch(err => {
-        console.log(err.response.data.detail)
+        if (err.response) console.log(err.response.data.detail)
 
         if (errorCallback) errorCallback(err)
       })

@@ -10,11 +10,10 @@ import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
 import MuiMenu from '@mui/material/Menu'
 import MuiMenuItem from '@mui/material/MenuItem'
-//Elegir Idioma
+
+//**Elegir idioma */
 import { useTranslation } from 'react-i18next'
 
-
-//import Infobasic from '/pages/info-basic'
 import { useRouter } from 'next/router'
 
 // ** Icon Imports
@@ -23,14 +22,14 @@ import Icon from 'src/@core/components/icon'
 // ** Util Import
 import { hexToRGBA } from 'src/@core/utils/hex-to-rgba'
 
-// Styled Menu component
+// ** Styled Menu component
 const Menu = styled(MuiMenu)(({ theme }) => ({
   '& .MuiMenu-paper': {
     border: 1
   }
 }))
 
-// Styled MenuItem component
+// ** Styled MenuItem component
 const MenuItem = styled(MuiMenuItem)(({ theme }) => ({
   margin: 0,
   borderRadius: 0,
@@ -56,9 +55,9 @@ const MenuCustomized = () => {
     setAnchorEl(event.currentTarget)
   }
 
-  // const handleClose = () => {
-  //   setAnchorEl(null)
-  // }
+  //**  const handleClose = () => {
+  //**    setAnchorEl(null)
+  //**  }
 
   const router = useRouter()
 
@@ -89,13 +88,14 @@ const MenuCustomized = () => {
       color: 'text.secondary'
     }
   }
-  const {t}=useTranslation();
+  const { t } = useTranslation()
+
   return (
     <div>
       <MenuItemStyled sx={{ p: 0 }} onClick={() => handleClose('/pages/moduls')}>
         <Box sx={styles}>
           <Icon icon='tabler:folder' />
-           {t('Moduls')}
+          {t('Moduls')}
         </Box>
       </MenuItemStyled>
       {/* <Menu

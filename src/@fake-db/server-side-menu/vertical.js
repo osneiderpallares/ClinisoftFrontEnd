@@ -587,7 +587,6 @@ const navigation = [
         action: 'read',
         subject: 'acl-page',
         icon: 'tabler:shield',
-        // title: 'Turnos digitales'
         title: 'Turns Digitals'
       },
       {

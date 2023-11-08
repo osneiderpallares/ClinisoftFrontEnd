@@ -21,21 +21,14 @@ import DialogContent from '@mui/material/DialogContent'
 import DialogActions from '@mui/material/DialogActions'
 import IconButton from '@mui/material/IconButton'
 import Tooltip from '@mui/material/Tooltip'
-
-//import TableBasic from 'src/pages/info-personal/propiedad-did/table/index.js'
 import DialogTitle from '@mui/material/DialogTitle'
 import DialogContentText from '@mui/material/DialogContentText'
 import { GridLocaleTextES } from 'src/@fake-db/table/constants/index.js'
 
 // ** Icon Imports
 import Icon from 'src/@core/components/icon'
-
 import Fab from '@mui/material/Fab'
-
-//import { textAlign } from '@mui/system'
-import { CardContent, TextField } from '@mui/material'
-
-// ** Custom Component Import
+import { CardContent } from '@mui/material'
 import CustomTextField from 'src/@core/components/mui/text-field'
 
 // ** Third Party Imports
@@ -44,6 +37,7 @@ import toast from 'react-hot-toast'
 import { useForm, Controller } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 
+// ** Peticiones
 import { savePropiedadDid } from '../../../@fake-db/requests/peticiones.js'
 import { deletePropiedadDid } from '../../../@fake-db/requests/peticiones.js'
 
@@ -52,8 +46,6 @@ const Transition = forwardRef(function Transition(props, ref) {
 })
 
 const endPoint = 'http://127.0.0.1:8000/show_prodid/'
-
-//const baseUrl = process.env.REACT_APP_BASE_URL
 
 const escapeRegExp = value => {
   return value.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&')
@@ -77,7 +69,7 @@ const CustomCloseButton = styled(IconButton)(({ theme }) => ({
 const AppPage = ({}) => {
   const { t } = useTranslation()
 
-  //DataGrid
+  //** DataGrid
   const columns = [
     {
       type: 'number',
@@ -97,6 +89,12 @@ const AppPage = ({}) => {
       minWidth: 230,
       field: 'abreviacion',
       headerName: 'ABREVIACIÓN'
+    },
+    {
+      flex: 0.15,
+      minWidth: 120,
+      field: 'create_up',
+      headerName: 'FECHA DE PUBLICACIÓN'
     },
     {
       flex: 0.15,
@@ -148,8 +146,6 @@ const AppPage = ({}) => {
   const [filteredData, setFilteredData] = useState([])
   const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 7 })
 
-  //const [languages, setLanguages] = useState([])
-
   const handleSearch = searchValue => {
     setSearchText(searchValue)
     const searchRegex = new RegExp(escapeRegExp(searchValue), 'i')
@@ -167,7 +163,7 @@ const AppPage = ({}) => {
     }
   }
 
-  //Eliminar registro
+  // ** Eliminar registro
   const [registroSeleccionado, setRegistroSeleccionado] = useState({
     id: null,
     nombre: '',
@@ -197,7 +193,7 @@ const AppPage = ({}) => {
     setOpen(false)
   }
 
-  //Guardar registro y validar
+  //** Guardar registro y validar
   const schema = yup.object().shape({
     id: yup.number(),
     nombre: yup
@@ -246,14 +242,16 @@ const AppPage = ({}) => {
   const onSubmit = data => {
     if (savePropiedadDid(data)) {
       toast.success('Registro guardado correctamente!')
-      peticionGet()
+      rows.map(row => {
+        peticionGet()
+      })
     } else {
       toast.error('Hubo un error al guardar el registro')
     }
     setShow(false)
   }
 
-  //Editar registro
+  //** Editar registro
   const Edit = params => {
     setShowEdit(true)
     setRegistroSeleccionado(params.row)
@@ -264,11 +262,7 @@ const AppPage = ({}) => {
     if (savePropiedadDid(registroSeleccionado)) {
       toast.success('Registro actualizado correctamente!')
       rows.map(row => {
-        if (row.id == registroSeleccionado.id) {
-          row.nombre = registroSeleccionado.nombre
-          row.abreviacion = registroSeleccionado.abreviacion
-          row.estado = registroSeleccionado.estado
-        }
+        peticionGet()
       })
     } else {
       toast.error('Hubo un error al actualizar el registro')
@@ -291,7 +285,7 @@ const AppPage = ({}) => {
       paginationModel={paginationModel}
       slots={{ toolbar: QuickSearchToolbar }}
       onPaginationModelChange={setPaginationModel}
-      columnVisibilityModel={{ id: false }}
+      columnVisibilityModel={{ id: false, create_up: false }}
       slotProps={{
         baseButton: {
           size: 'medium',
@@ -361,6 +355,7 @@ const AppPage = ({}) => {
                   rules={{ required: true }}
                   render={({ field: { value, onChange } }) => (
                     <CustomTextField
+                      id='nombre'
                       fullWidth
                       value={value}
                       label='Nombre'

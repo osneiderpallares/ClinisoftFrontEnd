@@ -114,22 +114,18 @@ const AppPage = ({}) => {
         return (
           <Grid container>
             <Grid mx={2}>
-              <div>
-                <Tooltip title={t('Edit')}>
-                  <IconButton color='warning' aria-label='Editar' size='small' onClick={() => Edit(params)}>
-                    <Icon icon='tabler:pencil' fontSize='inherit' />
-                  </IconButton>
-                </Tooltip>
-              </div>
+              <Tooltip title={t('Edit')}>
+                <IconButton color='warning' aria-label='Editar' size='small' onClick={() => Edit(params)}>
+                  <Icon icon='tabler:pencil' fontSize='inherit' />
+                </IconButton>
+              </Tooltip>
             </Grid>
             <Grid mx={2}>
-              <div>
-                <Tooltip title={t('Delete')}>
-                  <IconButton color='error' aria-label='Eliminar' size='small' onClick={() => Delete(params)}>
-                    <Icon icon='tabler:trash' fontSize='inherit' />
-                  </IconButton>
-                </Tooltip>
-              </div>
+              <Tooltip title={t('Delete')}>
+                <IconButton color='error' aria-label='Eliminar' size='small' onClick={() => Delete(params)}>
+                  <Icon icon='tabler:trash' fontSize='inherit' />
+                </IconButton>
+              </Tooltip>
             </Grid>
           </Grid>
         )
@@ -318,13 +314,11 @@ const AppPage = ({}) => {
       <CardHeader
         title='Propiedad DID'
         action={
-          <div>
-            <Tooltip title={t('Add')}>
-              <Fab color='primary' aria-label='Add' size='small' onClick={openModal}>
-                <Icon icon='tabler:plus' fontSize={35} />
-              </Fab>
-            </Tooltip>
-          </div>
+          <Tooltip title={t('Add')}>
+            <Fab color='primary' aria-label='Add' size='small' onClick={openModal}>
+              <Icon icon='tabler:plus' fontSize={35} />
+            </Fab>
+          </Tooltip>
         }
       />
       <CardContent>

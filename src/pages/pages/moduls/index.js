@@ -52,7 +52,8 @@ const moduls = () => {
     }
     setAnchorEl(null)
   }
-  const {t}=useTranslation();
+  const { t } = useTranslation()
+
   return (
     <Grid container spacing={3}>
       <Grid item xs={12} sm={6} md={4}>
@@ -275,7 +276,7 @@ const moduls = () => {
                       <ListItemIcon>
                         <Icon icon='tabler:mail' fontSize={20} />
                       </ListItemIcon>
-                      <ListItemText primary={('Residential Area')} />
+                      <ListItemText primary={t('Residential Area')} />
                     </ListItemButton>
                   </ListItem>
                   <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
@@ -303,7 +304,7 @@ const moduls = () => {
                   <ListItemIcon>
                     <Icon icon='tabler:mail' fontSize={20} />
                   </ListItemIcon>
-                    <ListItemText primary={t('Membership Type')} />
+                  <ListItemText primary={t('Membership Type')} />
                 </ListItemButton>
               </ListItem>
               <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
@@ -629,7 +630,7 @@ const moduls = () => {
                         <Icon icon='tabler:mail' fontSize={20} />
                       </ListItemIcon>
                       <ListItemText primary={t('Diagnoses')} />
-                     </ListItemButton>
+                    </ListItemButton>
                   </ListItem>
                   <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
                     <ListItemButton>
@@ -1002,7 +1003,6 @@ const moduls = () => {
         <Card>
           {/* <CardHeader title='Seguridad' /> */}
           <CardHeader title={t('Security')} />
-          
           <CardContent>
             <Accordion>
               <AccordionSummary

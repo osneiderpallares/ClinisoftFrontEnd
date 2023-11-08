@@ -25,7 +25,7 @@ import Tooltip from '@mui/material/Tooltip'
 //import TableBasic from 'src/pages/info-personal/propiedad-did/table/index.js'
 import DialogTitle from '@mui/material/DialogTitle'
 import DialogContentText from '@mui/material/DialogContentText'
-import { GridLocaleTextES } from 'src/pages/info-personal/constants'
+import { GridLocaleTextES } from 'src/@fake-db/table/constants/index.js'
 
 // ** Icon Imports
 import Icon from 'src/@core/components/icon'
@@ -44,8 +44,8 @@ import toast from 'react-hot-toast'
 import { useForm, Controller } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 
-import { savePropiedadDid } from './peticiones.js'
-import { deletePropiedadDid } from './peticiones.js'
+import { savePropiedadDid } from '../../../@fake-db/requests/peticiones.js'
+import { deletePropiedadDid } from '../../../@fake-db/requests/peticiones.js'
 
 const Transition = forwardRef(function Transition(props, ref) {
   return <Fade ref={ref} {...props} />

@@ -1,3 +1,6 @@
+//Traducir
+import { useTranslation } from 'react-i18next'
+
 // ** MUI Imports
 import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
@@ -68,11 +71,12 @@ const data = [
 ]
 
 const EcommerceTransactions = () => {
+  const {t}=useTranslation();
   return (
     <Card>
       <CardHeader
-        title='Transactions'
-        subheader='Total 58 transaction done in month'
+        title={t('Transactions')}
+        subheader={t('Total 58 transaction done in month')}
         action={
           <OptionsMenu
             options={['Refresh', 'Show all entries', 'Make payment']}

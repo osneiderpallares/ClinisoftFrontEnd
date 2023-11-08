@@ -1,3 +1,6 @@
+//Traducir
+import { useTranslation } from 'react-i18next'
+
 // ** MUI Imports
 import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
@@ -56,14 +59,15 @@ const renderStats = () => {
 }
 
 const EcommerceStatistics = () => {
+  const {t}=useTranslation();
   return (
     <Card>
       <CardHeader
-        title='Statistics'
+        title={t('Statistics')}
         sx={{ '& .MuiCardHeader-action': { m: 0, alignSelf: 'center' } }}
         action={
           <Typography variant='body2' sx={{ color: 'text.disabled' }}>
-            Updated 1 month ago
+            {t('Updated 1 month ago')}
           </Typography>
         }
       />

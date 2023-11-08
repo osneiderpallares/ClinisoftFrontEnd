@@ -21,7 +21,8 @@ import ApexChartWrapper from 'src/@core/styles/libs/react-apexcharts'
 import CardStatsVertical from 'src/@core/components/card-statistics/card-stats-vertical'
 
 const CrmDashboard = () => {
-  const {t}=useTranslation();
+  const { t } = useTranslation()
+
   return (
     <ApexChartWrapper>
       <Grid container spacing={6}>

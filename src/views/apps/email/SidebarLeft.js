@@ -90,7 +90,8 @@ const SidebarLeft = props => {
       return <PerfectScrollbar options={{ wheelPropagation: false }}>{children}</PerfectScrollbar>
     }
   }
-  const {t}=useTranslation();
+  const { t } = useTranslation()
+
   return (
     <Drawer
       open={leftSidebarOpen}

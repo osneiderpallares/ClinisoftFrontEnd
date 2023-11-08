@@ -96,7 +96,8 @@ const Customizer = () => {
   const handleChange = (field, value) => {
     saveSettings({ ...settings, [field]: value })
   }
-  const {t}=useTranslation();
+  const { t } = useTranslation()
+
   return (
     <div className='customizer'>
       <Toggler className='customizer-toggler' onClick={() => setOpen(true)}>

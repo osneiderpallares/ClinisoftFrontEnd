@@ -62,7 +62,8 @@ const HiddenReplyFront = styled(Box)(({ theme }) => ({
 }))
 
 const MailDetails = props => {
-  const {t}=useTranslation();
+  const { t } = useTranslation()
+
   // ** Props
   const {
     mail,

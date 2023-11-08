@@ -115,7 +115,8 @@ const AnalyticsEarningReports = () => {
     },
     yaxis: { show: false }
   }
-  const {t}=useTranslation();
+  const { t } = useTranslation()
+
   return (
     <Card>
       <CardHeader

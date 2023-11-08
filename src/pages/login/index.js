@@ -89,8 +89,8 @@ const schema = yup.object().shape({
 })
 
 const defaultValues = {
-  password: 'admin',
-  email: 'admin@vuexy.com'
+  password: 'carlosval',
+  email: 'carlosvalenciatovar18@gmail.com'
 }
 
 const LoginPage = () => {
@@ -129,7 +129,8 @@ const LoginPage = () => {
     })
   }
   const imageSource = skin === 'bordered' ? 'auth-v2-login-illustration-bordered' : 'auth-v2-login-illustration'
-  const {t}=useTranslation();
+  const { t } = useTranslation()
+
   return (
     <Box className='content-right' sx={{ backgroundColor: 'background.paper' }}>
       {!hidden ? (
@@ -193,7 +194,7 @@ const LoginPage = () => {
                 {`${t('Welcome to')} ${themeConfig.templateName}! 👋🏻`}
               </Typography>
               <Typography sx={{ color: 'text.secondary' }}>
-                 {/* Please sign-in to your account and start the adventure  */}
+                {/* Please sign-in to your account and start the adventure  */}
                 {t('Please sign-in')}
               </Typography>
             </Box>

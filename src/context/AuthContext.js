@@ -81,6 +81,10 @@ const AuthProvider = ({ children }) => {
       data: formData
     })
       .then(response => {
+        if (!response.data) {
+          throw 'Credentials are invalid or user was deleted'
+        }
+
         const accessToken = jwt.sign({ id: response.data[0].id }, jwtConfig.secret, {
           expiresIn: jwtConfig.expirationTime
         })
@@ -92,7 +96,9 @@ const AuthProvider = ({ children }) => {
         router.replace(redirectURL)
       })
       .catch(err => {
-        if (err.response) console.log(err.response.data.detail)
+        if (err) console.log(err)
+
+        //if (err.response) console.log(err.response.data.detail)
 
         if (errorCallback) errorCallback(err)
       })

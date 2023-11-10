@@ -58,28 +58,49 @@ const defaultSuggestionsData = [
     ]
   },
   {
-    category: 'Apps & Pages',
+    category: 'Admisiones',
     suggestions: [
       {
+        icon: 'tabler:user',
+        suggestion: 'Pacientes',
+        link: '/admisiones/paciente'
+      },
+      {
+        icon: 'tabler:shield',
+        suggestion: 'Turnos Digitales',
+        link: '/admisiones/turno'
+      },
+      {
+        icon: 'tabler:umbrella',
+        suggestion: 'Admisionar',
+        link: '/admisiones/admision'
+      },
+      {
         icon: 'tabler:calendar',
-        suggestion: 'Calendar',
-        link: '/apps/calendar'
-      },
-      {
-        icon: 'tabler:list-numbers',
-        suggestion: 'Invoice List',
-        link: '/apps/invoice/list'
-      },
-      {
-        icon: 'tabler:currency-dollar',
-        suggestion: 'Pricing',
-        link: '/pages/pricing'
-      },
-      {
-        icon: 'tabler:settings',
-        suggestion: 'Account Settings',
-        link: '/pages/account-settings/account'
+        suggestion: 'Agendas Médicas',
+        link: '/admisiones/agenda'
       }
+
+      // {
+      //   icon: 'tabler:calendar',
+      //   suggestion: 'Calendar',
+      //   link: '/apps/calendar'
+      // },
+      // {
+      //   icon: 'tabler:list-numbers',
+      //   suggestion: 'Invoice List',
+      //   link: '/apps/invoice/list'
+      // },
+      // {
+      //   icon: 'tabler:currency-dollar',
+      //   suggestion: 'Pricing',
+      //   link: '/pages/pricing'
+      // },
+      // {
+      //   icon: 'tabler:settings',
+      //   suggestion: 'Account Settings',
+      //   link: '/pages/account-settings/account'
+      // }
     ]
   },
   {

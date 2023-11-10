@@ -570,7 +570,7 @@ const navigation = () => {
       path: '/acl',
       action: 'read',
       subject: 'acl-page',
-      icon: 'tabler:shield',      
+      icon: 'tabler:shield',
       title: 'Admissions',
       children: [
         {
@@ -584,21 +584,21 @@ const navigation = () => {
           path: '/admisiones/turno',
           action: 'read',
           subject: 'acl-page',
-          icon: 'tabler:shield',          
+          icon: 'tabler:shield',
           title: 'Turns Digitals'
         },
         {
           path: '/admisiones/admision',
           action: 'read',
           subject: 'acl-page',
-          icon: 'tabler:shield',          
+          icon: 'tabler:umbrella',
           title: 'Admit'
         },
         {
           path: '/admisiones/agenda',
           action: 'read',
           subject: 'acl-page',
-          icon: 'tabler:medical-cross',
+          icon: 'tabler:calendar',
           title: 'Agendas Médicas'
         }
       ]

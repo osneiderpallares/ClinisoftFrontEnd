@@ -2,77 +2,76 @@ import axios from 'axios'
 
 //const baseUrl = process.env.REACT_APP_BASE_URL
 
-const baseURL_SHOW = 'http://127.0.0.1:8000/show_prodid/'
+// const baseURL_SHOW = 'http://127.0.0.1:8000/show_prodid/'
 
-const baseURL_GET = 'http://127.0.0.1:8000/get_prodid/'
+// const baseURL_GET = 'http://127.0.0.1:8000/get_prodid/'
 
-const baseURL_POST = 'http://127.0.0.1:8000/store_prodid/'
+const endPoint = 'http://127.0.0.1:8000'
 
-const baseURL_UPDATE = 'http://127.0.0.1:8000/update_prodid/'
-
-export async function savePropiedadDid(dataPropiedadDid) {
+export async function saveRow(data, url) {
   try {
     const formData = new FormData()
-    if (dataPropiedadDid.id) {
-      formData.append('id', dataPropiedadDid.id)
+    if (data.id) {
+      formData.append('id', data.id)
     }
-    formData.append('nombre', dataPropiedadDid.nombre)
-    formData.append('abreviacion', dataPropiedadDid.abreviacion)
-    formData.append('estado', dataPropiedadDid.estado)
+
+    Object.keys(data).forEach(e => {
+      if (e != 'id') formData.append(e, data[e])
+    })
 
     await axios({
-      url: baseURL_POST,
+      url: endPoint + url,
       method: 'POST',
       data: formData
     })
 
     return true
   } catch (e) {
-    console.log(e)
+    //console.log(e)
 
     return false
   }
 }
 
-export async function deletePropiedadDid(id) {
+export async function deleteRow(id, url) {
   try {
     await axios({
-      url: baseURL_UPDATE + id,
+      url: endPoint + url + id,
       method: 'GET'
     })
 
     return true
   } catch (e) {
-    console.log(e)
+    //console.log(e)
 
     return false
   }
 }
 
-export async function getPropiedadDid(id) {
+export async function get(id, url) {
   try {
     const response = await axios({
-      url: baseURL_GET + id,
+      url: endPoint + url + id,
       method: 'GET'
     })
 
     return response.data
   } catch (e) {
-    console.log(e)
+    //console.log(e)
 
     return ''
   }
 }
 
-export async function showPropiedadDid() {
+export async function show(url) {
   try {
-    await axios.get(baseURL_SHOW).then(response => {
+    await axios.get(endPoint + url).then(response => {
       console.log(response.data)
 
       return response.data
     })
   } catch (e) {
-    console.log(e)
+    //console.log(e)
 
     return ''
   }

@@ -720,29 +720,71 @@ const searchData = [
     id: 103,
     url: '/admisiones/paciente',
     icon: 'tabler:user',
-    title: 'Patients',
-    category: 'formsTables'
+    title: 'Pacientes',
+    category: 'appsPages'
   },
   {
     id: 104,
     url: '/admisiones/turno',
-    icon: 'tabler:shield',    
-    title: 'Turns Digitals',
-    category: 'formsTables'
+    icon: 'tabler:shield',
+    title: 'Turnos Digitales',
+    category: 'appsPages'
   },
   {
     id: 105,
     url: '/admisiones/admision',
-    icon: 'tabler:shield',
+    icon: 'tabler:umbrella',
     title: 'Admisionar',
-    category: 'formsTables'
+    category: 'appsPages'
   },
   {
     id: 106,
     url: '/admisiones/agenda',
-    icon: 'tabler:medical-cross',
+    icon: 'tabler:calendar',
     title: 'Agendas Médicas',
-    category: 'formsTables'
+    category: 'appsPages'
+  },
+  {
+    id: 107,
+    url: '/info-personal/genero',
+    icon: 'mdi:gender-male-female',
+    title: 'Géneros',
+    category: 'appsPages'
+  },
+  {
+    id: 108,
+    url: '/info-personal/propiedad-did',
+    icon: 'tabler:user-circle',
+    title: 'Propiedad Did',
+    category: 'appsPages'
+  },
+  {
+    id: 109,
+    url: '/info-personal/tipo-did',
+    icon: 'mdi:account-card-details',
+    title: 'Tipos Did',
+    category: 'appsPages'
+  },
+  {
+    id: 110,
+    url: '/info-personal/indentidad-genero',
+    icon: 'mdi:gender-transgender',
+    title: 'Identidad de Géneros',
+    category: 'appsPages'
+  },
+  {
+    id: 111,
+    url: '/info-personal/ocupacion_grupo',
+    icon: 'mdi:worker',
+    title: 'Ocupaciones Grupo',
+    category: 'appsPages'
+  },
+  {
+    id: 112,
+    url: '/info-personal/ocupacion',
+    icon: 'mdi:worker-outline',
+    title: 'Ocupaciones',
+    category: 'appsPages'
   }
 ]
 

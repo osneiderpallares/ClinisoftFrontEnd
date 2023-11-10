@@ -54,11 +54,11 @@ const data = [
 ]
 
 const Slides = ({ theme }) => {
-  const {t}=useTranslation();
+  const { t } = useTranslation()
+
   return (
     <>
       {data.map((slide, index) => {
-        
         return (
           <Box
             key={index}

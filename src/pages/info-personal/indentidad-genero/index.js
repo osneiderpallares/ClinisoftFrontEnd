@@ -45,7 +45,7 @@ const Transition = forwardRef(function Transition(props, ref) {
   return <Fade ref={ref} {...props} />
 })
 
-const endPoint = 'http://127.0.0.1:8000/show_prodid/'
+const endPoint = 'http://127.0.0.1:8000/show_identidadgenero/'
 
 const escapeRegExp = value => {
   return value.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&')
@@ -183,7 +183,7 @@ const AppPage = ({}) => {
   const handleNo = () => setOpen(false)
 
   const handleSi = () => {
-    if (deleteRow(registroSeleccionado.id, '/update_prodid/')) {
+    if (deleteRow(registroSeleccionado.id, '/update_idegenero/')) {
       toast.success(t('Record deleted successfully!'))
       peticionGet()
     } else {
@@ -239,7 +239,7 @@ const AppPage = ({}) => {
   })
 
   const onSubmit = data => {
-    if (saveRow(data, '/store_prodid/')) {
+    if (saveRow(data, '/store_idegenero/')) {
       toast.success(t('Log saved successfully!'))
       rows.map(row => {
         peticionGet()
@@ -258,7 +258,7 @@ const AppPage = ({}) => {
 
   const onSubmitEdit = e => {
     e.preventDefault()
-    if (saveRow(registroSeleccionado, '/store_prodid/')) {
+    if (saveRow(registroSeleccionado, '/store_idegenero/')) {
       toast.success(t('Registration successfully updated!'))
       rows.map(row => {
         peticionGet()
@@ -305,7 +305,7 @@ const AppPage = ({}) => {
   return (
     <Card>
       <CardHeader
-        title={t('DID property')}
+        title={t('Gender Identity')}
         action={
           <Tooltip title={t('Add')}>
             <Fab color='primary' aria-label='Add' size='small' onClick={openModal}>

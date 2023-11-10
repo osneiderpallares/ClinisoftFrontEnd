@@ -1,4 +1,5 @@
-//Traducir
+/* eslint-disable jsx-a11y/alt-text */
+
 import { useTranslation } from 'react-i18next'
 
 // ** React Imports
@@ -124,7 +125,7 @@ const LoginPage = () => {
       //rememberMe
       setError('email', {
         type: 'manual',
-        message: 'Email or Password is invalid'
+        message: t('Email or Password is invalid')
       })
     })
   }
@@ -161,7 +162,8 @@ const LoginPage = () => {
           }}
         >
           <Box sx={{ width: '100%', maxWidth: 400 }}>
-            <svg width={34} viewBox='0 0 32 22' fill='none' xmlns='http://www.w3.org/2000/svg'>
+            <img width={60} src='/images/logos/clinisoft.png' />
+            {/* <svg width={34} viewBox='0 0 32 22' fill='none' xmlns='http://www.w3.org/2000/svg'>
               <path
                 fillRule='evenodd'
                 clipRule='evenodd'
@@ -188,7 +190,7 @@ const LoginPage = () => {
                 fill={theme.palette.primary.main}
                 d='M7.77295 16.3566L23.6563 0H32V6.88383C32 6.88383 31.8262 9.17836 30.6591 10.4057L19.7824 22H13.6938L7.77295 16.3566Z'
               />
-            </svg>
+            </svg> */}
             <Box sx={{ my: 6 }}>
               <Typography variant='h3' sx={{ mb: 1.5 }}>
                 {`${t('Welcome to')} ${themeConfig.templateName}! 👋🏻`}
@@ -198,14 +200,14 @@ const LoginPage = () => {
                 {t('Please sign-in')}
               </Typography>
             </Box>
-            <Alert icon={false} sx={{ py: 3, mb: 6, ...bgColors.primaryLight, '& .MuiAlert-message': { p: 0 } }}>
+            {/* <Alert icon={false} sx={{ py: 3, mb: 6, ...bgColors.primaryLight, '& .MuiAlert-message': { p: 0 } }}>
               <Typography variant='body2' sx={{ mb: 2, color: 'primary.main' }}>
                 Admin: <strong>admin@vuexy.com</strong> / Pass: <strong>admin</strong>
               </Typography>
               <Typography variant='body2' sx={{ color: 'primary.main' }}>
                 Client: <strong>client@vuexy.com</strong> / Pass: <strong>client</strong>
               </Typography>
-            </Alert>
+            </Alert> */}
             <form noValidate autoComplete='off' onSubmit={handleSubmit(onSubmit)}>
               <Box sx={{ mb: 4 }}>
                 <Controller

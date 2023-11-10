@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { useState } from 'react'
 
 //** Elegir Idioma
@@ -75,39 +76,47 @@ const moduls = () => {
                     <ListItem disablePadding onClick={() => handleDropdownClose('../info-personal/propiedad-did')}>
                       <ListItemButton>
                         <ListItemIcon>
-                          <Icon icon='tabler:mail' fontSize={20} />
+                          <Icon icon='tabler:user-circle' fontSize={20} />
                         </ListItemIcon>
                         <ListItemText primary={t('Property of Identification')} />
                       </ListItemButton>
                     </ListItem>
-                    <ListItem disablePadding>
+                    <ListItem disablePadding onClick={() => handleDropdownClose('../info-personal/tipo-did')}>
                       <ListItemButton>
                         <ListItemIcon>
-                          <Icon icon='tabler:mail' fontSize={20} />
+                          <Icon icon='mdi:account-card-details' fontSize={20} />
                         </ListItemIcon>
                         <ListItemText primary={t('Types of Identification')} />
                       </ListItemButton>
                     </ListItem>
-                    <ListItem disablePadding>
+                    <ListItem disablePadding onClick={() => handleDropdownClose('../info-personal/genero')}>
                       <ListItemButton>
                         <ListItemIcon>
-                          <Icon icon='tabler:mail' fontSize={20} />
+                          <Icon icon='mdi:gender-male-female' fontSize={20} />
                         </ListItemIcon>
                         <ListItemText primary={t('Gender')} />
                       </ListItemButton>
                     </ListItem>
-                    <ListItem disablePadding>
+                    <ListItem disablePadding onClick={() => handleDropdownClose('../info-personal/indentidad-genero')}>
                       <ListItemButton>
                         <ListItemIcon>
-                          <Icon icon='tabler:mail' fontSize={20} />
+                          <Icon icon='mdi:gender-transgender' fontSize={20} />
                         </ListItemIcon>
                         <ListItemText primary={t('Gender Identity')} />
                       </ListItemButton>
                     </ListItem>
-                    <ListItem disablePadding>
+                    <ListItem disablePadding onClick={() => handleDropdownClose('../info-personal/ocupacion_grupo')}>
                       <ListItemButton>
                         <ListItemIcon>
-                          <Icon icon='tabler:mail' fontSize={20} />
+                          <Icon icon='mdi:worker' fontSize={20} />
+                        </ListItemIcon>
+                        <ListItemText primary={t('Group Occupations')} />
+                      </ListItemButton>
+                    </ListItem>
+                    <ListItem disablePadding onClick={() => handleDropdownClose('../info-personal/ocupacion')}>
+                      <ListItemButton>
+                        <ListItemIcon>
+                          <Icon icon='mdi:worker-outline' fontSize={20} />
                         </ListItemIcon>
                         <ListItemText primary={t('Occupation')} />
                       </ListItemButton>

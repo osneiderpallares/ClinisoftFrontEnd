@@ -1,5 +1,5 @@
 const AppPage = () => {
-  return <h2>Página para admisiones</h2>
+  return <h2>Página para turnos</h2>
 }
 
 AppPage.acl = {

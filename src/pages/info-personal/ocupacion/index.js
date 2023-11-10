@@ -45,7 +45,8 @@ const Transition = forwardRef(function Transition(props, ref) {
   return <Fade ref={ref} {...props} />
 })
 
-const endPoint = 'http://127.0.0.1:8000/show_prodid/'
+const endPoint = 'http://127.0.0.1:8000/show_ocupaciones/'
+const endPoint_ocupaciones_grupo = 'http://127.0.0.1:8000/show_ocupacion_grupo/'
 
 const escapeRegExp = value => {
   return value.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&')
@@ -80,31 +81,37 @@ const AppPage = ({}) => {
     },
     {
       flex: 0.25,
-      minWidth: 200,
+      minWidth: 250,
       field: 'nombre',
       headerName: t('NAME')
     },
     {
-      flex: 0.25,
-      minWidth: 230,
+      flex: 0.09,
+      minWidth: 90,
       field: 'abreviacion',
       headerName: t('ABBREVIATION')
     },
     {
-      flex: 0.15,
+      flex: 0.12,
       minWidth: 120,
+      field: 'ocupaciones_grupos_nombre',
+      headerName: t('Group Occupations')
+    },
+    {
+      flex: 0.1,
+      minWidth: 100,
       field: 'create_up',
       headerName: t('CREATION DATE')
     },
     {
-      flex: 0.15,
-      minWidth: 120,
+      flex: 0.09,
+      minWidth: 90,
       field: 'estado_nombre',
       headerName: t('STATE')
     },
     {
-      flex: 0.125,
-      minWidth: 140,
+      flex: 0.1,
+      minWidth: 110,
       field: 'acciones',
       headerName: t('ACTIONS'),
       renderCell: params => {
@@ -130,10 +137,14 @@ const AppPage = ({}) => {
     }
   ]
   const [rows, setRows] = useState(null)
+  const [rows_ocGrupo, setRowsOcGrupo] = useState(null)
 
   const peticionGet = async () => {
     await axios.get(endPoint).then(response => {
       setRows(response.data)
+    })
+    await axios.get(endPoint_ocupaciones_grupo).then(response => {
+      setRowsOcGrupo(response.data)
     })
   }
 
@@ -167,7 +178,8 @@ const AppPage = ({}) => {
     id: null,
     nombre: '',
     abreviacion: '',
-    estado: '1'
+    estado: '1',
+    ocupaciones_grupos: ''
   })
 
   const Delete = form => {
@@ -183,7 +195,7 @@ const AppPage = ({}) => {
   const handleNo = () => setOpen(false)
 
   const handleSi = () => {
-    if (deleteRow(registroSeleccionado.id, '/update_prodid/')) {
+    if (deleteRow(registroSeleccionado.id, '/update_ocupacion_grupo/')) {
       toast.success(t('Record deleted successfully!'))
       peticionGet()
     } else {
@@ -203,13 +215,15 @@ const AppPage = ({}) => {
       .string()
       .min(1, obj => showErrors(t('abbreviation'), obj.value.length, obj.min))
       .required(),
-    estado: yup.string()
+    estado: yup.string(),
+    ocupaciones_grupos: yup.string().required()
   })
 
   const defaultValues = {
     nombre: '',
     abreviacion: '',
-    estado: '1'
+    estado: '1',
+    ocupaciones_grupos: ''
   }
 
   const openModal = () => {
@@ -239,7 +253,7 @@ const AppPage = ({}) => {
   })
 
   const onSubmit = data => {
-    if (saveRow(data, '/store_prodid/')) {
+    if (saveRow(data, '/store_ocupacion_grupo/')) {
       toast.success(t('Log saved successfully!'))
       rows.map(row => {
         peticionGet()
@@ -258,7 +272,7 @@ const AppPage = ({}) => {
 
   const onSubmitEdit = e => {
     e.preventDefault()
-    if (saveRow(registroSeleccionado, '/store_prodid/')) {
+    if (saveRow(registroSeleccionado, '/store_ocupacion_grupo/')) {
       toast.success(t('Registration successfully updated!'))
       rows.map(row => {
         peticionGet()
@@ -305,7 +319,7 @@ const AppPage = ({}) => {
   return (
     <Card>
       <CardHeader
-        title={t('DID property')}
+        title={t('Occupations')}
         action={
           <Tooltip title={t('Add')}>
             <Fab color='primary' aria-label='Add' size='small' onClick={openModal}>
@@ -364,6 +378,35 @@ const AppPage = ({}) => {
                       aria-describedby='validation-schema-name'
                       {...(errors.nombre && { helperText: errors.nombre.message })}
                     />
+                  )}
+                />
+              </Grid>
+              <Grid item sm={12} xs={12}>
+                <Controller
+                  name='ocupaciones_grupos'
+                  control={control}
+                  rules={{ required: true }}
+                  render={({ field: { value, onChange } }) => (
+                    <CustomTextField
+                      select
+                      fullWidth
+                      label={t('Occupation Groups')}
+                      SelectProps={{
+                        value: value,
+                        onChange: onChange
+                      }}
+                      error={Boolean(errors.ocupaciones_grupos)}
+                      aria-describedby='validation-basic-occupation-groups'
+                      {...(errors.ocupaciones_grupos && { helperText: errors.ocupaciones_grupos.message })}
+                    >
+                      {rows_ocGrupo.map(ocGrupo => {
+                        return (
+                          <MenuItem key={ocGrupo.id} value={ocGrupo.id}>
+                            {ocGrupo.nombre}
+                          </MenuItem>
+                        )
+                      })}
+                    </CustomTextField>
                   )}
                 />
               </Grid>
@@ -467,6 +510,7 @@ const AppPage = ({}) => {
                   setRegistroSeleccionado({
                     id: registroSeleccionado.id,
                     nombre: registroSeleccionado.nombre,
+                    ocupaciones_grupos: registroSeleccionado.ocupaciones_grupos,
                     abreviacion: registroSeleccionado.abreviacion,
                     estado: registroSeleccionado.estado
                   })
@@ -483,12 +527,42 @@ const AppPage = ({}) => {
                     setRegistroSeleccionado({
                       id: registroSeleccionado.id,
                       nombre: e.target.value,
+                      ocupaciones_grupos: registroSeleccionado.ocupaciones_grupos,
                       abreviacion: registroSeleccionado.abreviacion,
                       estado: registroSeleccionado.estado
                     })
                   }}
                   placeholder={t('Enter your name')}
                 />
+              </Grid>
+              <Grid item sm={12} xs={12}>
+                <CustomTextField
+                  select
+                  required
+                  fullWidth
+                  name='ocupaciones_grupos'
+                  label={t('Occupation Groups')}
+                  SelectProps={{
+                    value: registroSeleccionado.ocupaciones_grupos,
+                    onChange: e => {
+                      setRegistroSeleccionado({
+                        id: registroSeleccionado.id,
+                        nombre: registroSeleccionado.nombre,
+                        ocupaciones_grupos: e.target.value,
+                        abreviacion: registroSeleccionado.abreviacion,
+                        estado: registroSeleccionado.abreviacion
+                      })
+                    }
+                  }}
+                >
+                  {rows_ocGrupo.map(ocGrupo => {
+                    return (
+                      <MenuItem key={ocGrupo.id} value={ocGrupo.id}>
+                        {ocGrupo.nombre}
+                      </MenuItem>
+                    )
+                  })}
+                </CustomTextField>
               </Grid>
               <Grid item sm={6} xs={6}>
                 <CustomTextField
@@ -501,6 +575,7 @@ const AppPage = ({}) => {
                     setRegistroSeleccionado({
                       id: registroSeleccionado.id,
                       nombre: registroSeleccionado.nombre,
+                      ocupaciones_grupos: registroSeleccionado.ocupaciones_grupos,
                       abreviacion: e.target.value,
                       estado: registroSeleccionado.estado
                     })
@@ -521,6 +596,7 @@ const AppPage = ({}) => {
                       setRegistroSeleccionado({
                         id: registroSeleccionado.id,
                         nombre: registroSeleccionado.nombre,
+                        ocupaciones_grupos: registroSeleccionado.ocupaciones_grupos,
                         abreviacion: registroSeleccionado.abreviacion,
                         estado: e.target.value
                       })

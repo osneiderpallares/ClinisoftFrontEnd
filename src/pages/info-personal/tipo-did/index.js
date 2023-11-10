@@ -40,12 +40,13 @@ import { yupResolver } from '@hookform/resolvers/yup'
 // ** Peticiones
 import { saveRow } from '../../../@fake-db/requests/peticiones.js'
 import { deleteRow } from '../../../@fake-db/requests/peticiones.js'
+import { ta } from 'date-fns/locale'
 
 const Transition = forwardRef(function Transition(props, ref) {
   return <Fade ref={ref} {...props} />
 })
 
-const endPoint = 'http://127.0.0.1:8000/show_prodid/'
+const endPoint = 'http://127.0.0.1:8000/show_tiposdid/'
 
 const escapeRegExp = value => {
   return value.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&')
@@ -80,15 +81,22 @@ const AppPage = ({}) => {
     },
     {
       flex: 0.25,
-      minWidth: 200,
+      minWidth: 250,
       field: 'nombre',
       headerName: t('NAME')
     },
     {
-      flex: 0.25,
-      minWidth: 230,
+      flex: 0.1,
+      minWidth: 100,
       field: 'abreviacion',
       headerName: t('ABBREVIATION')
+    },
+    {
+      type: 'number',
+      flex: 0.06,
+      field: 'longitud',
+      minWidth: 50,
+      headerName: t('LENGTH')
     },
     {
       flex: 0.15,
@@ -97,13 +105,13 @@ const AppPage = ({}) => {
       headerName: t('CREATION DATE')
     },
     {
-      flex: 0.15,
+      flex: 0.12,
       minWidth: 120,
       field: 'estado_nombre',
       headerName: t('STATE')
     },
     {
-      flex: 0.125,
+      flex: 0.1,
       minWidth: 140,
       field: 'acciones',
       headerName: t('ACTIONS'),
@@ -167,7 +175,9 @@ const AppPage = ({}) => {
     id: null,
     nombre: '',
     abreviacion: '',
-    estado: '1'
+    estado: '1',
+    longitud: 1,
+    codigo_factura: ''
   })
 
   const Delete = form => {
@@ -183,7 +193,7 @@ const AppPage = ({}) => {
   const handleNo = () => setOpen(false)
 
   const handleSi = () => {
-    if (deleteRow(registroSeleccionado.id, '/update_prodid/')) {
+    if (deleteRow(registroSeleccionado.id, '/update_tiposdid/')) {
       toast.success(t('Record deleted successfully!'))
       peticionGet()
     } else {
@@ -203,13 +213,20 @@ const AppPage = ({}) => {
       .string()
       .min(1, obj => showErrors(t('abbreviation'), obj.value.length, obj.min))
       .required(),
-    estado: yup.string()
+    estado: yup.string(),
+    longitud: yup
+      .number()
+      .min(1, obj => showErrors(t('length'), obj.value.length, obj.min))
+      .required(),
+    codigo_factura: yup.string()
   })
 
   const defaultValues = {
     nombre: '',
     abreviacion: '',
-    estado: '1'
+    estado: '1',
+    longitud: 1,
+    codigo_factura: ''
   }
 
   const openModal = () => {
@@ -222,7 +239,7 @@ const AppPage = ({}) => {
     if (valueLen === 0) {
       return `${t('The field')} ${field} ${t('is required')}`
     } else if (valueLen > 0 && valueLen < min) {
-      return `${t('El campo')} ${field} ${t('must at least have')} ${min} ${t('characters')}`
+      return `${t('The field')} ${field} ${t('must at least have')} ${min} ${t('characters')}`
     } else {
       return ''
     }
@@ -239,7 +256,7 @@ const AppPage = ({}) => {
   })
 
   const onSubmit = data => {
-    if (saveRow(data, '/store_prodid/')) {
+    if (saveRow(data, '/store_tiposdid')) {
       toast.success(t('Log saved successfully!'))
       rows.map(row => {
         peticionGet()
@@ -258,7 +275,7 @@ const AppPage = ({}) => {
 
   const onSubmitEdit = e => {
     e.preventDefault()
-    if (saveRow(registroSeleccionado, '/store_prodid/')) {
+    if (saveRow(registroSeleccionado, '/store_tiposdid')) {
       toast.success(t('Registration successfully updated!'))
       rows.map(row => {
         peticionGet()
@@ -305,7 +322,7 @@ const AppPage = ({}) => {
   return (
     <Card>
       <CardHeader
-        title={t('DID property')}
+        title={t('Type Identification')}
         action={
           <Tooltip title={t('Add')}>
             <Fab color='primary' aria-label='Add' size='small' onClick={openModal}>
@@ -354,12 +371,11 @@ const AppPage = ({}) => {
                   rules={{ required: true }}
                   render={({ field: { value, onChange } }) => (
                     <CustomTextField
-                      id='nombre'
                       fullWidth
                       value={value}
                       label={t('Name')}
                       onChange={onChange}
-                      placeholder={t('Enter the name')}
+                      placeholder={t('Enter your name')}
                       error={Boolean(errors.nombre)}
                       aria-describedby='validation-schema-name'
                       {...(errors.nombre && { helperText: errors.nombre.message })}
@@ -367,7 +383,7 @@ const AppPage = ({}) => {
                   )}
                 />
               </Grid>
-              <Grid item sm={6} xs={6}>
+              <Grid item sm={3} xs={3}>
                 <Controller
                   name='abreviacion'
                   control={control}
@@ -386,7 +402,46 @@ const AppPage = ({}) => {
                   )}
                 />
               </Grid>
-              <Grid item sm={6} xs={6}>
+              <Grid item sm={2} xs={2}>
+                <Controller
+                  name='longitud'
+                  control={control}
+                  rules={{ required: true }}
+                  render={({ field: { value, onChange } }) => (
+                    <CustomTextField
+                      fullWidth
+                      type='number'
+                      value={value}
+                      label={t('Length')}
+                      onChange={onChange}
+                      placeholder={t('Enter the length')}
+                      error={Boolean(errors.longitud)}
+                      aria-describedby='validation-schema-length'
+                      {...(errors.longitud && { helperText: errors.longitud.message })}
+                    />
+                  )}
+                />
+              </Grid>
+              <Grid item sm={3} xs={3}>
+                <Controller
+                  name='codigo_factura'
+                  control={control}
+                  rules={{ required: false }}
+                  render={({ field: { value, onChange } }) => (
+                    <CustomTextField
+                      fullWidth
+                      value={value}
+                      label={t('Invoice Code')}
+                      onChange={onChange}
+                      placeholder={t('Enter the invoice code')}
+                      error={Boolean(errors.codigo_factura)}
+                      aria-describedby='validation-schema-invoice-code'
+                      {...(errors.codigo_factura && { helperText: errors.codigo_factura.message })}
+                    />
+                  )}
+                />
+              </Grid>
+              <Grid item sm={4} xs={4}>
                 <Controller
                   name='estado'
                   control={control}
@@ -401,7 +456,7 @@ const AppPage = ({}) => {
                         onChange: onChange
                       }}
                       error={Boolean(errors.estado)}
-                      aria-describedby='validation-basic-estado'
+                      aria-describedby='validation-basic-state'
                       {...(errors.estado && { helperText: errors.estado.message })}
                     >
                       <MenuItem value='1'>{t('Active')}</MenuItem>
@@ -468,7 +523,9 @@ const AppPage = ({}) => {
                     id: registroSeleccionado.id,
                     nombre: registroSeleccionado.nombre,
                     abreviacion: registroSeleccionado.abreviacion,
-                    estado: registroSeleccionado.estado
+                    estado: registroSeleccionado.estado,
+                    longitud: registroSeleccionado.longitud,
+                    codigo_factura: registroSeleccionado.codigo_factura
                   })
                 }}
               ></input>
@@ -484,13 +541,15 @@ const AppPage = ({}) => {
                       id: registroSeleccionado.id,
                       nombre: e.target.value,
                       abreviacion: registroSeleccionado.abreviacion,
-                      estado: registroSeleccionado.estado
+                      estado: registroSeleccionado.estado,
+                      longitud: registroSeleccionado.longitud,
+                      codigo_factura: registroSeleccionado.codigo_factura
                     })
                   }}
-                  placeholder={t('Enter your name')}
+                  placeholder={t('Enter the name')}
                 />
               </Grid>
-              <Grid item sm={6} xs={6}>
+              <Grid item sm={3} xs={3}>
                 <CustomTextField
                   fullWidth
                   required
@@ -502,13 +561,54 @@ const AppPage = ({}) => {
                       id: registroSeleccionado.id,
                       nombre: registroSeleccionado.nombre,
                       abreviacion: e.target.value,
-                      estado: registroSeleccionado.estado
+                      estado: registroSeleccionado.estado,
+                      longitud: registroSeleccionado.longitud,
+                      codigo_factura: registroSeleccionado.codigo_factura
                     })
                   }}
                   placeholder={t('Enter the abbreviation')}
                 />
               </Grid>
-              <Grid item sm={6} xs={6}>
+              <Grid item sm={2} xs={2}>
+                <CustomTextField
+                  fullWidth
+                  required
+                  name='longitud'
+                  value={registroSeleccionado.longitud}
+                  label={t('Length')}
+                  onChange={e => {
+                    setRegistroSeleccionado({
+                      id: registroSeleccionado.id,
+                      nombre: registroSeleccionado.nombre,
+                      abreviacion: registroSeleccionado.abreviacion,
+                      estado: registroSeleccionado.estado,
+                      longitud: e.target.value,
+                      codigo_factura: registroSeleccionado.codigo_factura
+                    })
+                  }}
+                  placeholder={t('Enter the length')}
+                />
+              </Grid>
+              <Grid item sm={3} xs={3}>
+                <CustomTextField
+                  fullWidth
+                  name='codigo_factura'
+                  value={registroSeleccionado.codigo_factura}
+                  label={t('Invoice Code')}
+                  onChange={e => {
+                    setRegistroSeleccionado({
+                      id: registroSeleccionado.id,
+                      nombre: registroSeleccionado.nombre,
+                      abreviacion: registroSeleccionado.abreviacion,
+                      estado: registroSeleccionado.estado,
+                      longitud: registroSeleccionado.longitud,
+                      codigo_factura: e.target.value
+                    })
+                  }}
+                  placeholder={t('Enter the invoice code')}
+                />
+              </Grid>
+              <Grid item sm={4} xs={4}>
                 <CustomTextField
                   select
                   fullWidth
@@ -522,7 +622,9 @@ const AppPage = ({}) => {
                         id: registroSeleccionado.id,
                         nombre: registroSeleccionado.nombre,
                         abreviacion: registroSeleccionado.abreviacion,
-                        estado: e.target.value
+                        estado: e.target.value,
+                        longitud: registroSeleccionado.longitud,
+                        codigo_factura: registroSeleccionado.codigo_factura
                       })
                     }
                   }}

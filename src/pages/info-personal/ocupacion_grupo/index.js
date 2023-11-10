@@ -45,7 +45,7 @@ const Transition = forwardRef(function Transition(props, ref) {
   return <Fade ref={ref} {...props} />
 })
 
-const endPoint = 'http://127.0.0.1:8000/show_prodid/'
+const endPoint = 'http://127.0.0.1:8000/show_ocupacion_grupo/'
 
 const escapeRegExp = value => {
   return value.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&')
@@ -79,14 +79,14 @@ const AppPage = ({}) => {
       headerName: 'ID'
     },
     {
-      flex: 0.25,
-      minWidth: 200,
+      flex: 0.3,
+      minWidth: 300,
       field: 'nombre',
       headerName: t('NAME')
     },
     {
-      flex: 0.25,
-      minWidth: 230,
+      flex: 0.1,
+      minWidth: 100,
       field: 'abreviacion',
       headerName: t('ABBREVIATION')
     },
@@ -97,14 +97,14 @@ const AppPage = ({}) => {
       headerName: t('CREATION DATE')
     },
     {
-      flex: 0.15,
+      flex: 0.1,
       minWidth: 120,
       field: 'estado_nombre',
       headerName: t('STATE')
     },
     {
-      flex: 0.125,
-      minWidth: 140,
+      flex: 0.1,
+      minWidth: 120,
       field: 'acciones',
       headerName: t('ACTIONS'),
       renderCell: params => {
@@ -183,7 +183,7 @@ const AppPage = ({}) => {
   const handleNo = () => setOpen(false)
 
   const handleSi = () => {
-    if (deleteRow(registroSeleccionado.id, '/update_prodid/')) {
+    if (deleteRow(registroSeleccionado.id, '/update_ocupacion_grupo/')) {
       toast.success(t('Record deleted successfully!'))
       peticionGet()
     } else {
@@ -239,7 +239,7 @@ const AppPage = ({}) => {
   })
 
   const onSubmit = data => {
-    if (saveRow(data, '/store_prodid/')) {
+    if (saveRow(data, '/store_ocupacion_grupo/')) {
       toast.success(t('Log saved successfully!'))
       rows.map(row => {
         peticionGet()
@@ -258,7 +258,7 @@ const AppPage = ({}) => {
 
   const onSubmitEdit = e => {
     e.preventDefault()
-    if (saveRow(registroSeleccionado, '/store_prodid/')) {
+    if (saveRow(registroSeleccionado, '/store_ocupacion_grupo/')) {
       toast.success(t('Registration successfully updated!'))
       rows.map(row => {
         peticionGet()
@@ -305,7 +305,7 @@ const AppPage = ({}) => {
   return (
     <Card>
       <CardHeader
-        title={t('DID property')}
+        title={t('Group Occupations')}
         action={
           <Tooltip title={t('Add')}>
             <Fab color='primary' aria-label='Add' size='small' onClick={openModal}>

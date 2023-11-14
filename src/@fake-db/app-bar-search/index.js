@@ -785,6 +785,13 @@ const searchData = [
     icon: 'mdi:worker-outline',
     title: 'Ocupaciones',
     category: 'appsPages'
+  },
+  {
+    id: 113,
+    url: '/info-personal/escolaridad',
+    icon: 'mdi:account-school',
+    title: 'Escolaridad',
+    category: 'appsPages'
   }
 ]
 

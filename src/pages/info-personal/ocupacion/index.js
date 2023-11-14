@@ -41,6 +41,8 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { saveRow } from '../../../@fake-db/requests/peticiones.js'
 import { deleteRow } from '../../../@fake-db/requests/peticiones.js'
 
+import { useRouter } from 'next/router'
+
 const Transition = forwardRef(function Transition(props, ref) {
   return <Fade ref={ref} {...props} />
 })
@@ -146,6 +148,15 @@ const AppPage = ({}) => {
     await axios.get(endPoint_ocupaciones_grupo).then(response => {
       setRowsOcGrupo(response.data)
     })
+
+    // try {
+    //   axios.all([await axios.get(endPoint), await axios.get(endPoint_ocupaciones_grupo)]).then(response => {
+    //     setRows(response[0].data)
+    //     setRowsOcGrupo(response[1].data)
+    //   })
+    // } catch (error) {
+    //   console.log(error)
+    // }
   }
 
   const [show, setShow] = useState(false)
@@ -195,7 +206,7 @@ const AppPage = ({}) => {
   const handleNo = () => setOpen(false)
 
   const handleSi = () => {
-    if (deleteRow(registroSeleccionado.id, '/update_ocupacion_grupo/')) {
+    if (deleteRow(registroSeleccionado.id, '/update_ocupacion/')) {
       toast.success(t('Record deleted successfully!'))
       peticionGet()
     } else {
@@ -216,7 +227,10 @@ const AppPage = ({}) => {
       .min(1, obj => showErrors(t('abbreviation'), obj.value.length, obj.min))
       .required(),
     estado: yup.string(),
-    ocupaciones_grupos: yup.string().required()
+    ocupaciones_grupos: yup
+      .string()
+      .min(1, obj => showErrors(t('occupation groups'), obj.value.length, obj.min))
+      .required()
   })
 
   const defaultValues = {
@@ -242,6 +256,8 @@ const AppPage = ({}) => {
     }
   }
 
+  const router = useRouter()
+
   const {
     control,
     handleSubmit,
@@ -253,11 +269,9 @@ const AppPage = ({}) => {
   })
 
   const onSubmit = data => {
-    if (saveRow(data, '/store_ocupacion_grupo/')) {
+    if (saveRow(data, '/store_ocupacion/')) {
       toast.success(t('Log saved successfully!'))
-      rows.map(row => {
-        peticionGet()
-      })
+      router.push('./ocupacion')
     } else {
       toast.error(t('Error saving log'))
     }
@@ -272,11 +286,9 @@ const AppPage = ({}) => {
 
   const onSubmitEdit = e => {
     e.preventDefault()
-    if (saveRow(registroSeleccionado, '/store_ocupacion_grupo/')) {
+    if (saveRow(registroSeleccionado, '/store_ocupacion/')) {
       toast.success(t('Registration successfully updated!'))
-      rows.map(row => {
-        peticionGet()
-      })
+      router.push('./ocupacion')
     } else {
       toast.error(t('Error updating registry'))
     }
@@ -285,7 +297,7 @@ const AppPage = ({}) => {
 
   useEffect(() => {
     peticionGet()
-  }, [])
+  }, [router])
 
   const table = (
     <DataGrid
@@ -399,7 +411,7 @@ const AppPage = ({}) => {
                       aria-describedby='validation-basic-occupation-groups'
                       {...(errors.ocupaciones_grupos && { helperText: errors.ocupaciones_grupos.message })}
                     >
-                      {rows_ocGrupo.map(ocGrupo => {
+                      {rows_ocGrupo?.map(ocGrupo => {
                         return (
                           <MenuItem key={ocGrupo.id} value={ocGrupo.id}>
                             {ocGrupo.nombre}
@@ -555,7 +567,7 @@ const AppPage = ({}) => {
                     }
                   }}
                 >
-                  {rows_ocGrupo.map(ocGrupo => {
+                  {rows_ocGrupo?.map(ocGrupo => {
                     return (
                       <MenuItem key={ocGrupo.id} value={ocGrupo.id}>
                         {ocGrupo.nombre}

@@ -121,10 +121,10 @@ const moduls = () => {
                         <ListItemText primary={t('Occupation')} />
                       </ListItemButton>
                     </ListItem>
-                    <ListItem disablePadding>
+                    <ListItem disablePadding onClick={() => handleDropdownClose('../info-personal/escolaridad')}>
                       <ListItemButton>
                         <ListItemIcon>
-                          <Icon icon='tabler:mail' fontSize={20} />
+                          <Icon icon='mdi:account-school' fontSize={20} />
                         </ListItemIcon>
                         <ListItemText primary={t('Education Level')} />
                       </ListItemButton>

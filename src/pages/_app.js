@@ -55,6 +55,8 @@ import 'src/iconify-bundle/icons-bundle-react'
 
 // ** Global css styles
 import '../../styles/globals.css'
+import { useState, useEffect } from 'react'
+import axios from 'axios'
 
 const clientSideEmotionCache = createEmotionCache()
 
@@ -95,12 +97,25 @@ const App = props => {
   const guestGuard = Component.guestGuard ?? false
   const aclAbilities = Component.acl ?? defaultACLObj
 
+  const [company, setCompany] = useState(null)
+
+  const peticionGet = async () => {
+    await axios.get('http://127.0.0.1:8000/show_company/').then(response => {
+      setCompany(response.data)
+    })
+  }
+  useEffect(() => {
+    peticionGet()
+  }, [])
+
+  if (!company) return null
+
   return (
     <Provider store={store}>
       <CacheProvider value={emotionCache}>
         <Head>
           {/* <title>{`${themeConfig.templateName} - Material Design React Admin Template`}</title> */}
-          <title>{`${themeConfig.templateName} - SIC INGENIERIA S.A.S`}</title>
+          <title>{`${themeConfig.templateName} - ${company.abreviacion}`}</title>
           <meta
             name='description'
             content={`${themeConfig.templateName} – Material Design React Admin Dashboard Template – is the most developer friendly & highly customizable Admin Dashboard Template based on MUI v5.`}

@@ -1,3 +1,6 @@
+//Traducir
+import { useTranslation } from 'react-i18next'
+
 // ** React Imports
 import { useState, useEffect } from 'react'
 
@@ -346,7 +349,7 @@ const SidebarLeft = props => {
       setFilteredContacts(filteredContactsArr)
     }
   }
-
+  const {t}=useTranslation();
   return (
     <div>
       <Drawer
@@ -444,7 +447,7 @@ const SidebarLeft = props => {
               </Typography>
               <List sx={{ mb: 5, p: 0 }}>{renderChats()}</List>
               <Typography variant='h5' sx={{ ml: 3, mb: 3.5, color: 'primary.main' }}>
-                Contacts
+                {t('Contacts')}
               </Typography>
               <List sx={{ p: 0 }}>{renderContacts()}</List>
             </Box>

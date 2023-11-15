@@ -1,3 +1,6 @@
+//Traducir
+import { useTranslation } from 'react-i18next'
+
 // ** React Imports
 import { Fragment } from 'react'
 
@@ -32,6 +35,7 @@ const ChatWrapperStartChat = styled(Box)(({ theme }) => ({
 }))
 
 const ChatContent = props => {
+  const {t}=useTranslation();
   // ** Props
   const {
     store,
@@ -89,7 +93,7 @@ const ChatContent = props => {
               }}
             >
               <Typography sx={{ fontWeight: 500, fontSize: '1.125rem', lineHeight: 'normal' }}>
-                Start Conversation
+                {t('Start Conversation')}
               </Typography>
             </Box>
           </ChatWrapperStartChat>

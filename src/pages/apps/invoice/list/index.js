@@ -1,3 +1,6 @@
+//Traducir
+import { useTranslation } from 'react-i18next'
+
 // ** React Imports
 import { useState, useEffect, forwardRef } from 'react'
 
@@ -75,103 +78,103 @@ const renderClient = row => {
   }
 }
 
-const defaultColumns = [
-  {
-    flex: 0.1,
-    field: 'id',
-    minWidth: 100,
-    headerName: 'ID',
-    renderCell: ({ row }) => (
-      <Typography component={LinkStyled} href={`/apps/invoice/preview/${row.id}`}>{`#${row.id}`}</Typography>
-    )
-  },
-  {
-    flex: 0.1,
-    minWidth: 80,
-    field: 'invoiceStatus',
-    renderHeader: () => <Icon icon='tabler:trending-up' />,
-    renderCell: ({ row }) => {
-      const { dueDate, balance, invoiceStatus } = row
-      const color = invoiceStatusObj[invoiceStatus] ? invoiceStatusObj[invoiceStatus].color : 'primary'
+// const defaultColumns = [
+//   {
+//     flex: 0.1,
+//     field: 'id',
+//     minWidth: 100,
+//     headerName: 'ID',
+//     renderCell: ({ row }) => (
+//       <Typography component={LinkStyled} href={`/apps/invoice/preview/${row.id}`}>{`#${row.id}`}</Typography>
+//     )
+//   },
+//   {
+//     flex: 0.1,
+//     minWidth: 80,
+//     field: 'invoiceStatus',
+//     renderHeader: () => <Icon icon='tabler:trending-up' />,
+//     renderCell: ({ row }) => {
+//       const { dueDate, balance, invoiceStatus } = row
+//       const color = invoiceStatusObj[invoiceStatus] ? invoiceStatusObj[invoiceStatus].color : 'primary'
 
-      return (
-        <Tooltip
-          title={
-            <div>
-              <Typography variant='caption' sx={{ color: 'common.white', fontWeight: 600 }}>
-                {invoiceStatus}
-              </Typography>
-              <br />
-              <Typography variant='caption' sx={{ color: 'common.white', fontWeight: 600 }}>
-                Balance:
-              </Typography>{' '}
-              {balance}
-              <br />
-              <Typography variant='caption' sx={{ color: 'common.white', fontWeight: 600 }}>
-                Due Date:
-              </Typography>{' '}
-              {dueDate}
-            </div>
-          }
-        >
-          <CustomAvatar skin='light' color={color} sx={{ width: '1.875rem', height: '1.875rem' }}>
-            <Icon icon={invoiceStatusObj[invoiceStatus].icon} />
-          </CustomAvatar>
-        </Tooltip>
-      )
-    }
-  },
-  {
-    flex: 0.25,
-    field: 'name',
-    minWidth: 320,
-    headerName: 'Client',
-    renderCell: ({ row }) => {
-      const { name, companyEmail } = row
+//       return (
+//         <Tooltip
+//           title={
+//             <div>
+//               <Typography variant='caption' sx={{ color: 'common.white', fontWeight: 600 }}>
+//                 {invoiceStatus}
+//               </Typography>
+//               <br />
+//               <Typography variant='caption' sx={{ color: 'common.white', fontWeight: 600 }}>
+//                 Balance:
+//               </Typography>{' '}
+//               {balance}
+//               <br />
+//               <Typography variant='caption' sx={{ color: 'common.white', fontWeight: 600 }}>
+//               Due Date:
+//               </Typography>{' '}
+//               {dueDate}
+//             </div>
+//           }
+//         >
+//           <CustomAvatar skin='light' color={color} sx={{ width: '1.875rem', height: '1.875rem' }}>
+//             <Icon icon={invoiceStatusObj[invoiceStatus].icon} />
+//           </CustomAvatar>
+//         </Tooltip>
+//       )
+//     }
+//   },
+//   {
+//     flex: 0.25,
+//     field: 'name',
+//     minWidth: 320,
+//     headerName: 'Client',
+//     renderCell: ({ row }) => {
+//       const { name, companyEmail } = row
 
-      return (
-        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          {renderClient(row)}
-          <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-            <Typography noWrap sx={{ color: 'text.secondary', fontWeight: 500 }}>
-              {name}
-            </Typography>
-            <Typography noWrap variant='body2' sx={{ color: 'text.disabled' }}>
-              {companyEmail}
-            </Typography>
-          </Box>
-        </Box>
-      )
-    }
-  },
-  {
-    flex: 0.1,
-    minWidth: 100,
-    field: 'total',
-    headerName: 'Total',
-    renderCell: ({ row }) => <Typography sx={{ color: 'text.secondary' }}>{`$${row.total || 0}`}</Typography>
-  },
-  {
-    flex: 0.15,
-    minWidth: 140,
-    field: 'issuedDate',
-    headerName: 'Issued Date',
-    renderCell: ({ row }) => <Typography sx={{ color: 'text.secondary' }}>{row.issuedDate}</Typography>
-  },
-  {
-    flex: 0.1,
-    minWidth: 100,
-    field: 'balance',
-    headerName: 'Balance',
-    renderCell: ({ row }) => {
-      return row.balance !== 0 ? (
-        <Typography sx={{ color: 'text.secondary' }}>{row.balance}</Typography>
-      ) : (
-        <CustomChip rounded size='small' skin='light' color='success' label='Paid' />
-      )
-    }
-  }
-]
+//       return (
+//         <Box sx={{ display: 'flex', alignItems: 'center' }}>
+//           {renderClient(row)}
+//           <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+//             <Typography noWrap sx={{ color: 'text.secondary', fontWeight: 500 }}>
+//               {name}
+//             </Typography>
+//             <Typography noWrap variant='body2' sx={{ color: 'text.disabled' }}>
+//               {companyEmail}
+//             </Typography>
+//           </Box>
+//         </Box>
+//       )
+//     }
+//   },
+//   {
+//     flex: 0.1,
+//     minWidth: 100,
+//     field: 'total',
+//     headerName: 'Total',
+//     renderCell: ({ row }) => <Typography sx={{ color: 'text.secondary' }}>{`$${row.total || 0}`}</Typography>
+//   },
+//   {
+//     flex: 0.15,
+//     minWidth: 140,
+//     field: 'issuedDate',
+//     headerName: 'Issued Date',
+//     renderCell: ({ row }) => <Typography sx={{ color: 'text.secondary' }}>{row.issuedDate}</Typography>
+//   },
+//   {
+//     flex: 0.1,
+//     minWidth: 100,
+//     field: 'balance',
+//     headerName: 'Balance',
+//     renderCell: ({ row }) => {
+//       return row.balance !== 0 ? (
+//         <Typography sx={{ color: 'text.secondary' }}>{row.balance}</Typography>
+//       ) : (
+//         <CustomChip rounded size='small' skin='light' color='success' label='Paid' />
+//       )
+//     }
+//   }
+// ]
 /* eslint-disable */
 const CustomInput = forwardRef((props, ref) => {
   const startDate = props.start !== null ? format(props.start, 'MM/dd/yyyy') : ''
@@ -185,6 +188,9 @@ const CustomInput = forwardRef((props, ref) => {
 
 /* eslint-enable */
 const InvoiceList = () => {
+
+  const {t}=useTranslation()
+
   // ** State
   const [dates, setDates] = useState([])
   const [value, setValue] = useState('')
@@ -225,21 +231,116 @@ const InvoiceList = () => {
   }
 
   const columns = [
-    ...defaultColumns,
+    //...defaultColumns,esto esta declarado en la linea 81 y es lo mismo que esta desde la linea siguiente 235..Hago esto para la traduccion
+    {
+      flex: 0.1,
+      field: 'id',
+      minWidth: 100,
+      headerName: 'ID',
+      renderCell: ({ row }) => (
+        <Typography component={LinkStyled} href={`/apps/invoice/preview/${row.id}`}>{`#${row.id}`}</Typography>
+      )
+    },
+    {
+      flex: 0.1,
+      minWidth: 80,
+      field: 'invoiceStatus',
+      renderHeader: () => <Icon icon='tabler:trending-up' />,
+      renderCell: ({ row }) => {
+        const { dueDate, balance, invoiceStatus } = row
+        const color = invoiceStatusObj[invoiceStatus] ? invoiceStatusObj[invoiceStatus].color : 'primary'
+  
+        return (
+          <Tooltip
+            title={
+              <div>
+                <Typography variant='caption' sx={{ color: 'common.white', fontWeight: 600 }}>
+                  {invoiceStatus}
+                </Typography>
+                <br />
+                <Typography variant='caption' sx={{ color: 'common.white', fontWeight: 600 }}>
+                  Balance:
+                </Typography>{' '}
+                {balance}
+                <br />
+                <Typography variant='caption' sx={{ color: 'common.white', fontWeight: 600 }}>
+                Due Date:
+                </Typography>{' '}
+                {dueDate}
+              </div>
+            }
+          >
+            <CustomAvatar skin='light' color={color} sx={{ width: '1.875rem', height: '1.875rem' }}>
+              <Icon icon={invoiceStatusObj[invoiceStatus].icon} />
+            </CustomAvatar>
+          </Tooltip>
+        )
+      }
+    },
+    {
+      flex: 0.25,
+      field: 'name',
+      minWidth: 320,
+      headerName: t('Client'),
+      renderCell: ({ row }) => {
+        const { name, companyEmail } = row
+  
+        return (
+          <Box sx={{ display: 'flex', alignItems: 'center' }}>
+            {renderClient(row)}
+            <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+              <Typography noWrap sx={{ color: 'text.secondary', fontWeight: 500 }}>
+                {name}
+              </Typography>
+              <Typography noWrap variant='body2' sx={{ color: 'text.disabled' }}>
+                {companyEmail}
+              </Typography>
+            </Box>
+          </Box>
+        )
+      }
+    },
+    {
+      flex: 0.1,
+      minWidth: 100,
+      field: 'total',
+      headerName: t('Total'),
+      renderCell: ({ row }) => <Typography sx={{ color: 'text.secondary' }}>{`$${row.total || 0}`}</Typography>
+    },
+    {
+      flex: 0.15,
+      minWidth: 140,
+      field: 'issuedDate',
+      headerName: t('Issued Date'),
+      renderCell: ({ row }) => <Typography sx={{ color: 'text.secondary' }}>{row.issuedDate}</Typography>
+    },
+    {
+      flex: 0.1,
+      minWidth: 100,
+      field: 'balance',
+      headerName: t('Balance'),
+      renderCell: ({ row }) => {
+        return row.balance !== 0 ? (
+          <Typography sx={{ color: 'text.secondary' }}>{row.balance}</Typography>
+        ) : (
+          <CustomChip rounded size='small' skin='light' color='success' label='Paid' />
+        )
+      }
+    },
     {
       flex: 0.1,
       minWidth: 140,
       sortable: false,
       field: 'actions',
-      headerName: 'Actions',
+      headerName: t('Actions'),
       renderCell: ({ row }) => (
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          <Tooltip title='Delete Invoice'>
+          <Tooltip title={t('Delete Invoice')}>
             <IconButton size='small' sx={{ color: 'text.secondary' }} onClick={() => dispatch(deleteInvoice(row.id))}>
               <Icon icon='tabler:trash' />
             </IconButton>
           </Tooltip>
-          <Tooltip title='View'>
+          <Tooltip title={t('View')}>
             <IconButton
               size='small'
               component={Link}
@@ -254,16 +355,16 @@ const InvoiceList = () => {
             iconButtonProps={{ size: 'small', sx: { color: 'text.secondary' } }}
             options={[
               {
-                text: 'Download',
+                text: t('Download'),
                 icon: <Icon icon='tabler:download' fontSize={20} />
               },
               {
-                text: 'Edit',
+                text: t('Edit'),
                 href: `/apps/invoice/edit/${row.id}`,
                 icon: <Icon icon='tabler:edit' fontSize={20} />
               },
               {
-                text: 'Duplicate',
+                text: t('Duplicate'),
                 icon: <Icon icon='tabler:copy' fontSize={20} />
               }
             ]}
@@ -278,23 +379,23 @@ const InvoiceList = () => {
       <Grid container spacing={6}>
         <Grid item xs={12}>
           <Card>
-            <CardHeader title='Filters' />
+            <CardHeader title={t('Filters')} />
             <CardContent>
               <Grid container spacing={6}>
                 <Grid item xs={12} sm={6}>
                   <CustomTextField
                     select
                     fullWidth
-                    label='Invoice Status'
+                    label={t('Invoice Status')}
                     SelectProps={{ value: statusValue, onChange: e => handleStatusValue(e) }}
                   >
-                    <MenuItem value=''>None</MenuItem>
-                    <MenuItem value='downloaded'>Downloaded</MenuItem>
-                    <MenuItem value='draft'>Draft</MenuItem>
-                    <MenuItem value='paid'>Paid</MenuItem>
-                    <MenuItem value='partial payment'>Partial Payment</MenuItem>
-                    <MenuItem value='past due'>Past Due</MenuItem>
-                    <MenuItem value='sent'>Sent</MenuItem>
+                    <MenuItem value=''>{t('None')}</MenuItem>
+                    <MenuItem value='downloaded'>{t('Downloaded')}</MenuItem>
+                    <MenuItem value='draft'>{t('Draft')}</MenuItem>
+                    <MenuItem value='paid'>{t('Paid')}</MenuItem>
+                    <MenuItem value='partial payment'>{t('Partial Payment')}</MenuItem>
+                    <MenuItem value='past due'>{t('Past Due')}</MenuItem>
+                    <MenuItem value='sent'>{t('Sent')}</MenuItem>
                   </CustomTextField>
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -312,7 +413,7 @@ const InvoiceList = () => {
                       <CustomInput
                         dates={dates}
                         setDates={setDates}
-                        label='Invoice Date'
+                        label={t('Invoice Date')}
                         end={endDateRange}
                         start={startDateRange}
                       />

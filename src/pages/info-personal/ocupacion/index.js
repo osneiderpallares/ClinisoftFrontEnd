@@ -41,7 +41,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { saveRow } from '../../../@fake-db/requests/peticiones.js'
 import { deleteRow } from '../../../@fake-db/requests/peticiones.js'
 
-import { useRouter } from 'next/router'
+//import { useRouter } from 'next/router'
 
 const Transition = forwardRef(function Transition(props, ref) {
   return <Fade ref={ref} {...props} />
@@ -206,7 +206,8 @@ const AppPage = ({}) => {
   const handleSi = () => {
     if (deleteRow(registroSeleccionado.id, '/update_ocupacion/')) {
       toast.success(t('Record deleted successfully!'))
-      router.push('./ocupacion')
+
+      //router.push('./ocupacion')
     } else {
       toast.error(t('Error when trying to delete the registry'))
     }
@@ -254,7 +255,7 @@ const AppPage = ({}) => {
     }
   }
 
-  const router = useRouter()
+  //const router = useRouter()
 
   const {
     control,
@@ -269,7 +270,8 @@ const AppPage = ({}) => {
   const onSubmit = data => {
     if (saveRow(data, '/store_ocupacion/')) {
       toast.success(t('Log saved successfully!'))
-      router.push('./ocupacion')
+
+      //router.push('./ocupacion')
     } else {
       toast.error(t('Error saving log'))
     }
@@ -286,16 +288,16 @@ const AppPage = ({}) => {
     e.preventDefault()
     if (saveRow(registroSeleccionado, '/store_ocupacion/')) {
       toast.success(t('Registration successfully updated!'))
-      router.push('./ocupacion')
+
+      //router.push('./ocupacion')
     } else {
       toast.error(t('Error updating registry'))
     }
     setShowEdit(false)
   }
 
-  useEffect(() => {
-    peticionGet()
-  }, [router])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => {}, [peticionGet()])
 
   const table = (
     <DataGrid

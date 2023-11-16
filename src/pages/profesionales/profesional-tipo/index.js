@@ -47,7 +47,7 @@ const Transition = forwardRef(function Transition(props, ref) {
   return <Fade ref={ref} {...props} />
 })
 
-const endPoint = 'http://127.0.0.1:8000/show_grupos_etnicos/'
+const endPoint = 'http://127.0.0.1:8000/show_profesional_tipo/'
 
 const escapeRegExp = value => {
   return value.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&')
@@ -183,10 +183,10 @@ const AppPage = ({}) => {
   const handleNo = () => setOpen(false)
 
   const handleSi = () => {
-    if (deleteRow(registroSeleccionado.id, '/update_grupo_etnico/')) {
+    if (deleteRow(registroSeleccionado.id, '/update_profesional_tipo/')) {
       toast.success(t('Record deleted successfully!'))
 
-      //router.push('./grupo-etnico')
+      //router.push('./profesional-tipo')
     } else {
       toast.error(t('Error when trying to delete the registry'))
     }
@@ -242,10 +242,10 @@ const AppPage = ({}) => {
   })
 
   const onSubmit = data => {
-    if (saveRow(data, '/store_grupo_etnico/')) {
+    if (saveRow(data, '/store_profesional_tipo/')) {
       toast.success(t('Log saved successfully!'))
 
-      //router.push('./grupo-etnico')
+      //router.push('./profesional-tipo')
     } else {
       toast.error(t('Error saving log'))
     }
@@ -260,10 +260,10 @@ const AppPage = ({}) => {
 
   const onSubmitEdit = e => {
     e.preventDefault()
-    if (saveRow(registroSeleccionado, '/store_grupo_etnico/')) {
+    if (saveRow(registroSeleccionado, '/store_profesional_tipo/')) {
       toast.success(t('Registration successfully updated!'))
 
-      //router.push('./grupo-etnico')
+      //router.push('./profesional-tipo')
     } else {
       toast.error(t('Error updating registry'))
     }
@@ -305,7 +305,7 @@ const AppPage = ({}) => {
   return (
     <Card>
       <CardHeader
-        title={t('Grupos Étnicos')}
+        title={t('Types of professionals')}
         action={
           <Tooltip title={t('Add')}>
             <Fab color='primary' aria-label='Add' size='small' onClick={openModal}>

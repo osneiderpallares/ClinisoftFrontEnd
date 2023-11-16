@@ -97,7 +97,7 @@ const moduls = () => {
                         <ListItemText primary={t('Gender')} />
                       </ListItemButton>
                     </ListItem>
-                    <ListItem disablePadding onClick={() => handleDropdownClose('../info-personal/indentidad-genero')}>
+                    <ListItem disablePadding onClick={() => handleDropdownClose('../info-personal/identidad-genero')}>
                       <ListItemButton>
                         <ListItemIcon>
                           <Icon icon='mdi:gender-transgender' fontSize={20} />
@@ -129,66 +129,66 @@ const moduls = () => {
                         <ListItemText primary={t('Education Level')} />
                       </ListItemButton>
                     </ListItem>
-                    <ListItem disablePadding>
+                    <ListItem disablePadding onClick={() => handleDropdownClose('../info-personal/estado-civil')}>
                       <ListItemButton>
                         <ListItemIcon>
-                          <Icon icon='tabler:mail' fontSize={20} />
+                          <Icon icon='mdi:account-file-text' fontSize={20} />
                         </ListItemIcon>
-                        <ListItemText primary={t('Marital Status')} />
+                        <ListItemText primary={t('Civil Status')} />
                       </ListItemButton>
                     </ListItem>
-                    <ListItem disablePadding>
+                    <ListItem disablePadding onClick={() => handleDropdownClose('../info-personal/grupo-poblacional')}>
                       <ListItemButton>
                         <ListItemIcon>
-                          <Icon icon='tabler:mail' fontSize={20} />
+                          <Icon icon='mdi:nature-people' fontSize={20} />
                         </ListItemIcon>
                         <ListItemText primary={t('Population Groups')} />
                       </ListItemButton>
                     </ListItem>
-                    <ListItem disablePadding>
+                    <ListItem disablePadding onClick={() => handleDropdownClose('../info-personal/grupo-etnico')}>
                       <ListItemButton>
                         <ListItemIcon>
-                          <Icon icon='tabler:mail' fontSize={20} />
+                          <Icon icon='mdi:nature-people-outline' fontSize={20} />
                         </ListItemIcon>
                         <ListItemText primary={t('Ethnic Group')} />
                       </ListItemButton>
                     </ListItem>
-                    <ListItem disablePadding>
+                    <ListItem disablePadding onClick={() => handleDropdownClose('../info-personal/comunidad-etnica')}>
                       <ListItemButton>
                         <ListItemIcon>
-                          <Icon icon='tabler:mail' fontSize={20} />
+                          <Icon icon='healthicons:i-groups-perspective-crowd' fontSize={20} />
                         </ListItemIcon>
                         <ListItemText primary={t('Ethnic Community')} />
                       </ListItemButton>
                     </ListItem>
-                    <ListItem disablePadding>
+                    <ListItem disablePadding onClick={() => handleDropdownClose('../info-personal/discapacidad')}>
                       <ListItemButton>
                         <ListItemIcon>
-                          <Icon icon='tabler:mail' fontSize={20} />
+                          <Icon icon='medical-icon:accessibility' fontSize={20} />
                         </ListItemIcon>
                         <ListItemText primary={t('Disability')} />
                       </ListItemButton>
                     </ListItem>
-                    <ListItem disablePadding>
+                    <ListItem disablePadding onClick={() => handleDropdownClose('../info-personal/grupo-sanguineo')}>
                       <ListItemButton>
                         <ListItemIcon>
-                          <Icon icon='tabler:mail' fontSize={20} />
+                          <Icon icon='ph:drop-fill' fontSize={20} />
                         </ListItemIcon>
                         <ListItemText primary={t('Blood Type')} />
                       </ListItemButton>
                     </ListItem>
-                    <ListItem disablePadding>
+                    <ListItem disablePadding onClick={() => handleDropdownClose('../info-personal/parentesco')}>
                       <ListItemButton>
                         <ListItemIcon>
-                          <Icon icon='tabler:mail' fontSize={20} />
+                          <Icon icon='game-icons:relationship-bounds' fontSize={20} />
                         </ListItemIcon>
                         <ListItemText primary={t('Relationship')} />
                       </ListItemButton>
                     </ListItem>
-                    <ListItem disablePadding>
+                    <ListItem disablePadding onClick={() => handleDropdownClose('../info-personal/causa-muerte')}>
                       <ListItemButton>
                         <ListItemIcon>
-                          <Icon icon='tabler:mail' fontSize={20} />
+                          <Icon icon='tabler:ribbon-health' fontSize={20} />
                         </ListItemIcon>
                         <ListItemText primary={t('Cause of Death')} />
                       </ListItemButton>
@@ -217,10 +217,10 @@ const moduls = () => {
                         <ListItemText primary={t('Professionals')} />
                       </ListItemButton>
                     </ListItem>
-                    <ListItem disablePadding>
+                    <ListItem disablePadding onClick={() => handleDropdownClose('../profesionales/especialidad')}>
                       <ListItemButton>
                         <ListItemIcon>
-                          <Icon icon='tabler:mail' fontSize={20} />
+                          <Icon icon='fluent-emoji-high-contrast:medical-symbol' fontSize={20} />
                         </ListItemIcon>
                         <ListItemText primary={t('Specialties')} />
                       </ListItemButton>

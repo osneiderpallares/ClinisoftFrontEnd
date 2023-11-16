@@ -225,10 +225,10 @@ const moduls = () => {
                         <ListItemText primary={t('Specialties')} />
                       </ListItemButton>
                     </ListItem>
-                    <ListItem disablePadding>
+                    <ListItem disablePadding onClick={() => handleDropdownClose('../profesionales/profesional-tipo')}>
                       <ListItemButton>
                         <ListItemIcon>
-                          <Icon icon='tabler:mail' fontSize={20} />
+                          <Icon icon='wpf:medical-doctor' fontSize={20} />
                         </ListItemIcon>
                         <ListItemText primary={t('Types of professionals')} />
                       </ListItemButton>

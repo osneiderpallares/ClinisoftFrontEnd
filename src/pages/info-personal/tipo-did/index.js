@@ -41,7 +41,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { saveRow } from '../../../@fake-db/requests/peticiones.js'
 import { deleteRow } from '../../../@fake-db/requests/peticiones.js'
 
-//import { useRouter } from 'next/router'
+import { useRouter } from 'next/router'
 
 const Transition = forwardRef(function Transition(props, ref) {
   return <Fade ref={ref} {...props} />
@@ -152,6 +152,8 @@ const AppPage = ({}) => {
   const [filteredData, setFilteredData] = useState([])
   const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 7 })
 
+  const router = useRouter()
+
   const handleSearch = searchValue => {
     setSearchText(searchValue)
     const searchRegex = new RegExp(escapeRegExp(searchValue), 'i')
@@ -194,8 +196,7 @@ const AppPage = ({}) => {
   const handleSi = () => {
     if (deleteRow(registroSeleccionado.id, '/update_tiposdid/')) {
       toast.success(t('Record deleted successfully!'))
-
-      //router.push('./tipo-did')
+      router.push('./tipo-did')
     } else {
       toast.error(t('Error when trying to delete the registry'))
     }
@@ -245,8 +246,6 @@ const AppPage = ({}) => {
     }
   }
 
-  //const router = useRouter()
-
   const {
     control,
     handleSubmit,
@@ -260,8 +259,7 @@ const AppPage = ({}) => {
   const onSubmit = data => {
     if (saveRow(data, '/store_tiposdid')) {
       toast.success(t('Log saved successfully!'))
-
-      //router.push('./tipo-did')
+      router.push('./tipo-did')
     } else {
       toast.error(t('Error saving log'))
     }
@@ -278,16 +276,16 @@ const AppPage = ({}) => {
     e.preventDefault()
     if (saveRow(registroSeleccionado, '/store_tiposdid')) {
       toast.success(t('Registration successfully updated!'))
-
-      //router.push('./tipo-did')
+      router.push('./tipo-did')
     } else {
       toast.error(t('Error updating registry'))
     }
     setShowEdit(false)
   }
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => {}, [peticionGet()])
+  useEffect(() => {
+    peticionGet()
+  }, [router])
 
   const table = (
     <DataGrid

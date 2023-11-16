@@ -855,6 +855,13 @@ const searchData = [
     icon: 'fluent-emoji-high-contrast:medical-symbol',
     title: 'Especialidades',
     category: 'appsPages'
+  },
+  {
+    id: 121,
+    url: '/profesionales/profesional-tipo',
+    icon: 'wpf:medical-doctor',
+    title: 'Tipos de Profesionales',
+    category: 'appsPages'
   }
 ]
 

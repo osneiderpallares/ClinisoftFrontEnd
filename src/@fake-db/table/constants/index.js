@@ -1,177 +1,186 @@
-export const GridLocaleTextES = {
-  // Root
-  noRowsLabel: 'No hay registro',
-  noResultsOverlayLabel: 'No results found.',
+/*Traducir*/
+import { useTranslation } from 'react-i18next'
 
-  // Density selector toolbar button text
-  toolbarDensity: 'Density',
-  toolbarDensityLabel: 'Density',
-  toolbarDensityCompact: 'Compact',
-  toolbarDensityStandard: 'Standard',
-  toolbarDensityComfortable: 'Comfortable',
+// export const GridLocaleTextES = {
+export function useGridLocaleTextES() {
+  const { t } = useTranslation();
 
-  // Columns selector toolbar button text
-  toolbarColumns: 'Columnas',
-  toolbarColumnsLabel: 'Select columns',
+  return {
+    rowsPerPageLabel: 'Filas por página',//es Rows Per Page
+    // Root
+    noRowsLabel: 'No hay registro',
+    noResultsOverlayLabel: 'No results found.',
 
-  // Filters toolbar button text
-  toolbarFilters: 'Filtros',
-  toolbarFiltersLabel: 'Mostrar filtros',
-  toolbarFiltersTooltipHide: 'Ocultar filtros',
-  toolbarFiltersTooltipShow: 'Mostrar filtros',
-  toolbarFiltersTooltipActive: count => (count !== 1 ? `${count} active filters` : `${count} active filter`),
+    // Density selector toolbar button text
+    toolbarDensity: 'Density',
+    toolbarDensityLabel: 'Density',
+    toolbarDensityCompact: 'Compact',
+    toolbarDensityStandard: 'Standard',
+    toolbarDensityComfortable: 'Comfortable',
 
-  // Quick filter toolbar field
-  toolbarQuickFilterPlaceholder: 'Buscar…',
-  toolbarQuickFilterLabel: 'Buscar',
-  toolbarQuickFilterDeleteIconLabel: 'Limpiar',
+    // Columns selector toolbar button text
+    toolbarColumns: 'Columnas',
+    toolbarColumnsLabel: 'Select columns',
 
-  // Export selector toolbar button text
-  toolbarExport: 'Exportar',
-  toolbarExportLabel: 'Exportar',
-  toolbarExportCSV: 'Download as CSV',
-  toolbarExportPrint: 'Print',
-  toolbarExportExcel: 'Download as Excel',
+    // Filters toolbar button text
+    toolbarFilters: t('Filtros'),
+    toolbarFiltersLabel: 'Mostrar filtros',
+    toolbarFiltersTooltipHide: 'Ocultar filtros',
+    toolbarFiltersTooltipShow: 'Mostrar filtros',
+    toolbarFiltersTooltipActive: count => (count !== 1 ? `${count} active filters` : `${count} active filter`),
 
-  // Columns panel text
-  columnsPanelTextFieldLabel: 'Find column',
-  columnsPanelTextFieldPlaceholder: 'Column title',
-  columnsPanelDragIconLabel: 'Reorder column',
-  columnsPanelShowAllButton: 'Show all',
-  columnsPanelHideAllButton: 'Hide all',
+    // Quick filter toolbar field
+    toolbarQuickFilterPlaceholder: 'Buscar…',
+    toolbarQuickFilterLabel: 'Buscar',
+    toolbarQuickFilterDeleteIconLabel: 'Limpiar',
 
-  // Filter panel text
-  filterPanelAddFilter: 'Add filter',
-  filterPanelRemoveAll: 'Remove all',
-  filterPanelDeleteIconLabel: 'Delete',
-  filterPanelLogicOperator: 'Logic operator',
-  filterPanelOperator: 'Operator',
-  filterPanelOperatorAnd: 'And',
-  filterPanelOperatorOr: 'Or',
-  filterPanelColumns: 'Columns',
-  filterPanelInputLabel: 'Value',
-  filterPanelInputPlaceholder: 'Filter value',
+    // Export selector toolbar button text
+    toolbarExport: 'Exportar',
+    toolbarExportLabel: 'Exportar',
+    toolbarExportCSV: 'Download as CSV',
+    toolbarExportPrint: 'Print',
+    toolbarExportExcel: 'Download as Excel',
 
-  // Filter operators text
-  filterOperatorContains: 'contiene',
-  filterOperatorEquals: 'es igual',
-  filterOperatorStartsWith: 'comienza con',
-  filterOperatorEndsWith: 'termina con',
-  filterOperatorIs: 'es',
-  filterOperatorNot: 'no es',
-  filterOperatorAfter: 'es después',
-  filterOperatorOnOrAfter: 'es en o después',
-  filterOperatorBefore: 'es antes',
-  filterOperatorOnOrBefore: 'es en o antes',
-  filterOperatorIsEmpty: 'está vacío',
-  filterOperatorIsNotEmpty: 'no está vacío',
-  filterOperatorIsAnyOf: 'es cualquiera de',
-  'filterOperator=': '=',
-  'filterOperator!=': '!=',
-  'filterOperator>': '>',
-  'filterOperator>=': '>=',
-  'filterOperator<': '<',
-  'filterOperator<=': '<=',
+    // Columns panel text
+    columnsPanelTextFieldLabel: 'Find column',
+    columnsPanelTextFieldPlaceholder: 'Column title',
+    columnsPanelDragIconLabel: 'Reorder column',
+    columnsPanelShowAllButton: 'Show all',
+    columnsPanelHideAllButton: 'Hide all',
 
-  // Header filter operators text
-  headerFilterOperatorContains: 'contiene',
-  headerFilterOperatorEquals: 'es igual',
-  headerFilterOperatorStartsWith: 'Comienza con',
-  headerFilterOperatorEndsWith: 'Termina con',
-  headerFilterOperatorIs: 'Es',
-  headerFilterOperatorNot: 'No es',
-  headerFilterOperatorAfter: 'Es después',
-  headerFilterOperatorOnOrAfter: 'No es o después',
-  headerFilterOperatorBefore: 'Es antes',
-  headerFilterOperatorOnOrBefore: 'No es o antes',
-  headerFilterOperatorIsEmpty: 'Esta vacío',
-  headerFilterOperatorIsNotEmpty: 'No está vacío',
-  headerFilterOperatorIsAnyOf: 'Es alguno de',
-  'headerFilterOperator=': 'Contiene',
-  'headerFilterOperator!=': 'No contine',
-  'headerFilterOperator>': 'Mas grande que',
-  'headerFilterOperator>=': 'Mas grande que o igual a',
-  'headerFilterOperator<': 'Menos que',
-  'headerFilterOperator<=': 'Menos que o igual a',
+    // Filter panel text
+    filterPanelAddFilter: 'Add filter',
+    filterPanelRemoveAll: 'Remove all',
+    filterPanelDeleteIconLabel: 'Delete',
+    filterPanelLogicOperator: 'Logic operator',
+    filterPanelOperator: t('Operator'),
+    filterPanelOperatorAnd: 'And',
+    filterPanelOperatorOr: 'Or',
+    filterPanelColumns: t('Columns'),
+    filterPanelInputLabel: t('Value'),
+    filterPanelInputPlaceholder: t('Filter value'),
 
-  // Filter values text
-  filterValueAny: 'cualquiera',
-  filterValueTrue: 'verdadero',
-  filterValueFalse: 'falso',
+    // Filter operators text
+    filterOperatorContains: t('contains'),
+    filterOperatorEquals: t('is equal'),
+    filterOperatorStartsWith: t('starts with'),
+    filterOperatorEndsWith: t('ends with'),
+    filterOperatorIs: 'es',
+    filterOperatorNot: 'no es',
+    filterOperatorAfter: 'es después',
+    filterOperatorOnOrAfter: 'es en o después',
+    filterOperatorBefore: 'es antes',
+    filterOperatorOnOrBefore: 'es en o antes',
+    filterOperatorIsEmpty: t('is empty'),
+    filterOperatorIsNotEmpty: t('is not empty'),
+    filterOperatorIsAnyOf: t('is any of'),
+    'filterOperator=': '=',
+    'filterOperator!=': '!=',
+    'filterOperator>': '>',
+    'filterOperator>=': '>=',
+    'filterOperator<': '<',
+    'filterOperator<=': '<=',
 
-  // Column menu text
-  columnMenuLabel: 'Menu',
-  columnMenuShowColumns: 'Mostrar columnas',
-  columnMenuManageColumns: 'Administrar columnas',
-  columnMenuFilter: 'Filtro',
-  columnMenuHideColumn: 'Ocultar columna',
-  columnMenuUnsort: 'Desordenar',
-  columnMenuSortAsc: 'Orden ASC',
-  columnMenuSortDesc: 'Orden DESC',
+    // Header filter operators text
+    headerFilterOperatorContains: 'contiene',
+    headerFilterOperatorEquals: 'es igual',
+    headerFilterOperatorStartsWith: 'Comienza con',
+    headerFilterOperatorEndsWith: 'Termina con',
+    headerFilterOperatorIs: 'Es',
+    headerFilterOperatorNot: 'No es',
+    headerFilterOperatorAfter: 'Es después',
+    headerFilterOperatorOnOrAfter: 'No es o después',
+    headerFilterOperatorBefore: 'Es antes',
+    headerFilterOperatorOnOrBefore: 'No es o antes',
+    headerFilterOperatorIsEmpty: 'Esta vacío',
+    headerFilterOperatorIsNotEmpty: 'No está vacío',
+    headerFilterOperatorIsAnyOf: 'Es alguno de',
+    'headerFilterOperator=': 'Contiene',
+    'headerFilterOperator!=': 'No contine',
+    'headerFilterOperator>': 'Mas grande que',
+    'headerFilterOperator>=': 'Mas grande que o igual a',
+    'headerFilterOperator<': 'Menos que',
+    'headerFilterOperator<=': 'Menos que o igual a',
 
-  // Column header text
-  columnHeaderFiltersTooltipActive: count => (count !== 1 ? `${count} activar filtros` : `${count} activar filtro`),
-  columnHeaderFiltersLabel: 'Mostrar filtros',
-  columnHeaderSortIconLabel: 'Ordenar',
+    // Filter values text
+    filterValueAny: 'cualquiera',
+    filterValueTrue: 'verdadero',
+    filterValueFalse: 'falso',
 
-  // Rows selected footer text
-  footerRowSelected: count =>
-    count !== 1
-      ? `${count.toLocaleString()} registros seleccionados`
-      : `${count.toLocaleString()} registro seleccionado`,
+    // Column menu text
+    columnMenuLabel: 'Menu',
+    columnMenuShowColumns: 'Mostrar columnas',
+    columnMenuManageColumns: 'Administrar columnas',
+    columnMenuFilter: 'Filtro',
+    columnMenuHideColumn: 'Ocultar columna',
+    columnMenuUnsort: 'Desordenar',
+    columnMenuSortAsc: 'Orden ASC',
+    columnMenuSortDesc: 'Orden DESC',
 
-  // Total row amount footer text
-  footerTotalRows: 'Total de registros:',
+    // Column header text
+    columnHeaderFiltersTooltipActive: count => (count !== 1 ? `${count} activar filtros` : `${count} activar filtro`),
+    columnHeaderFiltersLabel: 'Mostrar filtros',
+    columnHeaderSortIconLabel: 'Ordenar',
 
-  // Total visible row amount footer text
-  footerTotalVisibleRows: (visibleCount, totalCount) =>
-    `${visibleCount.toLocaleString()} of ${totalCount.toLocaleString()}`,
+    // Rows selected footer text
+    footerRowSelected: count =>
+      count !== 1
+        ? `${count.toLocaleString()} registros seleccionados`
+        : `${count.toLocaleString()} registro seleccionado`,
 
-  // Checkbox selection text
-  checkboxSelectionHeaderName: 'Selección de casilla de verificación',
-  checkboxSelectionSelectAllRows: 'Seleccionar todos los registros',
-  checkboxSelectionUnselectAllRows: 'Deseleccionar todos los registros',
-  checkboxSelectionSelectRow: 'Seleccionar fila',
-  checkboxSelectionUnselectRow: 'Unselect row',
+    // Total row amount footer text
+    footerTotalRows: 'Total de registros:',
 
-  // Boolean cell text
-  booleanCellTrueLabel: 'si',
-  booleanCellFalseLabel: 'no',
+    // Total visible row amount footer text
+    footerTotalVisibleRows: (visibleCount, totalCount) =>
+      `${visibleCount.toLocaleString()} of ${totalCount.toLocaleString()}`,
 
-  // Actions cell more text
-  actionsCellMore: 'mas',
+    // Checkbox selection text
+    checkboxSelectionHeaderName: 'Selección de casilla de verificación',
+    checkboxSelectionSelectAllRows: 'Seleccionar todos los registros',
+    checkboxSelectionUnselectAllRows: 'Deseleccionar todos los registros',
+    checkboxSelectionSelectRow: 'Seleccionar fila',
+    checkboxSelectionUnselectRow: 'Unselect row',
 
-  // Column pinning text
-  pinToLeft: 'Pin to left',
-  pinToRight: 'Pin to right',
-  unpin: 'Unpin',
+    // Boolean cell text
+    booleanCellTrueLabel: 'si',
+    booleanCellFalseLabel: 'no',
 
-  // Tree Data
-  treeDataGroupingHeaderName: 'Group',
-  treeDataExpand: 'see children',
-  treeDataCollapse: 'hide children',
+    // Actions cell more text
+    actionsCellMore: 'mas',
 
-  // Grouping columns
-  groupingColumnHeaderName: 'Group',
-  groupColumn: name => `Group by ${name}`,
-  unGroupColumn: name => `Stop grouping by ${name}`,
+    // Column pinning text
+    pinToLeft: 'Pin to left',
+    pinToRight: 'Pin to right',
+    unpin: 'Unpin',
 
-  // Master/detail
-  detailPanelToggle: 'Detail panel toggle',
-  expandDetailPanel: 'Expand',
-  collapseDetailPanel: 'Collapse',
+    // Tree Data
+    treeDataGroupingHeaderName: 'Group',
+    treeDataExpand: 'see children',
+    treeDataCollapse: 'hide children',
 
-  // Used core components translation keys
-  MuiTablePagination: {},
+    // Grouping columns
+    groupingColumnHeaderName: 'Group',
+    groupColumn: name => `Group by ${name}`,
+    unGroupColumn: name => `Stop grouping by ${name}`,
 
-  // Row reordering text
-  rowReorderingHeaderName: 'Row reordering',
+    // Master/detail
+    detailPanelToggle: 'Detail panel toggle',
+    expandDetailPanel: 'Expand',
+    collapseDetailPanel: 'Collapse',
 
-  // Aggregation
-  aggregationMenuItemHeader: 'Aggregation',
-  aggregationFunctionLabelSum: 'sum',
-  aggregationFunctionLabelAvg: 'avg',
-  aggregationFunctionLabelMin: 'min',
-  aggregationFunctionLabelMax: 'max',
-  aggregationFunctionLabelSize: 'size'
+    // Used core components translation keys
+    MuiTablePagination: {},
+
+    // Row reordering text
+    rowReorderingHeaderName: 'Row reordering',
+
+    // Aggregation
+    aggregationMenuItemHeader: 'Aggregation',
+    aggregationFunctionLabelSum: 'sum',
+    aggregationFunctionLabelAvg: 'avg',
+    aggregationFunctionLabelMin: 'min',
+    aggregationFunctionLabelMax: 'max',
+    aggregationFunctionLabelSize: 'size'
+};
 }

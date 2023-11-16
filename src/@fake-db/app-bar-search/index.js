@@ -792,6 +792,69 @@ const searchData = [
     icon: 'mdi:account-school',
     title: 'Escolaridad',
     category: 'appsPages'
+  },
+  {
+    id: 114,
+    url: '/info-personal/estado-civil',
+    icon: 'mdi:account-file-text',
+    title: 'Estado Civil',
+    category: 'appsPages'
+  },
+  {
+    id: 115,
+    url: '/info-personal/grupo-poblacional',
+    icon: 'mdi:nature-people',
+    title: 'Grupo Poblacional',
+    category: 'appsPages'
+  },
+  {
+    id: 116,
+    url: '/info-personal/grupo-etnico',
+    icon: 'mdi:nature-people-outline',
+    title: 'Grupo Étnico',
+    category: 'appsPages'
+  },
+  {
+    id: 117,
+    url: '/info-personal/comunidad-etnica',
+    icon: 'healthicons:i-groups-perspective-crowd',
+    title: 'Comunidad Étnica',
+    category: 'appsPages'
+  },
+  {
+    id: 118,
+    url: '/info-personal/discapacidad',
+    icon: 'medical-icon:accessibility',
+    title: 'Discapacidad',
+    category: 'appsPages'
+  },
+  {
+    id: 119,
+    url: '/info-personal/grupo-sanguineo',
+    icon: 'ph:drop-fill',
+    title: 'Grupo Sanguineo',
+    category: 'appsPages'
+  },
+  {
+    id: 120,
+    url: '/info-personal/parentesco',
+    icon: 'game-icons:relationship-bounds',
+    title: 'Parentesco',
+    category: 'appsPages'
+  },
+  {
+    id: 120,
+    url: '/info-personal/causa-muerte',
+    icon: 'tabler:ribbon-health',
+    title: 'Causa Muerte',
+    category: 'appsPages'
+  },
+  {
+    id: 121,
+    url: '/profesionales/especialidad',
+    icon: 'fluent-emoji-high-contrast:medical-symbol',
+    title: 'Especialidades',
+    category: 'appsPages'
   }
 ]
 

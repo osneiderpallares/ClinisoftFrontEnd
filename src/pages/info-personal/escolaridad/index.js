@@ -141,8 +141,6 @@ const AppPage = ({}) => {
 
   const [show, setShow] = useState(false)
   const [showEdit, setShowEdit] = useState(false)
-
-  const [data] = useState(rows)
   const [searchText, setSearchText] = useState('')
   const [filteredData, setFilteredData] = useState([])
   const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 7 })
@@ -151,10 +149,10 @@ const AppPage = ({}) => {
     setSearchText(searchValue)
     const searchRegex = new RegExp(escapeRegExp(searchValue), 'i')
 
-    const filteredRows = data?.filter(row => {
+    const filteredRows = rows?.filter(row => {
       return Object.keys(row).some(field => {
         // @ts-ignore
-        return searchRegex.test(row[field].toString())
+        return searchRegex.test(row[field]?.toString())
       })
     })
     if (searchValue.length) {
@@ -187,7 +185,7 @@ const AppPage = ({}) => {
   const handleSi = () => {
     if (deleteRow(registroSeleccionado.id, '/update_escolaridad/')) {
       toast.success(t('Record deleted successfully!'))
-      peticionGet()
+      router.push('./escolaridad')
     } else {
       toast.error(t('Error when trying to delete the registry'))
     }
@@ -278,7 +276,7 @@ const AppPage = ({}) => {
       columnHeaderHeight={38}
       rowHeight={38}
       stickyHeader
-      rows={rows}
+      rows={filteredData.length ? filteredData : rows}
       columns={columns}
       pageSizeOptions={[7, 10, 25, 50]}
       paginationModel={paginationModel}

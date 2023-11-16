@@ -40,7 +40,8 @@ import { yupResolver } from '@hookform/resolvers/yup'
 // ** Peticiones
 import { saveRow } from '../../../@fake-db/requests/peticiones.js'
 import { deleteRow } from '../../../@fake-db/requests/peticiones.js'
-import { ta } from 'date-fns/locale'
+
+import { useRouter } from 'next/router'
 
 const Transition = forwardRef(function Transition(props, ref) {
   return <Fade ref={ref} {...props} />
@@ -147,8 +148,6 @@ const AppPage = ({}) => {
 
   const [show, setShow] = useState(false)
   const [showEdit, setShowEdit] = useState(false)
-
-  const [data] = useState(rows)
   const [searchText, setSearchText] = useState('')
   const [filteredData, setFilteredData] = useState([])
   const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 7 })
@@ -157,10 +156,10 @@ const AppPage = ({}) => {
     setSearchText(searchValue)
     const searchRegex = new RegExp(escapeRegExp(searchValue), 'i')
 
-    const filteredRows = data?.filter(row => {
+    const filteredRows = rows?.filter(row => {
       return Object.keys(row).some(field => {
         // @ts-ignore
-        return searchRegex.test(row[field].toString())
+        return searchRegex.test(row[field]?.toString())
       })
     })
     if (searchValue.length) {
@@ -195,7 +194,7 @@ const AppPage = ({}) => {
   const handleSi = () => {
     if (deleteRow(registroSeleccionado.id, '/update_tiposdid/')) {
       toast.success(t('Record deleted successfully!'))
-      peticionGet()
+      router.push('./tipo-did')
     } else {
       toast.error(t('Error when trying to delete the registry'))
     }
@@ -245,6 +244,8 @@ const AppPage = ({}) => {
     }
   }
 
+  const router = useRouter()
+
   const {
     control,
     handleSubmit,
@@ -258,9 +259,7 @@ const AppPage = ({}) => {
   const onSubmit = data => {
     if (saveRow(data, '/store_tiposdid')) {
       toast.success(t('Log saved successfully!'))
-      rows.map(row => {
-        peticionGet()
-      })
+      router.push('./tipo-did')
     } else {
       toast.error(t('Error saving log'))
     }
@@ -277,9 +276,7 @@ const AppPage = ({}) => {
     e.preventDefault()
     if (saveRow(registroSeleccionado, '/store_tiposdid')) {
       toast.success(t('Registration successfully updated!'))
-      rows.map(row => {
-        peticionGet()
-      })
+      router.push('./tipo-did')
     } else {
       toast.error(t('Error updating registry'))
     }
@@ -288,14 +285,14 @@ const AppPage = ({}) => {
 
   useEffect(() => {
     peticionGet()
-  }, [])
+  }, [router])
 
   const table = (
     <DataGrid
       columnHeaderHeight={38}
       rowHeight={38}
       stickyHeader
-      rows={rows}
+      rows={filteredData.length ? filteredData : rows}
       columns={columns}
       pageSizeOptions={[7, 10, 25, 50]}
       paginationModel={paginationModel}

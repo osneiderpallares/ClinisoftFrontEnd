@@ -47,7 +47,7 @@ const Transition = forwardRef(function Transition(props, ref) {
   return <Fade ref={ref} {...props} />
 })
 
-const endPoint = 'http://127.0.0.1:8000/show_ocupacion_grupo/'
+const endPoint = 'http://127.0.0.1:8000/show_grupo_sanguineo/'
 
 const escapeRegExp = value => {
   return value.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&')
@@ -81,14 +81,14 @@ const AppPage = ({}) => {
       headerName: 'ID'
     },
     {
-      flex: 0.3,
-      minWidth: 300,
+      flex: 0.25,
+      minWidth: 200,
       field: 'nombre',
       headerName: t('NAME')
     },
     {
-      flex: 0.1,
-      minWidth: 100,
+      flex: 0.25,
+      minWidth: 230,
       field: 'abreviacion',
       headerName: t('ABBREVIATION')
     },
@@ -99,14 +99,14 @@ const AppPage = ({}) => {
       headerName: t('CREATION DATE')
     },
     {
-      flex: 0.1,
+      flex: 0.15,
       minWidth: 120,
       field: 'estado_nombre',
       headerName: t('STATE')
     },
     {
-      flex: 0.1,
-      minWidth: 120,
+      flex: 0.125,
+      minWidth: 140,
       field: 'acciones',
       headerName: t('ACTIONS'),
       renderCell: params => {
@@ -183,9 +183,9 @@ const AppPage = ({}) => {
   const handleNo = () => setOpen(false)
 
   const handleSi = () => {
-    if (deleteRow(registroSeleccionado.id, '/update_ocupacion_grupo/')) {
+    if (deleteRow(registroSeleccionado.id, '/update_grupo_sanguineo/')) {
       toast.success(t('Record deleted successfully!'))
-      router.push('./ocupacion_grupo')
+      router.push('./grupo-sanguineo')
     } else {
       toast.error(t('Error when trying to delete the registry'))
     }
@@ -203,7 +203,7 @@ const AppPage = ({}) => {
       .string()
       .min(1, obj => showErrors(t('abbreviation'), obj.value.length, obj.min))
       .required(),
-    estado: yup.string()
+    estado: yup.number()
   })
 
   const defaultValues = {
@@ -241,9 +241,9 @@ const AppPage = ({}) => {
   })
 
   const onSubmit = data => {
-    if (saveRow(data, '/store_ocupacion_grupo/')) {
+    if (saveRow(data, '/store_grupo_sanguineo/')) {
       toast.success(t('Log saved successfully!'))
-      router.push('./ocupacion_grupo')
+      router.push('./grupo-sanguineo')
     } else {
       toast.error(t('Error saving log'))
     }
@@ -258,9 +258,9 @@ const AppPage = ({}) => {
 
   const onSubmitEdit = e => {
     e.preventDefault()
-    if (saveRow(registroSeleccionado, '/store_ocupacion_grupo/')) {
+    if (saveRow(registroSeleccionado, '/store_grupo_sanguineo/')) {
       toast.success(t('Registration successfully updated!'))
-      router.push('./ocupacion_grupo')
+      router.push('./grupo-sanguineo')
     } else {
       toast.error(t('Error updating registry'))
     }
@@ -303,7 +303,7 @@ const AppPage = ({}) => {
   return (
     <Card>
       <CardHeader
-        title={t('Group Occupations')}
+        title={t('Grupo Sanguineo')}
         action={
           <Tooltip title={t('Add')}>
             <Fab color='primary' aria-label='Add' size='small' onClick={openModal}>

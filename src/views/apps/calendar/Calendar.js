@@ -1,3 +1,7 @@
+import React from 'react';
+/*Traducir*/
+import { useTranslation } from 'react-i18next'
+
 // ** React Import
 import { useEffect, useRef } from 'react'
 
@@ -27,6 +31,10 @@ const blankEvent = {
 }
 
 const Calendar = props => {
+  const {t}=useTranslation()
+  const s=`${t('dayGridMonth')}`
+  
+  const a=t('dayGridMonth')
   // ** Props
   const {
     store,
@@ -42,14 +50,18 @@ const Calendar = props => {
   } = props
 
   // ** Refs
+  
   const calendarRef = useRef()
+  
   useEffect(() => {
     if (calendarApi === null) {
       // @ts-ignore
       setCalendarApi(calendarRef.current?.getApi())
     }
   }, [calendarApi, setCalendarApi])
+  
   if (store) {
+    // alert(s)
     // ** calendarOptions(Props)
     const calendarOptions = {
       events: store.events.length ? store.events : [],
@@ -57,11 +69,18 @@ const Calendar = props => {
       initialView: 'dayGridMonth',
       headerToolbar: {
         start: 'sidebarToggle, prev, next, title',
-        end: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
-      },
+        end:  'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
+        },
+        buttonText: {
+          dayGridMonth: t('dayGridMonth'),
+          timeGridWeek:t('timeGridWeek'),
+          timeGridDay:t('timeGridDay'),
+          listMonth:t('listMonth')
+        },     
       views: {
         week: {
           titleFormat: { year: 'numeric', month: 'long', day: 'numeric' }
+          
         }
       },
 

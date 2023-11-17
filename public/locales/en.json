@@ -439,6 +439,7 @@
   "Item": "Item",
   "Description": "Description",
   "hours": "hours",
+  "Hours": "Hours",
   "qty": "qty",
   "Discount": "Discount",
   "Tax": "Tax",
@@ -446,5 +447,14 @@
   "Thanks for your business": "Thanks for your business",
   "Print": "Print",
   "Edit Invoice": "Edit Invoice",
-  "Add Payment": "Add Payment"
+  "Add Payment": "Add Payment",
+  "Total Due": "Total Due",
+  "Bank name": "Bank name",
+  "Country": "Country",
+  "SWIFT code": "SWIFT code",
+  "Price": "Price",
+  "Cost": "Cost",
+  "Customization & Bug Fixes": "Customization & Bug Fixes",
+  "Note": "Note",
+  "Add Item": "Add Item"
 }

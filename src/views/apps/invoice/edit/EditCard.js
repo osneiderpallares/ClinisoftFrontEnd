@@ -1,3 +1,6 @@
+/*Traducir*/
+import { useTranslation } from 'react-i18next'
+
 // ** React Imports
 import { useEffect, useState, forwardRef } from 'react'
 
@@ -98,6 +101,7 @@ const InvoiceAction = styled(Box)(({ theme }) => ({
 }))
 
 const EditCard = ({ data }) => {
+  const {t}=useTranslation();
   // ** States
   const [count, setCount] = useState(1)
   const [selected, setSelected] = useState('')
@@ -184,7 +188,7 @@ const EditCard = ({ data }) => {
               <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: { xl: 'flex-end', xs: 'flex-start' } }}>
                 <Box sx={{ mb: 3, display: 'flex', alignItems: 'center' }}>
                   <Typography variant='h4' sx={{ mr: 2, width: '105px' }}>
-                    Invoice
+                    {t('Invoice')}
                   </Typography>
                   <CustomTextField
                     fullWidth
@@ -197,7 +201,7 @@ const EditCard = ({ data }) => {
                   />
                 </Box>
                 <Box sx={{ mb: 3, display: 'flex', alignItems: 'center' }}>
-                  <Typography sx={{ mr: 3, width: '100px', color: 'text.secondary' }}>Date Issued:</Typography>
+                  <Typography sx={{ mr: 3, width: '100px', color: 'text.secondary' }}>{t('Date Issued:')}</Typography>
                   <DatePicker
                     id='issue-date'
                     selected={issueDate}
@@ -207,7 +211,7 @@ const EditCard = ({ data }) => {
                   />
                 </Box>
                 <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                  <Typography sx={{ mr: 3, width: '100px', color: 'text.secondary' }}>Date Due:</Typography>
+                  <Typography sx={{ mr: 3, width: '100px', color: 'text.secondary' }}>{t('Date Due:')}</Typography>
                   <DatePicker
                     selected={dueDate}
                     showDisabledMonthNavigation
@@ -226,7 +230,7 @@ const EditCard = ({ data }) => {
           <Grid container>
             <Grid item xs={12} sm={6} sx={{ mb: { lg: 0, xs: 4 } }}>
               <Typography variant='h6' sx={{ mb: 6 }}>
-                Invoice To:
+                {t('Invoice To:')}
               </Typography>
               <CustomTextField
                 select
@@ -261,14 +265,14 @@ const EditCard = ({ data }) => {
             <Grid item xs={12} sm={6} sx={{ display: 'flex', justifyContent: ['flex-start', 'flex-end'] }}>
               <div>
                 <Typography variant='h6' sx={{ mb: 6 }}>
-                  Bill To:
+                  {t('Bill To:')}
                 </Typography>
                 <TableContainer>
                   <Table>
                     <TableBody sx={{ '& .MuiTableCell-root': { py: `${theme.spacing(0.75)} !important` } }}>
                       <TableRow>
                         <MUITableCell>
-                          <Typography sx={{ color: 'text.secondary' }}>Total Due:</Typography>
+                          <Typography sx={{ color: 'text.secondary' }}>{t('Total Due')}:</Typography>
                         </MUITableCell>
                         <MUITableCell>
                           <Typography sx={{ fontWeight: 500, color: 'text.secondary' }}>
@@ -278,7 +282,7 @@ const EditCard = ({ data }) => {
                       </TableRow>
                       <TableRow>
                         <MUITableCell>
-                          <Typography sx={{ color: 'text.secondary' }}>Bank name:</Typography>
+                          <Typography sx={{ color: 'text.secondary' }}>{t('Bank name')}:</Typography>
                         </MUITableCell>
                         <MUITableCell>
                           <Typography sx={{ color: 'text.secondary' }}>{data.paymentDetails.bankName}</Typography>
@@ -286,7 +290,7 @@ const EditCard = ({ data }) => {
                       </TableRow>
                       <TableRow>
                         <MUITableCell>
-                          <Typography sx={{ color: 'text.secondary' }}>Country:</Typography>
+                          <Typography sx={{ color: 'text.secondary' }}>{t('Country')}:</Typography>
                         </MUITableCell>
                         <MUITableCell>
                           <Typography sx={{ color: 'text.secondary' }}>{data.paymentDetails.country}</Typography>
@@ -302,7 +306,7 @@ const EditCard = ({ data }) => {
                       </TableRow>
                       <TableRow>
                         <MUITableCell>
-                          <Typography sx={{ color: 'text.secondary' }}>SWIFT code:</Typography>
+                          <Typography sx={{ color: 'text.secondary' }}>{t('SWIFT code')}:</Typography>
                         </MUITableCell>
                         <MUITableCell>
                           <Typography sx={{ color: 'text.secondary' }}>{data.paymentDetails.swiftCode}</Typography>
@@ -330,7 +334,7 @@ const EditCard = ({ data }) => {
                       <Grid container sx={{ py: 4, width: '100%', pr: { lg: 0, xs: 4 } }}>
                         <Grid item lg={6} md={5} xs={12} sx={{ px: 4, my: { lg: 0, xs: 2 } }}>
                           <Typography className='col-title' sx={{ mb: { md: 2, xs: 0 }, color: 'text.secondary' }}>
-                            Item
+                            {t('Item')}
                           </Typography>
                           <CustomTextField select fullWidth defaultValue='App Design'>
                             <MenuItem value='App Design'>App Design</MenuItem>
@@ -343,12 +347,12 @@ const EditCard = ({ data }) => {
                             fullWidth
                             multiline
                             sx={{ mt: 3.5 }}
-                            defaultValue='Customization & Bug Fixes'
+                            defaultValue={t('Customization & Bug Fixes')}
                           />
                         </Grid>
                         <Grid item lg={2} md={3} xs={12} sx={{ px: 4, my: { lg: 0, xs: 2 } }}>
                           <Typography className='col-title' sx={{ mb: { md: 2, xs: 0 }, color: 'text.secondary' }}>
-                            Cost
+                            {t('Cost')}
                           </Typography>
                           <CustomTextField
                             type='number'
@@ -356,7 +360,7 @@ const EditCard = ({ data }) => {
                             defaultValue='24'
                             InputProps={{ inputProps: { min: 0 } }}
                           />
-                          <Typography sx={{ mt: 3.5, mr: 2, color: 'text.secondary' }}>Discount:</Typography>
+                          <Typography sx={{ mt: 3.5, mr: 2, color: 'text.secondary' }}>{t('Discount')}:</Typography>
                           <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
                             <Typography sx={{ mr: 2, color: 'text.secondary' }}>0%</Typography>
                             <Tooltip title='Tax 1' placement='top'>
@@ -369,7 +373,7 @@ const EditCard = ({ data }) => {
                         </Grid>
                         <Grid item lg={2} md={2} xs={12} sx={{ px: 4, my: { lg: 0, xs: 2 } }}>
                           <Typography className='col-title' sx={{ mb: { md: 2, xs: 0 }, color: 'text.secondary' }}>
-                            Hours
+                            {t('Hours')}
                           </Typography>
                           <CustomTextField
                             type='number'
@@ -380,7 +384,7 @@ const EditCard = ({ data }) => {
                         </Grid>
                         <Grid item lg={2} md={1} xs={12} sx={{ px: 4, my: { lg: 0 }, mt: 2 }}>
                           <Typography className='col-title' sx={{ mb: { md: 2, xs: 0 }, color: 'text.secondary' }}>
-                            Price
+                            {t('Price')}
                           </Typography>
                           <Typography sx={{ color: 'text.secondary' }}>$24.00</Typography>
                         </Grid>
@@ -400,7 +404,7 @@ const EditCard = ({ data }) => {
           <Grid container sx={{ mt: 4 }}>
             <Grid item xs={12} sx={{ px: 0 }}>
               <Button variant='contained' onClick={() => setCount(count + 1)}>
-                Add Item
+                {t('Add Item')}
               </Button>
             </Grid>
           </Grid>
@@ -413,11 +417,11 @@ const EditCard = ({ data }) => {
             <Grid item xs={12} sm={7} lg={6} sx={{ order: { sm: 1, xs: 2 } }}>
               <Box sx={{ mb: 4, display: 'flex', alignItems: 'center' }}>
                 <Typography variant='body2' sx={{ mr: 2, fontWeight: 500, lineHeight: 'normal' }}>
-                  Salesperson:
+                  {t('Salesperson')}:
                 </Typography>
                 <CustomTextField fullWidth defaultValue='Tommy Shelby' />
               </Box>
-              <CustomTextField fullWidth defaultValue='Thanks for your business' />
+              <CustomTextField fullWidth defaultValue={t('Thanks for your business')} />
             </Grid>
             <Grid
               item
@@ -432,11 +436,11 @@ const EditCard = ({ data }) => {
                   <Typography sx={{ fontWeight: 500, color: 'text.secondary' }}>$1800</Typography>
                 </CalcWrapper>
                 <CalcWrapper>
-                  <Typography sx={{ color: 'text.secondary' }}>Discount:</Typography>
+                  <Typography sx={{ color: 'text.secondary' }}>{t('Discount')}:</Typography>
                   <Typography sx={{ fontWeight: 500, color: 'text.secondary' }}>$28</Typography>
                 </CalcWrapper>
                 <CalcWrapper sx={{ mb: '0 !important' }}>
-                  <Typography sx={{ color: 'text.secondary' }}>Tax:</Typography>
+                  <Typography sx={{ color: 'text.secondary' }}>{t('Tax')}:</Typography>
                   <Typography sx={{ fontWeight: 500, color: 'text.secondary' }}>21%</Typography>
                 </CalcWrapper>
                 <Divider sx={{ my: `${theme.spacing(2)} !important` }} />
@@ -456,7 +460,7 @@ const EditCard = ({ data }) => {
             htmlFor='invoice-note'
             sx={{ mb: 2, fontWeight: 500, fontSize: theme.typography.body2.fontSize, lineHeight: 'normal' }}
           >
-            Note:
+            {t('Note')}:
           </InputLabel>
           <CustomTextField
             rows={2}

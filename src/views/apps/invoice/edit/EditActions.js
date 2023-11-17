@@ -1,3 +1,6 @@
+/*Traducir*/
+import { useTranslation } from 'react-i18next'
+
 // ** Next Import
 import Link from 'next/link'
 
@@ -25,6 +28,7 @@ const OptionsWrapper = styled(Box)(() => ({
 }))
 
 const EditActions = ({ id, toggleSendInvoiceDrawer, toggleAddPaymentDrawer }) => {
+  const {t}=useTranslation();
   return (
     <Grid container spacing={6}>
       <Grid item xs={12}>
@@ -32,7 +36,7 @@ const EditActions = ({ id, toggleSendInvoiceDrawer, toggleAddPaymentDrawer }) =>
           <CardContent>
             <Button fullWidth variant='contained' onClick={toggleSendInvoiceDrawer} sx={{ mb: 2, '& svg': { mr: 2 } }}>
               <Icon fontSize='1.125rem' icon='tabler:send' />
-              Send Invoice
+              {t('Send Invoice')}
             </Button>
             <Box sx={{ mb: 2, gap: 4, display: 'flex', alignItems: 'center' }}>
               <Button fullWidth variant='tonal' component={Link} color='secondary' href={`/apps/invoice/preview/${id}`}>

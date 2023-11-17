@@ -440,6 +440,7 @@
   "Item": "Producto",
   "Description": "Descripción",
   "hours": "Horas",
+  "Hours": "Horas",
   "qty": "Cantidad",
   "Discount": "Descuento",
   "Tax": "Impuesto",
@@ -447,5 +448,14 @@
   "Thanks for your business": "Le agradecemos su confianza",
   "Print": "Imprimir",
   "Edit Invoice": "Editar Factura",
-  "Add Payment": "Agregar Pago"
+  "Add Payment": "Agregar Pago",
+  "Total Due": "Total a pagar",
+  "Bank name": "Nombre del banco",
+  "Country": "País",
+  "SWIFT code": "Código SWIFT",
+  "Price": "Precio",
+  "Cost": "Costo",
+  "Customization & Bug Fixes": "Personalización y Corrección de Errores",
+  "Note": "Nota",
+  "Add Item": "Agregar producto"
 }

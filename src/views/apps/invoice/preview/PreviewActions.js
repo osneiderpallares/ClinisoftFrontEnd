@@ -1,3 +1,6 @@
+/*Traducir*/
+import { useTranslation } from 'react-i18next'
+
 // ** Next Import
 import Link from 'next/link'
 
@@ -10,15 +13,17 @@ import CardContent from '@mui/material/CardContent'
 import Icon from 'src/@core/components/icon'
 
 const PreviewActions = ({ id, toggleSendInvoiceDrawer, toggleAddPaymentDrawer }) => {
+  const {t}=useTranslation();
   return (
     <Card>
       <CardContent>
         <Button fullWidth variant='contained' onClick={toggleSendInvoiceDrawer} sx={{ mb: 2, '& svg': { mr: 2 } }}>
           <Icon fontSize='1.125rem' icon='tabler:send' />
-          Send Invoice
+          {t('Send Invoice')}
+          
         </Button>
         <Button fullWidth sx={{ mb: 2 }} color='secondary' variant='tonal'>
-          Download
+          {t('Download')}
         </Button>
         <Button
           fullWidth
@@ -29,7 +34,7 @@ const PreviewActions = ({ id, toggleSendInvoiceDrawer, toggleAddPaymentDrawer })
           color='secondary'
           href={`/apps/invoice/print/${id}`}
         >
-          Print
+          {t('Print')}
         </Button>
         <Button
           fullWidth
@@ -39,11 +44,11 @@ const PreviewActions = ({ id, toggleSendInvoiceDrawer, toggleAddPaymentDrawer })
           color='secondary'
           href={`/apps/invoice/edit/${id}`}
         >
-          Edit Invoice
+          {t('Edit Invoice')}
         </Button>
         <Button fullWidth variant='contained' sx={{ '& svg': { mr: 2 } }} onClick={toggleAddPaymentDrawer}>
           <Icon fontSize='1.125rem' icon='tabler:currency-dollar' />
-          Add Payment
+          {t('Add Payment')}
         </Button>
       </CardContent>
     </Card>

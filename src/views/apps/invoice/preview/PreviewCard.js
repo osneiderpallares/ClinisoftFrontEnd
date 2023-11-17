@@ -1,3 +1,6 @@
+/*Traducir*/
+import { useTranslation } from 'react-i18next'
+
 // ** MUI Imports
 import Grid from '@mui/material/Grid'
 import Card from '@mui/material/Card'
@@ -35,6 +38,7 @@ const CalcWrapper = styled(Box)(({ theme }) => ({
 }))
 
 const PreviewCard = ({ data }) => {
+  const {t}=useTranslation();
   // ** Hook
   const theme = useTheme()
   if (data) {
@@ -90,7 +94,7 @@ const PreviewCard = ({ data }) => {
                   <TableBody sx={{ '& .MuiTableCell-root': { py: `${theme.spacing(1.5)} !important` } }}>
                     <TableRow>
                       <MUITableCell>
-                        <Typography variant='h4'>Invoice</Typography>
+                        <Typography variant='h4'>{t('Invoice')}</Typography>
                       </MUITableCell>
                       <MUITableCell>
                         <Typography variant='h4'>{`#${data.invoice.id}`}</Typography>
@@ -98,7 +102,7 @@ const PreviewCard = ({ data }) => {
                     </TableRow>
                     <TableRow>
                       <MUITableCell>
-                        <Typography sx={{ color: 'text.secondary' }}>Date Issued:</Typography>
+                        <Typography sx={{ color: 'text.secondary' }}>{t('Date Issued:')}</Typography>
                       </MUITableCell>
                       <MUITableCell>
                         <Typography sx={{ color: 'text.secondary' }}>{data.invoice.issuedDate}</Typography>
@@ -106,7 +110,7 @@ const PreviewCard = ({ data }) => {
                     </TableRow>
                     <TableRow>
                       <MUITableCell>
-                        <Typography sx={{ color: 'text.secondary' }}>Date Due:</Typography>
+                        <Typography sx={{ color: 'text.secondary' }}>{t('Date Due:')}</Typography>
                       </MUITableCell>
                       <MUITableCell>
                         <Typography sx={{ color: 'text.secondary' }}>{data.invoice.dueDate}</Typography>
@@ -125,7 +129,7 @@ const PreviewCard = ({ data }) => {
           <Grid container>
             <Grid item xs={12} sm={6} sx={{ mb: { lg: 0, xs: 4 } }}>
               <Typography variant='h6' sx={{ mb: 6 }}>
-                Invoice To:
+                {t('Invoice To:')}
               </Typography>
               <Typography sx={{ mb: 1.5, color: 'text.secondary' }}>{data.invoice.name}</Typography>
               <Typography sx={{ mb: 1.5, color: 'text.secondary' }}>{data.invoice.company}</Typography>
@@ -136,7 +140,7 @@ const PreviewCard = ({ data }) => {
             <Grid item xs={12} sm={6} sx={{ display: 'flex', justifyContent: ['flex-start', 'flex-end'] }}>
               <div>
                 <Typography variant='h6' sx={{ mb: 6 }}>
-                  Bill To:
+                {t('Bill To:')}
                 </Typography>
                 <TableContainer>
                   <Table>
@@ -197,10 +201,10 @@ const PreviewCard = ({ data }) => {
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell>Item</TableCell>
-                <TableCell>Description</TableCell>
-                <TableCell>hours</TableCell>
-                <TableCell>qty</TableCell>
+                <TableCell>{t('Item')}</TableCell>
+                <TableCell>{t('Description')}</TableCell>
+                <TableCell>{t('hours')}</TableCell>
+                <TableCell>{t('qty')}</TableCell>
                 <TableCell>Total</TableCell>
               </TableRow>
             </TableHead>
@@ -248,11 +252,11 @@ const PreviewCard = ({ data }) => {
           <Grid container>
             <Grid item xs={12} sm={7} lg={9} sx={{ order: { sm: 1, xs: 2 } }}>
               <Box sx={{ mb: 2, display: 'flex', alignItems: 'center' }}>
-                <Typography sx={{ mr: 2, fontWeight: 500, color: 'text.secondary' }}>Salesperson:</Typography>
+                <Typography sx={{ mr: 2, fontWeight: 500, color: 'text.secondary' }}>{t('Salesperson')}:</Typography>
                 <Typography sx={{ color: 'text.secondary' }}>Tommy Shelby</Typography>
               </Box>
 
-              <Typography sx={{ color: 'text.secondary' }}>Thanks for your business</Typography>
+              <Typography sx={{ color: 'text.secondary' }}>{t('Thanks for your business')}</Typography>
             </Grid>
             <Grid item xs={12} sm={5} lg={3} sx={{ mb: { sm: 0, xs: 4 }, order: { sm: 2, xs: 1 } }}>
               <CalcWrapper>
@@ -260,11 +264,11 @@ const PreviewCard = ({ data }) => {
                 <Typography sx={{ fontWeight: 500, color: 'text.secondary' }}>$1800</Typography>
               </CalcWrapper>
               <CalcWrapper>
-                <Typography sx={{ color: 'text.secondary' }}>Discount:</Typography>
+                <Typography sx={{ color: 'text.secondary' }}>{t('Discount')}:</Typography>
                 <Typography sx={{ fontWeight: 500, color: 'text.secondary' }}>$28</Typography>
               </CalcWrapper>
               <CalcWrapper sx={{ mb: '0 !important' }}>
-                <Typography sx={{ color: 'text.secondary' }}>Tax:</Typography>
+                <Typography sx={{ color: 'text.secondary' }}>{t('Tax')}:</Typography>
                 <Typography sx={{ fontWeight: 500, color: 'text.secondary' }}>21%</Typography>
               </CalcWrapper>
               <Divider sx={{ my: `${theme.spacing(2)} !important` }} />

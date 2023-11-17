@@ -431,5 +431,21 @@
   "Export": "Exportar",
   "Download as CSV": "Descargar con CSV",
   "Group Occupations": "Ocupaciones Grupo",
-  "Civil Status": "Estado Civíl"
+  "Civil Status": "Estado Civíl",
+  "Send Invoice": "Enviar Factura",
+  "Date Issued:": "Fecha de Emisión",
+  "Date Due:": "Fecha de vencimiento:",
+  "Invoice To:": "Facturar a:",
+  "Bill To:": "Enviar factura a:",
+  "Item": "Producto",
+  "Description": "Descripción",
+  "hours": "Horas",
+  "qty": "Cantidad",
+  "Discount": "Descuento",
+  "Tax": "Impuesto",
+  "Salesperson": "Vendedor",
+  "Thanks for your business": "Le agradecemos su confianza",
+  "Print": "Imprimir",
+  "Edit Invoice": "Editar Factura",
+  "Add Payment": "Agregar Pago"
 }

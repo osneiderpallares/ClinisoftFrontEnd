@@ -430,5 +430,21 @@
   "Export": "Export",
   "Download as CSV": "Download as CSV",
   "Group Occupations": "Group Occupations",
-  "Civil Status": "Civil Status"
+  "Civil Status": "Civil Status",
+  "Send Invoice": "Send Invoice",
+  "Date Issued:": "Date Issued:",
+  "Date Due:": "Date Due:",
+  "Invoice To:": "Invoice To:",
+  "Bill To:": "Bill To:",
+  "Item": "Item",
+  "Description": "Description",
+  "hours": "hours",
+  "qty": "qty",
+  "Discount": "Discount",
+  "Tax": "Tax",
+  "Salesperson": "Salesperson",
+  "Thanks for your business": "Thanks for your business",
+  "Print": "Print",
+  "Edit Invoice": "Edit Invoice",
+  "Add Payment": "Add Payment"
 }

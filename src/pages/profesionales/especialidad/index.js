@@ -293,7 +293,7 @@ const AppPage = ({}) => {
           onChange: event => handleSearch(event.target.value)
         }
       }}
-      localeText={GridLocaleTextES}
+      localeText={GridLocaleTextES()}
     />
   )
 
@@ -302,7 +302,7 @@ const AppPage = ({}) => {
   return (
     <Card>
       <CardHeader
-        title={t('Especialidades')}
+        title={t('Specialties')}
         action={
           <Tooltip title={t('Add')}>
             <Fab color='primary' aria-label='Add' size='small' onClick={openModal}>

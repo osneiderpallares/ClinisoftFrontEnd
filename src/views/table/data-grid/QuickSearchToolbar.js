@@ -2,6 +2,7 @@
 import Box from '@mui/material/Box'
 import IconButton from '@mui/material/IconButton'
 import { GridToolbarFilterButton } from '@mui/x-data-grid'
+import { useTranslation } from 'react-i18next'
 
 // ** Custom Component Import
 import CustomTextField from 'src/@core/components/mui/text-field'
@@ -10,6 +11,8 @@ import CustomTextField from 'src/@core/components/mui/text-field'
 import Icon from 'src/@core/components/icon'
 
 const QuickSearchToolbar = props => {
+  const { t } = useTranslation()
+  
   return (
     <Box
       sx={{
@@ -24,7 +27,7 @@ const QuickSearchToolbar = props => {
       <GridToolbarFilterButton />
       <CustomTextField
         value={props.value}
-        placeholder='Search…'
+        placeholder={t('Search')}
         onChange={props.onChange}
         InputProps={{
           startAdornment: (

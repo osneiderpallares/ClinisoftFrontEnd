@@ -1,10 +1,9 @@
 /*Traducir*/
 import { useTranslation } from 'react-i18next'
 
-// export const GridLocaleTextES = {
-export function useGridLocaleTextES() {
-  const { t } = useTranslation();
-
+export const GridLocaleTextES =()=> {
+  const { t } = useTranslation()
+  
   return {
     rowsPerPageLabel: 'Filas por página',//es Rows Per Page
     // Root
@@ -182,5 +181,5 @@ export function useGridLocaleTextES() {
     aggregationFunctionLabelMin: 'min',
     aggregationFunctionLabelMax: 'max',
     aggregationFunctionLabelSize: 'size'
-};
+ };
 }

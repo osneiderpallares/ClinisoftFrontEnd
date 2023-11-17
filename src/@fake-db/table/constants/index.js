@@ -34,9 +34,9 @@ export const GridLocaleTextES =()=> {
     toolbarQuickFilterDeleteIconLabel: 'Limpiar',
 
     // Export selector toolbar button text
-    toolbarExport: 'Exportar',
+    toolbarExport: t('Export'),
     toolbarExportLabel: 'Exportar',
-    toolbarExportCSV: 'Download as CSV',
+    toolbarExportCSV: t('Download as CSV'),
     toolbarExportPrint: 'Print',
     toolbarExportExcel: 'Download as Excel',
 

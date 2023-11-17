@@ -321,7 +321,7 @@ const AppPage = ({}) => {
           onChange: event => handleSearch(event.target.value)
         }
       }}
-      localeText={GridLocaleTextES}
+      localeText={GridLocaleTextES()}
     />
   )
 

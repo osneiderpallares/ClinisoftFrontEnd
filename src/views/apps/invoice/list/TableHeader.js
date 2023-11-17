@@ -31,12 +31,13 @@ const TableHeader = props => {
     >
       <CustomTextField
         select
-        defaultValue='Actions'
+        defaultValue={t('Actions')}
         sx={{ mr: 4, mb: 2 }}
         SelectProps={{
-           //displayEmpty: true,
-            disabled: selectedRows && selectedRows.length === 0,
-            renderValue: selected => (selected?.length === 0 ? t('Actions') : selected)
+           displayEmpty: true,
+           disabled: selectedRows && selectedRows.length === 0,
+          //  renderValue: selected => (selected?.length === 0 ? t('Actions') : selected)
+          renderValue: selected => t('Actions') 
         }}
       >
         <MenuItem disabled value='Actions'>

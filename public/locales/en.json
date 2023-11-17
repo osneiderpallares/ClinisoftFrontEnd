@@ -423,5 +423,10 @@
   "No": "No",
   "dayGridMonth": "dayGridMonth",
   "dayGridDayy": "dayGridDay",
-  "Type Identification": "Type Identification"
+  "Type Identification": "Type Identification",
+  "Occupations": "Occupations",
+  "Export": "Export",
+  "Download as CSV": "Download as CSV",
+  "Group Occupations": "Group Occupations",
+  "Civil Status": "Civil Status"
 }

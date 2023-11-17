@@ -40,15 +40,15 @@ const EditActions = ({ id, toggleSendInvoiceDrawer, toggleAddPaymentDrawer }) =>
             </Button>
             <Box sx={{ mb: 2, gap: 4, display: 'flex', alignItems: 'center' }}>
               <Button fullWidth variant='tonal' component={Link} color='secondary' href={`/apps/invoice/preview/${id}`}>
-                Preview
+                {t('Preview')}
               </Button>
               <Button fullWidth color='secondary' variant='tonal'>
-                Save
+                {t('Save')}
               </Button>
             </Box>
             <Button fullWidth variant='contained' sx={{ '& svg': { mr: 2 } }} onClick={toggleAddPaymentDrawer}>
               <Icon fontSize='1.125rem' icon='tabler:currency-dollar' />
-              Add Payment
+              {t('Add Payment')}
             </Button>
           </CardContent>
         </Card>

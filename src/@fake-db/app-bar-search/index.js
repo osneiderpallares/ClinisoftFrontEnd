@@ -843,24 +843,73 @@ const searchData = [
     category: 'appsPages'
   },
   {
-    id: 120,
+    id: 121,
     url: '/info-personal/causa-muerte',
     icon: 'tabler:ribbon-health',
     title: 'Causa Muerte',
     category: 'appsPages'
   },
   {
-    id: 121,
+    id: 122,
     url: '/profesionales/especialidad',
     icon: 'fluent-emoji-high-contrast:medical-symbol',
     title: 'Especialidades',
     category: 'appsPages'
   },
   {
-    id: 121,
+    id: 123,
     url: '/profesionales/profesional-tipo',
     icon: 'wpf:medical-doctor',
     title: 'Tipos de Profesionales',
+    category: 'appsPages'
+  },
+  {
+    id: 124,
+    url: '/profesionales/profesional-servicio',
+    icon: 'medical-icon:interpreter-services',
+    title: 'Servicios Profesionales',
+    category: 'appsPages'
+  },
+  {
+    id: 125,
+    url: '/profesionales/profesional',
+    icon: 'medical-icon:i-medical-library',
+    title: 'Profesionales',
+    category: 'appsPages'
+  },
+  {
+    id: 126,
+    url: '/ubicacion/departamento',
+    icon: 'tdesign:map-location',
+    title: 'Departamentos',
+    category: 'appsPages'
+  },
+  {
+    id: 127,
+    url: '/ubicacion/ciudad',
+    icon: 'mdi:home-city',
+    title: 'Ciudades',
+    category: 'appsPages'
+  },
+  {
+    id: 128,
+    url: '/ubicacion/estrato',
+    icon: 'streamline:decent-work-and-economic-growth-solid',
+    title: 'Estrato Socioeconomico',
+    category: 'appsPages'
+  },
+  {
+    id: 129,
+    url: '/ubicacion/zona-residencial',
+    icon: 'mdi:home-map-marker',
+    title: 'Zonas Residenciales',
+    category: 'appsPages'
+  },
+  {
+    id: 130,
+    url: '/ubicacion/barrio',
+    icon: 'material-symbols-light:location-home-rounded',
+    title: 'Barrio',
     category: 'appsPages'
   }
 ]

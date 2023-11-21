@@ -10,7 +10,6 @@ import CardHeader from '@mui/material/CardHeader'
 import { DataGrid } from '@mui/x-data-grid'
 
 import QuickSearchToolbar from 'src/views/table/data-grid/QuickSearchToolbar'
-import ServerSideToolbar from 'src/views/table/data-grid/ServerSideToolbar'
 import Grid from '@mui/material/Grid'
 import Dialog from '@mui/material/Dialog'
 import Button from '@mui/material/Button'
@@ -48,8 +47,7 @@ const Transition = forwardRef(function Transition(props, ref) {
   return <Fade ref={ref} {...props} />
 })
 
-const endPoint = 'http://127.0.0.1:8000/show_ocupaciones/'
-const endPoint_ocupaciones_grupo = 'http://127.0.0.1:8000/show_ocupacion_grupo/'
+const endPoint = 'http://127.0.0.1:8000/show_departamento/'
 
 const escapeRegExp = value => {
   return value.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&')
@@ -84,37 +82,31 @@ const AppPage = ({}) => {
     },
     {
       flex: 0.25,
-      minWidth: 250,
+      minWidth: 200,
       field: 'nombre',
       headerName: t('NAME')
     },
     {
-      flex: 0.09,
-      minWidth: 90,
-      field: 'abreviacion',
-      headerName: t('ABBREVIATION')
+      flex: 0.25,
+      minWidth: 230,
+      field: 'codigo_departamento',
+      headerName: t('DEPARTMENT CODE')
     },
     {
-      flex: 0.12,
+      flex: 0.15,
       minWidth: 120,
-      field: 'ocupaciones_grupos_nombre',
-      headerName: t('Group Occupations')
-    },
-    {
-      flex: 0.1,
-      minWidth: 100,
       field: 'create_up',
       headerName: t('CREATION DATE')
     },
     {
-      flex: 0.09,
-      minWidth: 90,
+      flex: 0.15,
+      minWidth: 120,
       field: 'estado_nombre',
       headerName: t('STATE')
     },
     {
-      flex: 0.1,
-      minWidth: 110,
+      flex: 0.125,
+      minWidth: 140,
       field: 'acciones',
       headerName: t('ACTIONS'),
       renderCell: params => {
@@ -140,24 +132,11 @@ const AppPage = ({}) => {
     }
   ]
   const [rows, setRows] = useState(null)
-  const [rows_ocGrupo, setRowsOcGrupo] = useState(null)
 
   const peticionGet = async () => {
     await axios.get(endPoint).then(response => {
       setRows(response.data)
     })
-    await axios.get(endPoint_ocupaciones_grupo).then(response => {
-      setRowsOcGrupo(response.data)
-    })
-
-    // try {
-    //   axios.all([await axios.get(endPoint), await axios.get(endPoint_ocupaciones_grupo)]).then(response => {
-    //     setRows(response[0].data)
-    //     setRowsOcGrupo(response[1].data)
-    //   })
-    // } catch (error) {
-    //   console.log(error)
-    // }
   }
 
   const [show, setShow] = useState(false)
@@ -189,9 +168,8 @@ const AppPage = ({}) => {
   const [registroSeleccionado, setRegistroSeleccionado] = useState({
     id: null,
     nombre: '',
-    abreviacion: '',
-    estado: '1',
-    ocupaciones_grupos: ''
+    codigo_departamento: '',
+    estado: '1'
   })
 
   const Delete = form => {
@@ -207,9 +185,9 @@ const AppPage = ({}) => {
   const handleNo = () => setOpen(false)
 
   const handleSi = () => {
-    if (deleteRow(registroSeleccionado.id, '/update_ocupacion/')) {
+    if (deleteRow(registroSeleccionado.id, '/update_departamento/')) {
       toast.success(t('Record deleted successfully!'))
-      router.push('./ocupacion')
+      router.push('./departamento')
     } else {
       toast.error(t('Error when trying to delete the registry'))
     }
@@ -223,22 +201,17 @@ const AppPage = ({}) => {
       .string()
       .min(3, obj => showErrors(t('name'), obj.value.length, obj.min))
       .required(),
-    abreviacion: yup
+    codigo_departamento: yup
       .string()
-      .min(1, obj => showErrors(t('abbreviation'), obj.value.length, obj.min))
+      .min(1, obj => showErrors(t('department code'), obj.value.length, obj.min))
       .required(),
-    estado: yup.string(),
-    ocupaciones_grupos: yup
-      .string()
-      .min(1, obj => showErrors(t('occupation groups'), obj.value.length, obj.min))
-      .required()
+    estado: yup.string()
   })
 
   const defaultValues = {
     nombre: '',
-    abreviacion: '',
-    estado: '1',
-    ocupaciones_grupos: ''
+    codigo_departamento: '',
+    estado: '1'
   }
 
   const openModal = () => {
@@ -268,9 +241,9 @@ const AppPage = ({}) => {
   })
 
   const onSubmit = data => {
-    if (saveRow(data, '/store_ocupacion/')) {
+    if (saveRow(data, '/store_departamento/')) {
       toast.success(t('Log saved successfully!'))
-      router.push('./ocupacion')
+      router.push('./departamento')
     } else {
       toast.error(t('Error saving log'))
     }
@@ -285,9 +258,9 @@ const AppPage = ({}) => {
 
   const onSubmitEdit = e => {
     e.preventDefault()
-    if (saveRow(registroSeleccionado, '/store_ocupacion/')) {
+    if (saveRow(registroSeleccionado, '/store_departamento/')) {
       toast.success(t('Registration successfully updated!'))
-      router.push('./ocupacion')
+      router.push('./departamento')
     } else {
       toast.error(t('Error updating registry'))
     }
@@ -307,7 +280,7 @@ const AppPage = ({}) => {
       columns={columns}
       pageSizeOptions={[7, 10, 25, 50]}
       paginationModel={paginationModel}
-      slots={{ toolbar: ServerSideToolbar }}
+      slots={{ toolbar: QuickSearchToolbar }}
       onPaginationModelChange={setPaginationModel}
       columnVisibilityModel={{ id: false, create_up: false }}
       slotProps={{
@@ -325,24 +298,12 @@ const AppPage = ({}) => {
     />
   )
 
-  const ITEM_HEIGHT = 48
-  const ITEM_PADDING_TOP = 8
-
-  const MenuProps = {
-    PaperProps: {
-      style: {
-        width: 250,
-        maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP
-      }
-    }
-  }
-
   if (!rows) return null
 
   return (
     <Card>
       <CardHeader
-        title={t('Occupations')}
+        title={t('Departments')}
         action={
           <Tooltip title={t('Add')}>
             <Fab color='primary' aria-label='Add' size='small' onClick={openModal}>
@@ -395,6 +356,7 @@ const AppPage = ({}) => {
                       fullWidth
                       value={value}
                       label={t('Name')}
+                      inputProps={{ maxLength: 200 }}
                       onChange={onChange}
                       placeholder={t('Enter the name')}
                       error={Boolean(errors.nombre)}
@@ -404,51 +366,22 @@ const AppPage = ({}) => {
                   )}
                 />
               </Grid>
-              <Grid item sm={12} xs={12}>
-                <Controller
-                  name='ocupaciones_grupos'
-                  control={control}
-                  rules={{ required: true }}
-                  render={({ field: { value, onChange } }) => (
-                    <CustomTextField
-                      select
-                      fullWidth
-                      label={t('Occupation Groups')}
-                      SelectProps={{
-                        MenuProps,
-                        value: value,
-                        onChange: onChange
-                      }}
-                      error={Boolean(errors.ocupaciones_grupos)}
-                      aria-describedby='validation-basic-occupation-groups'
-                      {...(errors.ocupaciones_grupos && { helperText: errors.ocupaciones_grupos.message })}
-                    >
-                      {rows_ocGrupo?.map(ocGrupo => {
-                        return (
-                          <MenuItem key={ocGrupo.id} value={ocGrupo.id}>
-                            {ocGrupo.nombre}
-                          </MenuItem>
-                        )
-                      })}
-                    </CustomTextField>
-                  )}
-                />
-              </Grid>
               <Grid item sm={6} xs={6}>
                 <Controller
-                  name='abreviacion'
+                  name='codigo_departamento'
                   control={control}
                   rules={{ required: true }}
                   render={({ field: { value, onChange } }) => (
                     <CustomTextField
                       fullWidth
                       value={value}
-                      label={t('Abbreviation')}
+                      label={t('Department Code')}
                       onChange={onChange}
-                      placeholder={t('Enter the abbreviation')}
-                      error={Boolean(errors.abreviacion)}
-                      aria-describedby='validation-schema-abbreviation'
-                      {...(errors.abreviacion && { helperText: errors.abreviacion.message })}
+                      inputProps={{ maxLength: 2 }}
+                      placeholder={t('Enter the Department Code')}
+                      error={Boolean(errors.codigo_departamento)}
+                      aria-describedby='validation-schema-department-code'
+                      {...(errors.codigo_departamento && { helperText: errors.codigo_departamento.message })}
                     />
                   )}
                 />
@@ -534,8 +467,7 @@ const AppPage = ({}) => {
                   setRegistroSeleccionado({
                     id: registroSeleccionado.id,
                     nombre: registroSeleccionado.nombre,
-                    ocupaciones_grupos: registroSeleccionado.ocupaciones_grupos,
-                    abreviacion: registroSeleccionado.abreviacion,
+                    codigo_departamento: registroSeleccionado.codigo_departamento,
                     estado: registroSeleccionado.estado
                   })
                 }}
@@ -547,65 +479,35 @@ const AppPage = ({}) => {
                   name='nombre'
                   value={registroSeleccionado.nombre}
                   label={t('Name')}
+                  inputProps={{ maxLength: 200 }}
                   onChange={e => {
                     setRegistroSeleccionado({
                       id: registroSeleccionado.id,
                       nombre: e.target.value,
-                      ocupaciones_grupos: registroSeleccionado.ocupaciones_grupos,
-                      abreviacion: registroSeleccionado.abreviacion,
+                      codigo_departamento: registroSeleccionado.codigo_departamento,
                       estado: registroSeleccionado.estado
                     })
                   }}
                   placeholder={t('Enter your name')}
                 />
               </Grid>
-              <Grid item sm={12} xs={12}>
-                <CustomTextField
-                  select
-                  required
-                  fullWidth
-                  name='ocupaciones_grupos'
-                  label={t('Occupation Groups')}
-                  SelectProps={{
-                    MenuProps,
-                    value: registroSeleccionado.ocupaciones_grupos,
-                    onChange: e => {
-                      setRegistroSeleccionado({
-                        id: registroSeleccionado.id,
-                        nombre: registroSeleccionado.nombre,
-                        ocupaciones_grupos: e.target.value,
-                        abreviacion: registroSeleccionado.abreviacion,
-                        estado: registroSeleccionado.abreviacion
-                      })
-                    }
-                  }}
-                >
-                  {rows_ocGrupo?.map(ocGrupo => {
-                    return (
-                      <MenuItem key={ocGrupo.id} value={ocGrupo.id}>
-                        {ocGrupo.nombre}
-                      </MenuItem>
-                    )
-                  })}
-                </CustomTextField>
-              </Grid>
               <Grid item sm={6} xs={6}>
                 <CustomTextField
                   fullWidth
                   required
-                  name='abreviacion'
-                  value={registroSeleccionado.abreviacion}
-                  label={t('Abbreviation')}
+                  name='codigo_departamento'
+                  value={registroSeleccionado.codigo_departamento}
+                  label={t('Department Code')}
+                  inputProps={{ maxLength: 2 }}
                   onChange={e => {
                     setRegistroSeleccionado({
                       id: registroSeleccionado.id,
                       nombre: registroSeleccionado.nombre,
-                      ocupaciones_grupos: registroSeleccionado.ocupaciones_grupos,
-                      abreviacion: e.target.value,
+                      codigo_departamento: e.target.value,
                       estado: registroSeleccionado.estado
                     })
                   }}
-                  placeholder={t('Enter the abbreviation')}
+                  placeholder={t('Enter the Department Code')}
                 />
               </Grid>
               <Grid item sm={6} xs={6}>
@@ -621,8 +523,7 @@ const AppPage = ({}) => {
                       setRegistroSeleccionado({
                         id: registroSeleccionado.id,
                         nombre: registroSeleccionado.nombre,
-                        ocupaciones_grupos: registroSeleccionado.ocupaciones_grupos,
-                        abreviacion: registroSeleccionado.abreviacion,
+                        codigo_departamento: registroSeleccionado.codigo_departamento,
                         estado: e.target.value
                       })
                     }

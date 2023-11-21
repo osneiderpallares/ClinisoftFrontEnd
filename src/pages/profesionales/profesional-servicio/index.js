@@ -10,7 +10,6 @@ import CardHeader from '@mui/material/CardHeader'
 import { DataGrid } from '@mui/x-data-grid'
 
 import QuickSearchToolbar from 'src/views/table/data-grid/QuickSearchToolbar'
-import ServerSideToolbar from 'src/views/table/data-grid/ServerSideToolbar'
 import Grid from '@mui/material/Grid'
 import Dialog from '@mui/material/Dialog'
 import Button from '@mui/material/Button'
@@ -48,8 +47,9 @@ const Transition = forwardRef(function Transition(props, ref) {
   return <Fade ref={ref} {...props} />
 })
 
-const endPoint = 'http://127.0.0.1:8000/show_ocupaciones/'
-const endPoint_ocupaciones_grupo = 'http://127.0.0.1:8000/show_ocupacion_grupo/'
+const endPoint = 'http://127.0.0.1:8000/show_profesional_servicio/'
+const endPoint_profesional = 'http://127.0.0.1:8000/show_profesional/'
+const endPoint_servicio = 'http://127.0.0.1:8000/show_servicio/'
 
 const escapeRegExp = value => {
   return value.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&')
@@ -83,32 +83,26 @@ const AppPage = ({}) => {
       headerName: 'ID'
     },
     {
+      flex: 0.2,
+      minWidth: 200,
+      field: 'profesional_nombre',
+      headerName: t('PROFESSIONALS')
+    },
+    {
       flex: 0.25,
-      minWidth: 250,
-      field: 'nombre',
-      headerName: t('NAME')
+      minWidth: 230,
+      field: 'servicio_nombre',
+      headerName: t('SERVICES')
     },
     {
-      flex: 0.09,
-      minWidth: 90,
-      field: 'abreviacion',
-      headerName: t('ABBREVIATION')
-    },
-    {
-      flex: 0.12,
+      flex: 0.15,
       minWidth: 120,
-      field: 'ocupaciones_grupos_nombre',
-      headerName: t('Group Occupations')
-    },
-    {
-      flex: 0.1,
-      minWidth: 100,
       field: 'create_up',
       headerName: t('CREATION DATE')
     },
     {
-      flex: 0.09,
-      minWidth: 90,
+      flex: 0.1,
+      minWidth: 110,
       field: 'estado_nombre',
       headerName: t('STATE')
     },
@@ -140,24 +134,19 @@ const AppPage = ({}) => {
     }
   ]
   const [rows, setRows] = useState(null)
-  const [rows_ocGrupo, setRowsOcGrupo] = useState(null)
+  const [profesionalRows, setProfesionalRows] = useState(null)
+  const [servicioRows, setServicioRows] = useState(null)
 
   const peticionGet = async () => {
     await axios.get(endPoint).then(response => {
       setRows(response.data)
     })
-    await axios.get(endPoint_ocupaciones_grupo).then(response => {
-      setRowsOcGrupo(response.data)
+    await axios.get(endPoint_profesional).then(response => {
+      setProfesionalRows(response.data)
     })
-
-    // try {
-    //   axios.all([await axios.get(endPoint), await axios.get(endPoint_ocupaciones_grupo)]).then(response => {
-    //     setRows(response[0].data)
-    //     setRowsOcGrupo(response[1].data)
-    //   })
-    // } catch (error) {
-    //   console.log(error)
-    // }
+    await axios.get(endPoint_servicio).then(response => {
+      setServicioRows(response.data)
+    })
   }
 
   const [show, setShow] = useState(false)
@@ -188,10 +177,9 @@ const AppPage = ({}) => {
   // ** Eliminar registro
   const [registroSeleccionado, setRegistroSeleccionado] = useState({
     id: null,
-    nombre: '',
-    abreviacion: '',
-    estado: '1',
-    ocupaciones_grupos: ''
+    profesional: '',
+    servicio: '',
+    estado: '1'
   })
 
   const Delete = form => {
@@ -207,9 +195,9 @@ const AppPage = ({}) => {
   const handleNo = () => setOpen(false)
 
   const handleSi = () => {
-    if (deleteRow(registroSeleccionado.id, '/update_ocupacion/')) {
+    if (deleteRow(registroSeleccionado.id, '/update_profesional_servicio/')) {
       toast.success(t('Record deleted successfully!'))
-      router.push('./ocupacion')
+      router.push('./profesional-servicio')
     } else {
       toast.error(t('Error when trying to delete the registry'))
     }
@@ -219,31 +207,24 @@ const AppPage = ({}) => {
   //** Guardar registro y validar
   const schema = yup.object().shape({
     id: yup.number(),
-    nombre: yup
+    profesional: yup
       .string()
-      .min(3, obj => showErrors(t('name'), obj.value.length, obj.min))
+      .min(1, obj => showErrors(t('professional'), obj.value.length, obj.min))
       .required(),
-    abreviacion: yup
+    servicio: yup
       .string()
-      .min(1, obj => showErrors(t('abbreviation'), obj.value.length, obj.min))
+      .min(1, obj => showErrors(t('service'), obj.value.length, obj.min))
       .required(),
-    estado: yup.string(),
-    ocupaciones_grupos: yup
-      .string()
-      .min(1, obj => showErrors(t('occupation groups'), obj.value.length, obj.min))
-      .required()
+    estado: yup.string()
   })
 
   const defaultValues = {
-    nombre: '',
-    abreviacion: '',
-    estado: '1',
-    ocupaciones_grupos: ''
+    profesional: '',
+    servicio: '',
+    estado: '1'
   }
 
   const openModal = () => {
-    //registroSeleccionado.id = null
-
     setShow(true)
   }
 
@@ -268,9 +249,9 @@ const AppPage = ({}) => {
   })
 
   const onSubmit = data => {
-    if (saveRow(data, '/store_ocupacion/')) {
+    if (saveRow(data, '/store_profesional_servicio/')) {
       toast.success(t('Log saved successfully!'))
-      router.push('./ocupacion')
+      router.push('./profesional-servicio')
     } else {
       toast.error(t('Error saving log'))
     }
@@ -285,15 +266,16 @@ const AppPage = ({}) => {
 
   const onSubmitEdit = e => {
     e.preventDefault()
-    if (saveRow(registroSeleccionado, '/store_ocupacion/')) {
+    if (saveRow(registroSeleccionado, '/store_profesional_servicio/')) {
       toast.success(t('Registration successfully updated!'))
-      router.push('./ocupacion')
+      router.push('./profesional-servicio')
     } else {
       toast.error(t('Error updating registry'))
     }
     setShowEdit(false)
   }
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     peticionGet()
   }, [router])
@@ -307,7 +289,7 @@ const AppPage = ({}) => {
       columns={columns}
       pageSizeOptions={[7, 10, 25, 50]}
       paginationModel={paginationModel}
-      slots={{ toolbar: ServerSideToolbar }}
+      slots={{ toolbar: QuickSearchToolbar }}
       onPaginationModelChange={setPaginationModel}
       columnVisibilityModel={{ id: false, create_up: false }}
       slotProps={{
@@ -321,7 +303,7 @@ const AppPage = ({}) => {
           onChange: event => handleSearch(event.target.value)
         }
       }}
-      localeText={GridLocaleTextES()}
+      localeText={GridLocaleTextES}
     />
   )
 
@@ -342,7 +324,7 @@ const AppPage = ({}) => {
   return (
     <Card>
       <CardHeader
-        title={t('Occupations')}
+        title={t('Professional Services')}
         action={
           <Tooltip title={t('Add')}>
             <Fab color='primary' aria-label='Add' size='small' onClick={openModal}>
@@ -386,47 +368,27 @@ const AppPage = ({}) => {
             <Grid container spacing={6}>
               <Grid item sm={12} xs={12}>
                 <Controller
-                  name='nombre'
-                  control={control}
-                  rules={{ required: true }}
-                  render={({ field: { value, onChange } }) => (
-                    <CustomTextField
-                      id='nombre'
-                      fullWidth
-                      value={value}
-                      label={t('Name')}
-                      onChange={onChange}
-                      placeholder={t('Enter the name')}
-                      error={Boolean(errors.nombre)}
-                      aria-describedby='validation-schema-name'
-                      {...(errors.nombre && { helperText: errors.nombre.message })}
-                    />
-                  )}
-                />
-              </Grid>
-              <Grid item sm={12} xs={12}>
-                <Controller
-                  name='ocupaciones_grupos'
+                  name='profesional'
                   control={control}
                   rules={{ required: true }}
                   render={({ field: { value, onChange } }) => (
                     <CustomTextField
                       select
                       fullWidth
-                      label={t('Occupation Groups')}
+                      label={t('Professional')}
                       SelectProps={{
                         MenuProps,
                         value: value,
                         onChange: onChange
                       }}
-                      error={Boolean(errors.ocupaciones_grupos)}
+                      error={Boolean(errors.profesional)}
                       aria-describedby='validation-basic-occupation-groups'
-                      {...(errors.ocupaciones_grupos && { helperText: errors.ocupaciones_grupos.message })}
+                      {...(errors.profesional && { helperText: errors.profesional.message })}
                     >
-                      {rows_ocGrupo?.map(ocGrupo => {
+                      {profesionalRows?.map(prof => {
                         return (
-                          <MenuItem key={ocGrupo.id} value={ocGrupo.id}>
-                            {ocGrupo.nombre}
+                          <MenuItem key={prof.id} value={prof.id}>
+                            {prof.profesional_nombre}
                           </MenuItem>
                         )
                       })}
@@ -434,22 +396,33 @@ const AppPage = ({}) => {
                   )}
                 />
               </Grid>
-              <Grid item sm={6} xs={6}>
+              <Grid item sm={12} xs={12}>
                 <Controller
-                  name='abreviacion'
+                  name='servicio'
                   control={control}
                   rules={{ required: true }}
                   render={({ field: { value, onChange } }) => (
                     <CustomTextField
+                      select
                       fullWidth
-                      value={value}
-                      label={t('Abbreviation')}
-                      onChange={onChange}
-                      placeholder={t('Enter the abbreviation')}
-                      error={Boolean(errors.abreviacion)}
-                      aria-describedby='validation-schema-abbreviation'
-                      {...(errors.abreviacion && { helperText: errors.abreviacion.message })}
-                    />
+                      label={t('Service')}
+                      SelectProps={{
+                        MenuProps,
+                        value: value,
+                        onChange: onChange
+                      }}
+                      error={Boolean(errors.servicio)}
+                      aria-describedby='validation-basic-occupation-groups'
+                      {...(errors.servicio && { helperText: errors.servicio.message })}
+                    >
+                      {servicioRows?.map(serv => {
+                        return (
+                          <MenuItem key={serv.id} value={serv.id}>
+                            {serv.nombre}
+                          </MenuItem>
+                        )
+                      })}
+                    </CustomTextField>
                   )}
                 />
               </Grid>
@@ -533,80 +506,69 @@ const AppPage = ({}) => {
                 onChange={e => {
                   setRegistroSeleccionado({
                     id: registroSeleccionado.id,
-                    nombre: registroSeleccionado.nombre,
-                    ocupaciones_grupos: registroSeleccionado.ocupaciones_grupos,
-                    abreviacion: registroSeleccionado.abreviacion,
+                    profesional: registroSeleccionado.profesional,
+                    servicio: registroSeleccionado.servicio,
                     estado: registroSeleccionado.estado
                   })
                 }}
               ></input>
               <Grid item sm={12} xs={12}>
                 <CustomTextField
-                  fullWidth
+                  select
                   required
-                  name='nombre'
-                  value={registroSeleccionado.nombre}
-                  label={t('Name')}
-                  onChange={e => {
-                    setRegistroSeleccionado({
-                      id: registroSeleccionado.id,
-                      nombre: e.target.value,
-                      ocupaciones_grupos: registroSeleccionado.ocupaciones_grupos,
-                      abreviacion: registroSeleccionado.abreviacion,
-                      estado: registroSeleccionado.estado
-                    })
+                  fullWidth
+                  name='profesional'
+                  label={t('Professional')}
+                  SelectProps={{
+                    MenuProps,
+                    value: registroSeleccionado.profesional,
+                    onChange: e => {
+                      setRegistroSeleccionado({
+                        id: registroSeleccionado.id,
+                        profesional: e.target.value,
+                        servicio: registroSeleccionado.servicio,
+                        estado: registroSeleccionado.estado
+                      })
+                    }
                   }}
-                  placeholder={t('Enter your name')}
-                />
+                >
+                  {profesionalRows?.map(prof => {
+                    return (
+                      <MenuItem key={prof.id} value={prof.id}>
+                        {prof.profesional_nombre}
+                      </MenuItem>
+                    )
+                  })}
+                </CustomTextField>
               </Grid>
               <Grid item sm={12} xs={12}>
                 <CustomTextField
                   select
                   required
                   fullWidth
-                  name='ocupaciones_grupos'
-                  label={t('Occupation Groups')}
+                  name='servicio'
+                  label={t('Service')}
                   SelectProps={{
                     MenuProps,
-                    value: registroSeleccionado.ocupaciones_grupos,
+                    value: registroSeleccionado.servicio,
                     onChange: e => {
                       setRegistroSeleccionado({
                         id: registroSeleccionado.id,
-                        nombre: registroSeleccionado.nombre,
-                        ocupaciones_grupos: e.target.value,
-                        abreviacion: registroSeleccionado.abreviacion,
-                        estado: registroSeleccionado.abreviacion
+                        profesional: registroSeleccionado.profesional,
+                        servicio: e.target.value,
+                        estado: registroSeleccionado.estado
                       })
                     }
                   }}
                 >
-                  {rows_ocGrupo?.map(ocGrupo => {
+                  {servicioRows?.map(serv => {
                     return (
-                      <MenuItem key={ocGrupo.id} value={ocGrupo.id}>
-                        {ocGrupo.nombre}
+                      <MenuItem key={serv.id} value={serv.id}>
+                        {serv.nombre}
                       </MenuItem>
                     )
                   })}
                 </CustomTextField>
-              </Grid>
-              <Grid item sm={6} xs={6}>
-                <CustomTextField
-                  fullWidth
-                  required
-                  name='abreviacion'
-                  value={registroSeleccionado.abreviacion}
-                  label={t('Abbreviation')}
-                  onChange={e => {
-                    setRegistroSeleccionado({
-                      id: registroSeleccionado.id,
-                      nombre: registroSeleccionado.nombre,
-                      ocupaciones_grupos: registroSeleccionado.ocupaciones_grupos,
-                      abreviacion: e.target.value,
-                      estado: registroSeleccionado.estado
-                    })
-                  }}
-                  placeholder={t('Enter the abbreviation')}
-                />
               </Grid>
               <Grid item sm={6} xs={6}>
                 <CustomTextField
@@ -620,9 +582,8 @@ const AppPage = ({}) => {
                     onChange: e => {
                       setRegistroSeleccionado({
                         id: registroSeleccionado.id,
-                        nombre: registroSeleccionado.nombre,
-                        ocupaciones_grupos: registroSeleccionado.ocupaciones_grupos,
-                        abreviacion: registroSeleccionado.abreviacion,
+                        profesional: registroSeleccionado.profesional,
+                        servicio: registroSeleccionado.servicio,
                         estado: e.target.value
                       })
                     }

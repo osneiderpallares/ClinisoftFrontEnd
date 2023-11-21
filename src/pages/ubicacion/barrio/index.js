@@ -10,7 +10,6 @@ import CardHeader from '@mui/material/CardHeader'
 import { DataGrid } from '@mui/x-data-grid'
 
 import QuickSearchToolbar from 'src/views/table/data-grid/QuickSearchToolbar'
-import ServerSideToolbar from 'src/views/table/data-grid/ServerSideToolbar'
 import Grid from '@mui/material/Grid'
 import Dialog from '@mui/material/Dialog'
 import Button from '@mui/material/Button'
@@ -44,12 +43,18 @@ import { deleteRow } from '../../../@fake-db/requests/peticiones.js'
 
 import { useRouter } from 'next/router'
 
+import Slider from '@mui/material/Slider'
+import Checkbox from '@mui/material/Checkbox'
+import ListItemText from '@mui/material/ListItemText'
+
 const Transition = forwardRef(function Transition(props, ref) {
   return <Fade ref={ref} {...props} />
 })
 
-const endPoint = 'http://127.0.0.1:8000/show_ocupaciones/'
-const endPoint_ocupaciones_grupo = 'http://127.0.0.1:8000/show_ocupacion_grupo/'
+const endPoint = 'http://127.0.0.1:8000/show_barrio/'
+const endPoint_ciudad = 'http://127.0.0.1:8000/show_ciudad/'
+const endPoint_comuna = 'http://127.0.0.1:8000/show_comuna/'
+const endPoint_estrato = 'http://127.0.0.1:8000/show_estrato/'
 
 const escapeRegExp = value => {
   return value.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&')
@@ -84,37 +89,43 @@ const AppPage = ({}) => {
     },
     {
       flex: 0.25,
-      minWidth: 250,
+      minWidth: 200,
       field: 'nombre',
       headerName: t('NAME')
     },
     {
-      flex: 0.09,
-      minWidth: 90,
-      field: 'abreviacion',
-      headerName: t('ABBREVIATION')
+      flex: 0.25,
+      minWidth: 230,
+      field: 'ciudad_nombre',
+      headerName: t('CITY')
     },
     {
-      flex: 0.12,
+      flex: 0.08,
+      minWidth: 80,
+      field: 'comuna',
+      headerName: t('COMMUNE')
+    },
+    {
+      flex: 0.08,
+      minWidth: 80,
+      field: 'estrato',
+      headerName: t('SOCIOECONOMIC LEVELS')
+    },
+    {
+      flex: 0.15,
       minWidth: 120,
-      field: 'ocupaciones_grupos_nombre',
-      headerName: t('Group Occupations')
-    },
-    {
-      flex: 0.1,
-      minWidth: 100,
       field: 'create_up',
       headerName: t('CREATION DATE')
     },
     {
-      flex: 0.09,
-      minWidth: 90,
+      flex: 0.1,
+      minWidth: 100,
       field: 'estado_nombre',
       headerName: t('STATE')
     },
     {
-      flex: 0.1,
-      minWidth: 110,
+      flex: 0.125,
+      minWidth: 140,
       field: 'acciones',
       headerName: t('ACTIONS'),
       renderCell: params => {
@@ -140,24 +151,23 @@ const AppPage = ({}) => {
     }
   ]
   const [rows, setRows] = useState(null)
-  const [rows_ocGrupo, setRowsOcGrupo] = useState(null)
+  const [ciudadRows, setCiudadRows] = useState(null)
+  const [comunaRows, setComunaRows] = useState(null)
+  const [estratoRows, setEstratoRows] = useState(null)
 
   const peticionGet = async () => {
     await axios.get(endPoint).then(response => {
       setRows(response.data)
     })
-    await axios.get(endPoint_ocupaciones_grupo).then(response => {
-      setRowsOcGrupo(response.data)
+    await axios.get(endPoint_ciudad).then(response => {
+      setCiudadRows(response.data)
     })
-
-    // try {
-    //   axios.all([await axios.get(endPoint), await axios.get(endPoint_ocupaciones_grupo)]).then(response => {
-    //     setRows(response[0].data)
-    //     setRowsOcGrupo(response[1].data)
-    //   })
-    // } catch (error) {
-    //   console.log(error)
-    // }
+    await axios.get(endPoint_comuna).then(response => {
+      setComunaRows(response.data)
+    })
+    await axios.get(endPoint_estrato).then(response => {
+      setEstratoRows(response.data)
+    })
   }
 
   const [show, setShow] = useState(false)
@@ -189,9 +199,10 @@ const AppPage = ({}) => {
   const [registroSeleccionado, setRegistroSeleccionado] = useState({
     id: null,
     nombre: '',
-    abreviacion: '',
-    estado: '1',
-    ocupaciones_grupos: ''
+    ciudad: '',
+    comuna: 1,
+    estrato: [],
+    estado: '1'
   })
 
   const Delete = form => {
@@ -207,9 +218,9 @@ const AppPage = ({}) => {
   const handleNo = () => setOpen(false)
 
   const handleSi = () => {
-    if (deleteRow(registroSeleccionado.id, '/update_ocupacion/')) {
+    if (deleteRow(registroSeleccionado.id, '/update_barrio/')) {
       toast.success(t('Record deleted successfully!'))
-      router.push('./ocupacion')
+      router.push('./barrio')
     } else {
       toast.error(t('Error when trying to delete the registry'))
     }
@@ -223,22 +234,24 @@ const AppPage = ({}) => {
       .string()
       .min(3, obj => showErrors(t('name'), obj.value.length, obj.min))
       .required(),
-    abreviacion: yup
+    ciudad: yup
       .string()
-      .min(1, obj => showErrors(t('abbreviation'), obj.value.length, obj.min))
+      .min(1, obj => showErrors(t('city'), obj.value.length, obj.min))
       .required(),
-    estado: yup.string(),
-    ocupaciones_grupos: yup
-      .string()
-      .min(1, obj => showErrors(t('occupation groups'), obj.value.length, obj.min))
-      .required()
+    estrato: yup
+      .array()
+      .min(1, obj => showErrors(t('socioeconomic levels'), obj.value.length, obj.min))
+      .required(),
+    comuna: yup.number(),
+    estado: yup.string()
   })
 
   const defaultValues = {
     nombre: '',
-    abreviacion: '',
-    estado: '1',
-    ocupaciones_grupos: ''
+    ciudad: '',
+    comuna: 1,
+    estrato: [],
+    estado: '1'
   }
 
   const openModal = () => {
@@ -251,7 +264,7 @@ const AppPage = ({}) => {
     if (valueLen === 0) {
       return `${t('The field')} ${field} ${t('is required')}`
     } else if (valueLen > 0 && valueLen < min) {
-      return `${t('El campo')} ${field} ${t('must at least have')} ${min} ${t('characters')}`
+      return `${t('The field')} ${field} ${t('must at least have')} ${min} ${t('characters')}`
     } else {
       return ''
     }
@@ -268,9 +281,9 @@ const AppPage = ({}) => {
   })
 
   const onSubmit = data => {
-    if (saveRow(data, '/store_ocupacion/')) {
+    if (saveRow(data, '/store_barrio/')) {
       toast.success(t('Log saved successfully!'))
-      router.push('./ocupacion')
+      router.push('./barrio')
     } else {
       toast.error(t('Error saving log'))
     }
@@ -278,16 +291,23 @@ const AppPage = ({}) => {
   }
 
   //** Editar registro
+
   const Edit = params => {
-    setShowEdit(true)
     setRegistroSeleccionado(params.row)
+    if (params.row.estrato) {
+      setEstratos(params.row.estrato.split(','))
+    } else {
+      setEstratos([])
+    }
+
+    setShowEdit(true)
   }
 
   const onSubmitEdit = e => {
     e.preventDefault()
-    if (saveRow(registroSeleccionado, '/store_ocupacion/')) {
+    if (saveRow(registroSeleccionado, '/store_barrio/')) {
       toast.success(t('Registration successfully updated!'))
-      router.push('./ocupacion')
+      router.push('./barrio')
     } else {
       toast.error(t('Error updating registry'))
     }
@@ -307,7 +327,7 @@ const AppPage = ({}) => {
       columns={columns}
       pageSizeOptions={[7, 10, 25, 50]}
       paginationModel={paginationModel}
-      slots={{ toolbar: ServerSideToolbar }}
+      slots={{ toolbar: QuickSearchToolbar }}
       onPaginationModelChange={setPaginationModel}
       columnVisibilityModel={{ id: false, create_up: false }}
       slotProps={{
@@ -336,13 +356,18 @@ const AppPage = ({}) => {
       }
     }
   }
+  const [estratos, setEstratos] = useState([])
+
+  const valuetext = value => {
+    return { value }
+  }
 
   if (!rows) return null
 
   return (
     <Card>
       <CardHeader
-        title={t('Occupations')}
+        title={t('Neighborhood')}
         action={
           <Tooltip title={t('Add')}>
             <Fab color='primary' aria-label='Add' size='small' onClick={openModal}>
@@ -395,6 +420,7 @@ const AppPage = ({}) => {
                       fullWidth
                       value={value}
                       label={t('Name')}
+                      inputProps={{ maxLength: 200 }}
                       onChange={onChange}
                       placeholder={t('Enter the name')}
                       error={Boolean(errors.nombre)}
@@ -404,29 +430,29 @@ const AppPage = ({}) => {
                   )}
                 />
               </Grid>
-              <Grid item sm={12} xs={12}>
+              <Grid item sm={6} xs={6}>
                 <Controller
-                  name='ocupaciones_grupos'
+                  name='ciudad'
                   control={control}
                   rules={{ required: true }}
                   render={({ field: { value, onChange } }) => (
                     <CustomTextField
                       select
                       fullWidth
-                      label={t('Occupation Groups')}
+                      label={t('City')}
                       SelectProps={{
                         MenuProps,
                         value: value,
                         onChange: onChange
                       }}
-                      error={Boolean(errors.ocupaciones_grupos)}
-                      aria-describedby='validation-basic-occupation-groups'
-                      {...(errors.ocupaciones_grupos && { helperText: errors.ocupaciones_grupos.message })}
+                      error={Boolean(errors.ciudad)}
+                      aria-describedby='validation-basic-department-groups'
+                      {...(errors.ciudad && { helperText: errors.ciudad.message })}
                     >
-                      {rows_ocGrupo?.map(ocGrupo => {
+                      {ciudadRows?.map(ciu => {
                         return (
-                          <MenuItem key={ocGrupo.id} value={ocGrupo.id}>
-                            {ocGrupo.nombre}
+                          <MenuItem key={ciu.id} value={ciu.id}>
+                            {ciu.nombre}
                           </MenuItem>
                         )
                       })}
@@ -434,22 +460,72 @@ const AppPage = ({}) => {
                   )}
                 />
               </Grid>
-              <Grid item sm={6} xs={6}>
+              <Grid item sm={2} xs={2}>
+                <Typography sx={{ color: 'text.secondary' }}>{t('Commune')}</Typography>
+              </Grid>
+              <Grid item sm={4} xs={4}>
                 <Controller
-                  name='abreviacion'
+                  name='comuna'
                   control={control}
                   rules={{ required: true }}
                   render={({ field: { value, onChange } }) => (
-                    <CustomTextField
-                      fullWidth
+                    <Slider
+                      marks={comunaRows?.map(com => ({
+                        value: com.id,
+                        label: com.nombre
+                      }))}
+                      min={1}
+                      max={comunaRows?.length}
+                      step={1}
                       value={value}
-                      label={t('Abbreviation')}
                       onChange={onChange}
-                      placeholder={t('Enter the abbreviation')}
-                      error={Boolean(errors.abreviacion)}
-                      aria-describedby='validation-schema-abbreviation'
-                      {...(errors.abreviacion && { helperText: errors.abreviacion.message })}
+                      defaultValue={1}
+                      valueLabelDisplay='on'
+                      getAriaValueText={valuetext}
+                      aria-labelledby='discrete-slider'
+                      error={Boolean(errors.comuna)}
+                      aria-describedby='validation-basic-strata-groups'
+                      {...(errors.comuna && { helperText: errors.comuna.message })}
                     />
+                  )}
+                />
+              </Grid>
+              <Grid item sm={6} xs={6}>
+                <Controller
+                  name='estrato'
+                  control={control}
+                  rules={{ required: true }}
+                  render={({
+                    field: {
+                      value = estratos,
+                      onChange = e => {
+                        setEstratos(e.target.value)
+                      }
+                    }
+                  }) => (
+                    <CustomTextField
+                      select
+                      fullWidth
+                      label={t('Socioeconomic Levels')}
+                      id='estrato'
+                      SelectProps={{
+                        MenuProps,
+                        multiple: true,
+                        value: value,
+                        onChange: e => onChange(e),
+                        renderValue: selected => selected.join(',')
+                      }}
+                      error={Boolean(errors.estrato)}
+                      aria-describedby='validation-basic-strata-groups'
+                      {...(errors.estrato && { helperText: errors.estrato.message })}
+                    >
+                      {estratoRows?.map(estr => (
+                        <MenuItem key={estr.nombre} value={estr.nombre}>
+                          <Checkbox checked={value.indexOf(estr.nombre) > -1} />
+                          <ListItemText primary={estr.nombre} />
+                        </MenuItem>
+                      ))}
+                    </CustomTextField>
                   )}
                 />
               </Grid>
@@ -534,8 +610,9 @@ const AppPage = ({}) => {
                   setRegistroSeleccionado({
                     id: registroSeleccionado.id,
                     nombre: registroSeleccionado.nombre,
-                    ocupaciones_grupos: registroSeleccionado.ocupaciones_grupos,
-                    abreviacion: registroSeleccionado.abreviacion,
+                    ciudad: registroSeleccionado.ciudad,
+                    comuna: registroSeleccionado.comuna,
+                    estrato: registroSeleccionado.estrato,
                     estado: registroSeleccionado.estado
                   })
                 }}
@@ -547,66 +624,111 @@ const AppPage = ({}) => {
                   name='nombre'
                   value={registroSeleccionado.nombre}
                   label={t('Name')}
+                  inputProps={{ maxLength: 200 }}
                   onChange={e => {
                     setRegistroSeleccionado({
                       id: registroSeleccionado.id,
                       nombre: e.target.value,
-                      ocupaciones_grupos: registroSeleccionado.ocupaciones_grupos,
-                      abreviacion: registroSeleccionado.abreviacion,
+                      ciudad: registroSeleccionado.ciudad,
+                      comuna: registroSeleccionado.comuna,
+                      estrato: registroSeleccionado.estrato,
                       estado: registroSeleccionado.estado
                     })
                   }}
                   placeholder={t('Enter your name')}
                 />
               </Grid>
-              <Grid item sm={12} xs={12}>
+              <Grid item sm={6} xs={6}>
                 <CustomTextField
                   select
                   required
                   fullWidth
-                  name='ocupaciones_grupos'
-                  label={t('Occupation Groups')}
+                  name='ciudad'
+                  label={t('City')}
                   SelectProps={{
                     MenuProps,
-                    value: registroSeleccionado.ocupaciones_grupos,
+                    value: registroSeleccionado.ciudad,
                     onChange: e => {
                       setRegistroSeleccionado({
                         id: registroSeleccionado.id,
                         nombre: registroSeleccionado.nombre,
-                        ocupaciones_grupos: e.target.value,
-                        abreviacion: registroSeleccionado.abreviacion,
+                        ciudad: e.target.value,
+                        comuna: registroSeleccionado.comuna,
+                        estrato: registroSeleccionado.estrato,
                         estado: registroSeleccionado.abreviacion
                       })
                     }
                   }}
                 >
-                  {rows_ocGrupo?.map(ocGrupo => {
+                  {ciudadRows?.map(ciu => {
                     return (
-                      <MenuItem key={ocGrupo.id} value={ocGrupo.id}>
-                        {ocGrupo.nombre}
+                      <MenuItem key={ciu.id} value={ciu.id}>
+                        {ciu.nombre}
                       </MenuItem>
                     )
                   })}
                 </CustomTextField>
               </Grid>
-              <Grid item sm={6} xs={6}>
-                <CustomTextField
-                  fullWidth
+              <Grid item sm={2} xs={2}>
+                <Typography sx={{ color: 'text.secondary' }}>{t('Commune')}</Typography>
+              </Grid>
+              <Grid item sm={4} xs={4}>
+                <Slider
+                  marks={comunaRows?.map(com => ({
+                    value: com.id,
+                    label: com.id
+                  }))}
                   required
-                  name='abreviacion'
-                  value={registroSeleccionado.abreviacion}
-                  label={t('Abbreviation')}
+                  min={1}
+                  max={comunaRows?.length}
+                  step={1}
+                  value={registroSeleccionado.comuna}
                   onChange={e => {
                     setRegistroSeleccionado({
                       id: registroSeleccionado.id,
                       nombre: registroSeleccionado.nombre,
-                      ocupaciones_grupos: registroSeleccionado.ocupaciones_grupos,
-                      abreviacion: e.target.value,
+                      ciudad: registroSeleccionado.ciudad,
+                      comuna: e.target.value,
+                      estrato: registroSeleccionado.estrato,
                       estado: registroSeleccionado.estado
                     })
                   }}
-                  placeholder={t('Enter the abbreviation')}
+                  valueLabelDisplay='on'
+                  getAriaValueText={valuetext}
                 />
+              </Grid>
+              <Grid item sm={6} xs={6}>
+                <CustomTextField
+                  select
+                  required
+                  fullWidth
+                  label={t('Socioeconomic Levels')}
+                  id='estrato'
+                  SelectProps={{
+                    MenuProps,
+                    multiple: true,
+                    value: estratos,
+                    onChange: e => {
+                      setRegistroSeleccionado({
+                        id: registroSeleccionado.id,
+                        nombre: registroSeleccionado.nombre,
+                        ciudad: registroSeleccionado.ciudad,
+                        comuna: registroSeleccionado.comuna,
+                        estrato: e.target.value,
+                        estado: registroSeleccionado.estado
+                      })
+                      setEstratos(e.target.value)
+                    },
+                    renderValue: selected => selected.join(',')
+                  }}
+                >
+                  {estratoRows?.map(estr => (
+                    <MenuItem key={estr.nombre} value={estr.nombre}>
+                      <Checkbox checked={estratos.indexOf(estr.nombre) > -1} />
+                      <ListItemText primary={estr.nombre} />
+                    </MenuItem>
+                  ))}
+                </CustomTextField>
               </Grid>
               <Grid item sm={6} xs={6}>
                 <CustomTextField
@@ -621,8 +743,9 @@ const AppPage = ({}) => {
                       setRegistroSeleccionado({
                         id: registroSeleccionado.id,
                         nombre: registroSeleccionado.nombre,
-                        ocupaciones_grupos: registroSeleccionado.ocupaciones_grupos,
-                        abreviacion: registroSeleccionado.abreviacion,
+                        ciudad: registroSeleccionado.ciudad,
+                        comuna: registroSeleccionado.comuna,
+                        estrato: registroSeleccionado.estrato,
                         estado: e.target.value
                       })
                     }

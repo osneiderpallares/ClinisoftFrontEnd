@@ -1,3 +1,6 @@
+/*Traducir*/
+import { useTranslation } from 'react-i18next'
+
 // ** React Imports
 import { useState, useEffect, useCallback } from 'react'
 
@@ -137,117 +140,118 @@ const RowOptions = ({ id }) => {
   )
 }
 
-const columns = [
-  {
-    flex: 0.25,
-    minWidth: 280,
-    field: 'fullName',
-    headerName: 'User',
-    renderCell: ({ row }) => {
-      const { fullName, email } = row
+// const columns = [
+//   {
+//     flex: 0.25,
+//     minWidth: 280,
+//     field: 'fullName',
+//     headerName: 'User',
+//     renderCell: ({ row }) => {
+//       const { fullName, email } = row
 
-      return (
-        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          {renderClient(row)}
-          <Box sx={{ display: 'flex', alignItems: 'flex-start', flexDirection: 'column' }}>
-            <Typography
-              noWrap
-              component={Link}
-              href='/apps/user/view/account'
-              sx={{
-                fontWeight: 500,
-                textDecoration: 'none',
-                color: 'text.secondary',
-                '&:hover': { color: 'primary.main' }
-              }}
-            >
-              {fullName}
-            </Typography>
-            <Typography noWrap variant='body2' sx={{ color: 'text.disabled' }}>
-              {email}
-            </Typography>
-          </Box>
-        </Box>
-      )
-    }
-  },
-  {
-    flex: 0.15,
-    field: 'role',
-    minWidth: 170,
-    headerName: 'Role',
-    renderCell: ({ row }) => {
-      return (
-        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          <CustomAvatar
-            skin='light'
-            sx={{ mr: 4, width: 30, height: 30 }}
-            color={userRoleObj[row.role].color || 'primary'}
-          >
-            <Icon icon={userRoleObj[row.role].icon} />
-          </CustomAvatar>
-          <Typography noWrap sx={{ color: 'text.secondary', textTransform: 'capitalize' }}>
-            {row.role}
-          </Typography>
-        </Box>
-      )
-    }
-  },
-  {
-    flex: 0.15,
-    minWidth: 120,
-    headerName: 'Plan',
-    field: 'currentPlan',
-    renderCell: ({ row }) => {
-      return (
-        <Typography noWrap sx={{ fontWeight: 500, color: 'text.secondary', textTransform: 'capitalize' }}>
-          {row.currentPlan}
-        </Typography>
-      )
-    }
-  },
-  {
-    flex: 0.15,
-    minWidth: 190,
-    field: 'billing',
-    headerName: 'Billing',
-    renderCell: ({ row }) => {
-      return (
-        <Typography noWrap sx={{ color: 'text.secondary' }}>
-          {row.billing}
-        </Typography>
-      )
-    }
-  },
-  {
-    flex: 0.1,
-    minWidth: 110,
-    field: 'status',
-    headerName: 'Status',
-    renderCell: ({ row }) => {
-      return (
-        <CustomChip
-          rounded
-          skin='light'
-          size='small'
-          label={row.status}
-          color={userStatusObj[row.status]}
-          sx={{ textTransform: 'capitalize' }}
-        />
-      )
-    }
-  },
-  {
-    flex: 0.1,
-    minWidth: 100,
-    sortable: false,
-    field: 'actions',
-    headerName: 'Actions',
-    renderCell: ({ row }) => <RowOptions id={row.id} />
-  }
-]
+//       return (
+//         <Box sx={{ display: 'flex', alignItems: 'center' }}>
+//           {renderClient(row)}
+//           <Box sx={{ display: 'flex', alignItems: 'flex-start', flexDirection: 'column' }}>
+//             <Typography
+//               noWrap
+//               component={Link}
+//               href='/apps/user/view/account'
+//               sx={{
+//                 fontWeight: 500,
+//                 textDecoration: 'none',
+//                 color: 'text.secondary',
+//                 '&:hover': { color: 'primary.main' }
+//               }}
+//             >
+//               {fullName}
+//             </Typography>
+//             <Typography noWrap variant='body2' sx={{ color: 'text.disabled' }}>
+//               {email}
+//             </Typography>
+//           </Box>
+//         </Box>
+//       )
+//     }
+//   },
+//   {
+//     flex: 0.15,
+//     field: 'role',
+//     minWidth: 170,
+//     headerName: 'Role',
+//     renderCell: ({ row }) => {
+//       return (
+//         <Box sx={{ display: 'flex', alignItems: 'center' }}>
+//           <CustomAvatar
+//             skin='light'
+//             sx={{ mr: 4, width: 30, height: 30 }}
+//             color={userRoleObj[row.role].color || 'primary'}
+//           >
+//             <Icon icon={userRoleObj[row.role].icon} />
+//           </CustomAvatar>
+//           <Typography noWrap sx={{ color: 'text.secondary', textTransform: 'capitalize' }}>
+//             {row.role}
+//           </Typography>
+//         </Box>
+//       )
+//     }
+//   },
+//   {
+//     flex: 0.15,
+//     minWidth: 120,
+//     headerName: 'Plan',
+//     field: 'currentPlan',
+//     renderCell: ({ row }) => {
+//       return (
+//         <Typography noWrap sx={{ fontWeight: 500, color: 'text.secondary', textTransform: 'capitalize' }}>
+//           {row.currentPlan}
+//         </Typography>
+//       )
+//     }
+//   },
+//   {
+//     flex: 0.15,
+//     minWidth: 190,
+//     field: 'billing',
+//     headerName: t('Billing'),
+//     renderCell: ({ row }) => {
+//       return (
+//         <Typography noWrap sx={{ color: 'text.secondary' }}>
+//           {row.billing}
+//         </Typography>
+//       )
+//     }
+//   },
+//   {
+//     flex: 0.1,
+//     minWidth: 110,
+//     field: 'status',
+//     headerName: 'Status',
+//     renderCell: ({ row }) => {
+//       return (
+//         <CustomChip
+//           rounded
+//           skin='light'
+//           size='small'
+//           label={row.status}
+//           color={userStatusObj[row.status]}
+//           sx={{ textTransform: 'capitalize' }}
+//         />
+//       )
+//     }
+//   },
+//   {
+//     flex: 0.1,
+//     minWidth: 100,
+//     sortable: false,
+//     field: 'actions',
+//     headerName: 'Actions',
+//     renderCell: ({ row }) => <RowOptions id={row.id} />
+//   }
+// ]
 
 const UserList = ({ apiData }) => {
+  const {t}=useTranslation();
   // ** State
   const [role, setRole] = useState('')
   const [plan, setPlan] = useState('')
@@ -286,6 +290,116 @@ const UserList = ({ apiData }) => {
     setStatus(e.target.value)
   }, [])
   const toggleAddUserDrawer = () => setAddUserOpen(!addUserOpen)
+  
+  const columns = [
+    {
+      flex: 0.25,
+      minWidth: 280,
+      field: 'fullName',
+      headerName: t('User'),
+      renderCell: ({ row }) => {
+        const { fullName, email } = row
+  
+        return (
+          <Box sx={{ display: 'flex', alignItems: 'center' }}>
+            {renderClient(row)}
+            <Box sx={{ display: 'flex', alignItems: 'flex-start', flexDirection: 'column' }}>
+              <Typography
+                noWrap
+                component={Link}
+                href='/apps/user/view/account'
+                sx={{
+                  fontWeight: 500,
+                  textDecoration: 'none',
+                  color: 'text.secondary',
+                  '&:hover': { color: 'primary.main' }
+                }}
+              >
+                {fullName}
+              </Typography>
+              <Typography noWrap variant='body2' sx={{ color: 'text.disabled' }}>
+                {email}
+              </Typography>
+            </Box>
+          </Box>
+        )
+      }
+    },
+    {
+      flex: 0.15,
+      field: 'role',
+      minWidth: 170,
+      headerName: t('Role'),
+      renderCell: ({ row }) => {
+        return (
+          <Box sx={{ display: 'flex', alignItems: 'center' }}>
+            <CustomAvatar
+              skin='light'
+              sx={{ mr: 4, width: 30, height: 30 }}
+              color={userRoleObj[row.role].color || 'primary'}
+            >
+              <Icon icon={userRoleObj[row.role].icon} />
+            </CustomAvatar>
+            <Typography noWrap sx={{ color: 'text.secondary', textTransform: 'capitalize' }}>
+              {row.role}
+            </Typography>
+          </Box>
+        )
+      }
+    },
+    {
+      flex: 0.15,
+      minWidth: 120,
+      headerName: 'Plan',
+      field: 'currentPlan',
+      renderCell: ({ row }) => {
+        return (
+          <Typography noWrap sx={{ fontWeight: 500, color: 'text.secondary', textTransform: 'capitalize' }}>
+            {row.currentPlan}
+          </Typography>
+        )
+      }
+    },
+    {
+      flex: 0.15,
+      minWidth: 190,
+      field: 'billing',
+      headerName: t('Billing'),
+      renderCell: ({ row }) => {
+        return (
+          <Typography noWrap sx={{ color: 'text.secondary' }}>
+            {row.billing}
+          </Typography>
+        )
+      }
+    },
+    {
+      flex: 0.1,
+      minWidth: 110,
+      field: 'status',
+      headerName: t('Status'),
+      renderCell: ({ row }) => {
+        return (
+          <CustomChip
+            rounded
+            skin='light'
+            size='small'
+            label={row.status}
+            color={userStatusObj[row.status]}
+            sx={{ textTransform: 'capitalize' }}
+          />
+        )
+      }
+    },
+    {
+      flex: 0.1,
+      minWidth: 100,
+      sortable: false,
+      field: 'actions',
+      headerName: t('Actions'),
+      renderCell: ({ row }) => <RowOptions id={row.id} />
+    }
+  ]
 
   return (
     <Grid container spacing={6.5}>
@@ -304,61 +418,61 @@ const UserList = ({ apiData }) => {
       </Grid>
       <Grid item xs={12}>
         <Card>
-          <CardHeader title='Search Filters' />
+          <CardHeader title={t('Search Filters')} />
           <CardContent>
             <Grid container spacing={6}>
               <Grid item sm={4} xs={12}>
                 <CustomTextField
                   select
                   fullWidth
-                  defaultValue='Select Role'
+                  defaultValue={t('Select Role')}
                   SelectProps={{
                     value: role,
                     displayEmpty: true,
                     onChange: e => handleRoleChange(e)
                   }}
                 >
-                  <MenuItem value=''>Select Role</MenuItem>
-                  <MenuItem value='admin'>Admin</MenuItem>
-                  <MenuItem value='author'>Author</MenuItem>
-                  <MenuItem value='editor'>Editor</MenuItem>
-                  <MenuItem value='maintainer'>Maintainer</MenuItem>
-                  <MenuItem value='subscriber'>Subscriber</MenuItem>
+                  <MenuItem value=''>{t('Select Role')}</MenuItem>
+                  <MenuItem value='admin'>{t('Admin')}</MenuItem>
+                  <MenuItem value='author'>{t('Author')}</MenuItem>
+                  <MenuItem value='editor'>{t('Editor')}</MenuItem>
+                  <MenuItem value='maintainer'>{t('Maintainer')}</MenuItem>
+                  <MenuItem value='subscriber'>{t('Subscriber')}</MenuItem>
                 </CustomTextField>
               </Grid>
               <Grid item sm={4} xs={12}>
                 <CustomTextField
                   select
                   fullWidth
-                  defaultValue='Select Plan'
+                  defaultValue={t('Select Plan')}
                   SelectProps={{
                     value: plan,
                     displayEmpty: true,
                     onChange: e => handlePlanChange(e)
                   }}
                 >
-                  <MenuItem value=''>Select Plan</MenuItem>
-                  <MenuItem value='basic'>Basic</MenuItem>
-                  <MenuItem value='company'>Company</MenuItem>
-                  <MenuItem value='enterprise'>Enterprise</MenuItem>
-                  <MenuItem value='team'>Team</MenuItem>
+                  <MenuItem value=''>{t('Select Plan')}</MenuItem>
+                  <MenuItem value='basic'>{t('Basic')}</MenuItem>
+                  <MenuItem value='company'>{t('Company')}</MenuItem>
+                  <MenuItem value='enterprise'>{t('Enterprise')}</MenuItem>
+                  <MenuItem value='team'>{t('Team')}</MenuItem>
                 </CustomTextField>
               </Grid>
               <Grid item sm={4} xs={12}>
                 <CustomTextField
                   select
                   fullWidth
-                  defaultValue='Select Status'
+                  defaultValue={t('Select Status')}
                   SelectProps={{
                     value: status,
                     displayEmpty: true,
                     onChange: e => handleStatusChange(e)
                   }}
                 >
-                  <MenuItem value=''>Select Status</MenuItem>
-                  <MenuItem value='pending'>Pending</MenuItem>
-                  <MenuItem value='active'>Active</MenuItem>
-                  <MenuItem value='inactive'>Inactive</MenuItem>
+                  <MenuItem value=''>{t('Select Status')}</MenuItem>
+                  <MenuItem value='pending'>{t('Pending')}</MenuItem>
+                  <MenuItem value='active'>{t('Active')}</MenuItem>
+                  <MenuItem value='inactive'>{t('Inactive')}</MenuItem>
                 </CustomTextField>
               </Grid>
             </Grid>

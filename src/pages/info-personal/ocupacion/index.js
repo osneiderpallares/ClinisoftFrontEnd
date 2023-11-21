@@ -325,6 +325,18 @@ const AppPage = ({}) => {
     />
   )
 
+  const ITEM_HEIGHT = 48
+  const ITEM_PADDING_TOP = 8
+
+  const MenuProps = {
+    PaperProps: {
+      style: {
+        width: 250,
+        maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP
+      }
+    }
+  }
+
   if (!rows) return null
 
   return (
@@ -403,6 +415,7 @@ const AppPage = ({}) => {
                       fullWidth
                       label={t('Occupation Groups')}
                       SelectProps={{
+                        MenuProps,
                         value: value,
                         onChange: onChange
                       }}
@@ -554,6 +567,7 @@ const AppPage = ({}) => {
                   name='ocupaciones_grupos'
                   label={t('Occupation Groups')}
                   SelectProps={{
+                    MenuProps,
                     value: registroSeleccionado.ocupaciones_grupos,
                     onChange: e => {
                       setRegistroSeleccionado({

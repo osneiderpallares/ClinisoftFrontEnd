@@ -270,7 +270,8 @@ const AppPage = ({}) => {
   useEffect(() => {
     peticionGet()
   }, [router])
-
+  const currentLocaleText =
+  i18n.language === 'es' ? esES.components.MuiDataGrid.defaultProps.localeText : enUS.components.MuiDataGrid.defaultProps.localeText;
   const table = (
     <DataGrid
       columnHeaderHeight={38}

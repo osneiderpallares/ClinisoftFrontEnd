@@ -7,7 +7,7 @@ import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
 import CardHeader from '@mui/material/CardHeader'
 
-import { DataGrid } from '@mui/x-data-grid'
+import { DataGrid, esES,enUS} from '@mui/x-data-grid'
 
 import QuickSearchToolbar from 'src/views/table/data-grid/QuickSearchToolbar'
 import Grid from '@mui/material/Grid'
@@ -69,7 +69,7 @@ const CustomCloseButton = styled(IconButton)(({ theme }) => ({
 }))
 
 const AppPage = ({}) => {
-  const { t } = useTranslation()
+  const { t, i18n  } = useTranslation()
 
   //** DataGrid
   const columns = [
@@ -270,9 +270,11 @@ const AppPage = ({}) => {
   useEffect(() => {
     peticionGet()
   }, [router])
-
+  const currentLocaleText =
+  i18n.language === 'es' ? esES.components.MuiDataGrid.defaultProps.localeText : enUS.components.MuiDataGrid.defaultProps.localeText;
   const table = (
     <DataGrid
+      disableColumnMenu 
       columnHeaderHeight={38}
       rowHeight={38}
       stickyHeader
@@ -294,7 +296,7 @@ const AppPage = ({}) => {
           onChange: event => handleSearch(event.target.value)
         }
       }}
-      localeText={GridLocaleTextES}
+      localeText={currentLocaleText}
     />
   )
 
@@ -303,7 +305,7 @@ const AppPage = ({}) => {
   return (
     <Card>
       <CardHeader
-        title={t('Comunidades Étnicas')}
+        title={t('Ethnic Community')}
         action={
           <Tooltip title={t('Add')}>
             <Fab color='primary' aria-label='Add' size='small' onClick={openModal}>

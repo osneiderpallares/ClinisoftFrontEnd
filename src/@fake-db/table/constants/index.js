@@ -5,7 +5,8 @@ export const GridLocaleTextES =()=> {
   const { t } = useTranslation()
   
   return {
-    rowsPerPageLabel: 'Filas por página',//es Rows Per Page
+    rowsPerPage: t('Rows per page:'),
+    //rowsPerPageText: t('Rows per page:'),//es Rows Per Page
     // Root
     noRowsLabel: 'No hay registro',
     noResultsOverlayLabel: 'No results found.',
@@ -109,12 +110,12 @@ export const GridLocaleTextES =()=> {
     // Column menu text
     columnMenuLabel: 'Menu',
     columnMenuShowColumns: 'Mostrar columnas',
-    columnMenuManageColumns: 'Administrar columnas',
-    columnMenuFilter: 'Filtro',
-    columnMenuHideColumn: 'Ocultar columna',
-    columnMenuUnsort: 'Desordenar',
-    columnMenuSortAsc: 'Orden ASC',
-    columnMenuSortDesc: 'Orden DESC',
+    columnMenuManageColumns: t('Manage columns'),
+    columnMenuFilter: t('Filters'),
+    columnMenuHideColumn: t('Hide column'),
+    columnMenuUnsort: t('Unsort'),
+    columnMenuSortAsc: t('Sort ASC'),
+    columnMenuSortDesc: t('Sort DESC'),
 
     // Column header text
     columnHeaderFiltersTooltipActive: count => (count !== 1 ? `${count} activar filtros` : `${count} activar filtro`),

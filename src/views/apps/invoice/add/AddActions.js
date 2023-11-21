@@ -1,6 +1,9 @@
 // ** Next Import
 import Link from 'next/link'
 
+/*Traducir*/
+import { useTranslation } from 'react-i18next'
+
 // ** MUI Imports
 import Card from '@mui/material/Card'
 import Grid from '@mui/material/Grid'
@@ -25,6 +28,7 @@ const OptionsWrapper = styled(Box)(() => ({
 }))
 
 const AddActions = () => {
+  const {t}=useTranslation();
   return (
     <Grid container spacing={6}>
       <Grid item xs={12}>
@@ -32,7 +36,7 @@ const AddActions = () => {
           <CardContent>
             <Button fullWidth variant='contained' sx={{ mb: 2, '& svg': { mr: 2 } }}>
               <Icon fontSize='1.125rem' icon='tabler:send' />
-              Send Invoice
+              {t('Send Invoice')}
             </Button>
             <Button
               fullWidth
@@ -42,10 +46,10 @@ const AddActions = () => {
               color='secondary'
               href='/apps/invoice/preview/4987'
             >
-              Preview
+              {t('Preview')}
             </Button>
             <Button fullWidth variant='tonal' color='secondary'>
-              Save
+              {t('Save')}
             </Button>
           </CardContent>
         </Card>
@@ -54,7 +58,7 @@ const AddActions = () => {
         <CustomTextField
           select
           fullWidth
-          label='Accept payments via'
+          label={t('Accept payments via')}
           defaultValue='Internet Banking'
           sx={{
             mb: 4,
@@ -64,27 +68,27 @@ const AddActions = () => {
             }
           }}
         >
-          <MenuItem value='Internet Banking'>Internet Banking</MenuItem>
-          <MenuItem value='Debit Card'>Debit Card</MenuItem>
-          <MenuItem value='Credit Card'>Credit Card</MenuItem>
+          <MenuItem value='Internet Banking'>{t('Internet Banking')}</MenuItem>
+          <MenuItem value='Debit Card'>{t('Debit Card')}</MenuItem>
+          <MenuItem value='Credit Card'>{t('Credit Card')}</MenuItem>
           <MenuItem value='Paypal'>Paypal</MenuItem>
-          <MenuItem value='UPI Transfer'>UPI Transfer</MenuItem>
+          <MenuItem value='UPI Transfer'>{t('UPI Transfer')}</MenuItem>
         </CustomTextField>
         <OptionsWrapper>
           <InputLabel sx={{ cursor: 'pointer', lineHeight: 1.467 }} htmlFor='invoice-add-payment-terms'>
-            Payment Terms
+            {t('Payment Terms')}
           </InputLabel>
           <Switch defaultChecked id='invoice-add-payment-terms' />
         </OptionsWrapper>
         <OptionsWrapper>
           <InputLabel sx={{ cursor: 'pointer', lineHeight: 1.467 }} htmlFor='invoice-add-client-notes'>
-            Client Notes
+            {t('Client Notes')}
           </InputLabel>
           <Switch id='invoice-add-client-notes' />
         </OptionsWrapper>
         <OptionsWrapper>
           <InputLabel sx={{ cursor: 'pointer', lineHeight: 1.467 }} htmlFor='invoice-add-payment-stub'>
-            Payment Stub
+            {t('Payment Stub')}
           </InputLabel>
           <Switch id='invoice-add-payment-stub' />
         </OptionsWrapper>

@@ -58,7 +58,7 @@ const EditActions = ({ id, toggleSendInvoiceDrawer, toggleAddPaymentDrawer }) =>
         <CustomTextField
           select
           fullWidth
-          label='Accept payments via'
+          label={t('Accept payments via')}
           defaultValue='Internet Banking'
           sx={{
             mb: 4,
@@ -68,27 +68,27 @@ const EditActions = ({ id, toggleSendInvoiceDrawer, toggleAddPaymentDrawer }) =>
             }
           }}
         >
-          <MenuItem value='Internet Banking'>Internet Banking</MenuItem>
-          <MenuItem value='Debit Card'>Debit Card</MenuItem>
-          <MenuItem value='Credit Card'>Credit Card</MenuItem>
-          <MenuItem value='Paypal'>Paypal</MenuItem>
-          <MenuItem value='UPI Transfer'>UPI Transfer</MenuItem>
+          <MenuItem value='Internet Banking'>{t('Internet Banking')}</MenuItem>
+          <MenuItem value='Debit Card'>{t('Debit Card')}</MenuItem>
+          <MenuItem value='Credit Card'>{t('Credit Card')}</MenuItem>
+          <MenuItem value='Paypal'>{t('Paypal')}</MenuItem>
+          <MenuItem value='UPI Transfer'>{t('UPI Transfer')}</MenuItem>
         </CustomTextField>
         <OptionsWrapper>
           <InputLabel sx={{ cursor: 'pointer', lineHeight: 1.467 }} htmlFor='invoice-edit-payment-terms'>
-            Payment Terms
+            {t('Payment Terms')}
           </InputLabel>
           <Switch defaultChecked id='invoice-edit-payment-terms' />
         </OptionsWrapper>
         <OptionsWrapper>
           <InputLabel sx={{ cursor: 'pointer', lineHeight: 1.467 }} htmlFor='invoice-edit-client-notes'>
-            Client Notes
+            {t('Client Notes')}
           </InputLabel>
           <Switch id='invoice-edit-client-notes' />
         </OptionsWrapper>
         <OptionsWrapper>
           <InputLabel sx={{ cursor: 'pointer', lineHeight: 1.467 }} htmlFor='invoice-edit-payment-stub'>
-            Payment Stub
+            {t('Payment Stub')}
           </InputLabel>
           <Switch id='invoice-edit-payment-stub' />
         </OptionsWrapper>

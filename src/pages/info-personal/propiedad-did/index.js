@@ -228,7 +228,7 @@ const AppPage = ({}) => {
     } else {
       return ''
     }
-  }  
+  }
 
   const {
     control,
@@ -267,8 +267,10 @@ const AppPage = ({}) => {
     setShowEdit(false)
   }
 
-  useEffect(() => {peticionGet()}, [router])
-  
+  useEffect(() => {
+    peticionGet()
+  }, [router])
+
   const table = (
     <DataGrid
       columnHeaderHeight={38}
@@ -354,6 +356,7 @@ const AppPage = ({}) => {
                       fullWidth
                       value={value}
                       label={t('Name')}
+                      inputProps={{ maxLength: 200 }}
                       onChange={onChange}
                       placeholder={t('Enter the name')}
                       error={Boolean(errors.nombre)}
@@ -373,6 +376,7 @@ const AppPage = ({}) => {
                       fullWidth
                       value={value}
                       label={t('Abbreviation')}
+                      inputProps={{ maxLength: 50 }}
                       onChange={onChange}
                       placeholder={t('Enter the abbreviation')}
                       error={Boolean(errors.abreviacion)}
@@ -475,6 +479,7 @@ const AppPage = ({}) => {
                   name='nombre'
                   value={registroSeleccionado.nombre}
                   label={t('Name')}
+                  inputProps={{ maxLength: 200 }}
                   onChange={e => {
                     setRegistroSeleccionado({
                       id: registroSeleccionado.id,
@@ -493,6 +498,7 @@ const AppPage = ({}) => {
                   name='abreviacion'
                   value={registroSeleccionado.abreviacion}
                   label={t('Abbreviation')}
+                  inputProps={{ maxLength: 50 }}
                   onChange={e => {
                     setRegistroSeleccionado({
                       id: registroSeleccionado.id,

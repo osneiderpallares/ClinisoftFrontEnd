@@ -290,6 +290,7 @@ const AppPage = ({}) => {
   i18n.language === 'es' ? esES.components.MuiDataGrid.defaultProps.localeText : enUS.components.MuiDataGrid.defaultProps.localeText;
   const table = (
     <DataGrid
+      disableColumnMenu  
       columnHeaderHeight={38}
       rowHeight={38}
       stickyHeader
@@ -311,7 +312,7 @@ const AppPage = ({}) => {
           onChange: event => handleSearch(event.target.value)
         }
       }}
-      //localeText={GridLocaleTextES()}
+      //localeText={currentLocaleText}
       localeText={currentLocaleText}
     />
   )

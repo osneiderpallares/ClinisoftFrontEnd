@@ -209,10 +209,10 @@ const moduls = () => {
               <AccordionDetails>
                 <Fragment>
                   <List component='nav' aria-label='main mailbox'>
-                    <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
+                    <ListItem disablePadding onClick={() => handleDropdownClose('../profesionales/profesional')}>
                       <ListItemButton>
                         <ListItemIcon>
-                          <Icon icon='tabler:mail' fontSize={20} />
+                          <Icon icon='medical-icon:i-medical-library' fontSize={20} />
                         </ListItemIcon>
                         <ListItemText primary={t('Professionals')} />
                       </ListItemButton>
@@ -259,44 +259,44 @@ const moduls = () => {
               </AccordionSummary>
               <AccordionDetails>
                 <List component='nav' aria-label='main mailbox'>
-                  <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
+                  <ListItem disablePadding onClick={() => handleDropdownClose('../ubicacion/departamento')}>
                     <ListItemButton>
                       <ListItemIcon>
-                        <Icon icon='tabler:mail' fontSize={20} />
+                        <Icon icon='tdesign:map-location' fontSize={20} />
                       </ListItemIcon>
                       <ListItemText primary={t('Departments')} />
                     </ListItemButton>
                   </ListItem>
-                  <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
+                  <ListItem disablePadding onClick={() => handleDropdownClose('../ubicacion/ciudad')}>
                     <ListItemButton>
                       <ListItemIcon>
-                        <Icon icon='tabler:mail' fontSize={20} />
+                        <Icon icon='mdi:home-city' fontSize={20} />
                       </ListItemIcon>
                       <ListItemText primary={t('Cities')} />
                     </ListItemButton>
                   </ListItem>
-                  <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
+                  <ListItem disablePadding onClick={() => handleDropdownClose('../ubicacion/barrio')}>
                     <ListItemButton>
                       <ListItemIcon>
-                        <Icon icon='tabler:mail' fontSize={20} />
+                        <Icon icon='material-symbols-light:location-home-rounded' fontSize={20} />
                       </ListItemIcon>
                       <ListItemText primary={t('Neighborhood')} />
                     </ListItemButton>
                   </ListItem>
-                  <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
+                  <ListItem disablePadding onClick={() => handleDropdownClose('../ubicacion/zona-residencial')}>
                     <ListItemButton>
                       <ListItemIcon>
-                        <Icon icon='tabler:mail' fontSize={20} />
+                        <Icon icon='mdi:home-map-marker' fontSize={20} />
                       </ListItemIcon>
-                      <ListItemText primary={t('Residential Area')} />
+                      <ListItemText primary={t('Residence Area')} />
                     </ListItemButton>
                   </ListItem>
-                  <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
+                  <ListItem disablePadding onClick={() => handleDropdownClose('../ubicacion/estrato')}>
                     <ListItemButton>
                       <ListItemIcon>
-                        <Icon icon='tabler:mail' fontSize={20} />
+                        <Icon icon='streamline:decent-work-and-economic-growth-solid' fontSize={20} />
                       </ListItemIcon>
-                      <ListItemText primary={t('Socioeconomic Stratum')} />
+                      <ListItemText primary={t('Socioeconomic Levels')} />
                     </ListItemButton>
                   </ListItem>
                 </List>
@@ -522,10 +522,10 @@ const moduls = () => {
                   <ListItemText primary={t('Types of Consultation')} />
                 </ListItemButton>
               </ListItem>
-              <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
+              <ListItem disablePadding onClick={() => handleDropdownClose('../notas-medicas/lugar-atencion')}>
                 <ListItemButton>
                   <ListItemIcon>
-                    <Icon icon='tabler:mail' fontSize={20} />
+                    <Icon icon='ic:baseline-note-add' fontSize={20} />
                   </ListItemIcon>
                   <ListItemText primary={t('Healthcare location')} />
                 </ListItemButton>

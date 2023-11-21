@@ -1,11 +1,12 @@
 /*Traducir*/
 import { useTranslation } from 'react-i18next'
 
-export const GridLocaleTextES =()=> {
+export const GridLocaleTextES = () => {
   const { t } = useTranslation()
-  
+
   return {
     rowsPerPage: t('Rows per page:'),
+
     //rowsPerPageText: t('Rows per page:'),//es Rows Per Page
     // Root
     noRowsLabel: 'No hay registro',
@@ -182,5 +183,5 @@ export const GridLocaleTextES =()=> {
     aggregationFunctionLabelMin: 'min',
     aggregationFunctionLabelMax: 'max',
     aggregationFunctionLabelSize: 'size'
- };
+  }
 }

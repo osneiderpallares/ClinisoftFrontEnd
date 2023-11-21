@@ -1,3 +1,6 @@
+/*Traducir*/
+import { useTranslation } from 'react-i18next'
+
 // ** React Imports
 import { useState } from 'react'
 
@@ -147,6 +150,7 @@ const columns = [
 ]
 
 const InvoiceListTable = ({ invoiceData }) => {
+  const {t}=useTranslation();
   // ** State
   const [anchorEl, setAnchorEl] = useState(null)
   const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 7 })
@@ -161,11 +165,117 @@ const InvoiceListTable = ({ invoiceData }) => {
   const handleClose = () => {
     setAnchorEl(null)
   }
-
+  const columns = [
+    {
+      flex: 0.2,
+      field: 'id',
+      minWidth: 100,
+      headerName: 'ID',
+      renderCell: ({ row }) => (
+        <Typography component={LinkStyled} href={`/apps/invoice/preview/${row.id}`}>{`#${row.id}`}</Typography>
+      )
+    },
+    {
+      flex: 0.15,
+      minWidth: 80,
+      field: 'invoiceStatus',
+      renderHeader: () => <Icon icon='tabler:trending-up' fontSize='1.125rem' />,
+      renderCell: ({ row }) => {
+        const { dueDate, balance, invoiceStatus } = row
+        const color = invoiceStatusObj[invoiceStatus] ? invoiceStatusObj[invoiceStatus].color : 'primary'
+  
+        return (
+          <Tooltip
+            title={
+              <>
+               <Typography variant='caption' sx={{ color: 'common.white', fontWeight: 600 }}>
+               {`${t(invoiceStatus)}`}
+                </Typography>
+                
+                <br />
+                <Typography variant='caption' sx={{ color: 'common.white', fontWeight: 600 }}>
+                  {t('Balance')}:
+                </Typography>{' '}
+                {balance}
+                <br />
+                <Typography variant='caption' sx={{ color: 'common.white', fontWeight: 600 }}>
+                  {t('Due Date')}:
+                </Typography>{' '}
+                {dueDate}
+              </>
+            }
+          >
+            <CustomAvatar skin='light' color={color} sx={{ width: 30, height: 30 }}>
+              <Icon icon={invoiceStatusObj[invoiceStatus].icon} />
+            </CustomAvatar>
+          </Tooltip>
+        )
+      }
+    },
+    {
+      flex: 0.2,
+      minWidth: 90,
+      field: 'total',
+      headerName: 'Total',
+      renderCell: ({ row }) => <Typography sx={{ color: 'text.secondary' }}>${row.total || 0}</Typography>
+    },
+    {
+      flex: 0.3,
+      minWidth: 125,
+      field: 'issuedDate',
+      headerName: t('Issued Date'),
+      renderCell: ({ row }) => <Typography sx={{ color: 'text.secondary' }}>{row.issuedDate}</Typography>
+    },
+    {
+      flex: 0.1,
+      minWidth: 130,
+      sortable: false,
+      field: 'actions',
+      headerName: t('Actions'),
+      renderCell: ({ row }) => (
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <Tooltip title={t('Delete Invoice')}>
+            <IconButton size='small' sx={{ color: 'text.secondary' }}>
+              <Icon icon='tabler:trash' />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title={t('View')}>
+            <IconButton
+              size='small'
+              component={Link}
+              sx={{ color: 'text.secondary' }}
+              href={`/apps/invoice/preview/${row.id}`}
+            >
+              <Icon icon='tabler:eye' />
+            </IconButton>
+          </Tooltip>
+          <OptionsMenu
+            iconButtonProps={{ size: 'small' }}
+            menuProps={{ sx: { '& .MuiMenuItem-root svg': { mr: 2 } } }}
+            options={[
+              {
+                text: t('Download'),
+                icon: <Icon icon='tabler:download' />
+              },
+              {
+                text: t('Edit'),
+                href: `/apps/invoice/edit/${row.id}`,
+                icon: <Icon icon='tabler:pencil' />
+              },
+              {
+                text: t('Duplicate'),
+                icon: <Icon icon='tabler:copy' />
+              }
+            ]}
+          />
+        </Box>
+      )
+    }
+  ]
   return (
     <Card>
       <CardHeader
-        title='Invoice List'
+        title={t('Invoice List')}
         sx={{ '& .MuiCardHeader-action': { m: 0 } }}
         action={
           <>
@@ -178,7 +288,7 @@ const InvoiceListTable = ({ invoiceData }) => {
               endIcon={<Icon icon='tabler:chevron-down' />}
               aria-controls={open ? 'user-view-overview-export' : undefined}
             >
-              Export
+              {t('Export')}
             </Button>
             <Menu open={open} anchorEl={anchorEl} onClose={handleClose} id='user-view-overview-export'>
               <MenuItem onClick={handleClose}>PDF</MenuItem>

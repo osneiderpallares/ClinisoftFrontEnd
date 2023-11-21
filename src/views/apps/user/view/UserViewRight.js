@@ -23,6 +23,7 @@ import UserViewAccount from 'src/views/apps/user/view/UserViewAccount'
 import UserViewSecurity from 'src/views/apps/user/view/UserViewSecurity'
 import UserViewConnection from 'src/views/apps/user/view/UserViewConnection'
 import UserViewNotification from 'src/views/apps/user/view/UserViewNotification'
+import { t } from 'i18next'
 
 // ** Styled Tab component
 const Tab = styled(MuiTab)(({ theme }) => ({
@@ -95,15 +96,15 @@ const UserViewRight = ({ tab, invoiceData }) => {
         aria-label='forced scroll tabs example'
         sx={{ borderBottom: theme => `1px solid ${theme.palette.divider}` }}
       >
-        <Tab value='account' label='Account' icon={<Icon fontSize='1.125rem' icon='tabler:user-check' />} />
-        <Tab value='security' label='Security' icon={<Icon fontSize='1.125rem' icon='tabler:lock' />} />
+        <Tab value='account' label={t('Account')} icon={<Icon fontSize='1.125rem' icon='tabler:user-check' />} />
+        <Tab value='security' label={t('Security')} icon={<Icon fontSize='1.125rem' icon='tabler:lock' />} />
         <Tab
           value='billing-plan'
-          label='Billing & Plan'
+          label={t('Billing & Plan')}
           icon={<Icon fontSize='1.125rem' icon='tabler:currency-dollar' />}
         />
-        <Tab value='notification' label='Notification' icon={<Icon fontSize='1.125rem' icon='tabler:bell' />} />
-        <Tab value='connection' label='Connection' icon={<Icon fontSize='1.125rem' icon='tabler:link' />} />
+        <Tab value='notification' label={t('Notification')} icon={<Icon fontSize='1.125rem' icon='tabler:bell' />} />
+        <Tab value='connection' label={t('Connection')} icon={<Icon fontSize='1.125rem' icon='tabler:link' />} />
       </TabList>
       <Box sx={{ mt: 4 }}>
         {isLoading ? (

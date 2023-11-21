@@ -1,3 +1,6 @@
+/*Traducir*/
+import { useTranslation } from 'react-i18next'
+
 // ** React Imports
 import { useState, useEffect } from 'react'
 
@@ -24,53 +27,54 @@ const Img = styled('img')(({ theme }) => ({
   marginRight: theme.spacing(2.5)
 }))
 
-const columns = [
-  {
-    flex: 0.35,
-    minWidth: 250,
-    field: 'projectTitle',
-    headerName: 'Project',
-    renderCell: ({ row }) => (
-      <Box sx={{ display: 'flex', alignItems: 'center' }}>
-        <Img src={row.img} alt={`project-${row.projectTitle}`} />
-        <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-          <Typography sx={{ fontWeight: 500, color: 'text.secondary' }}>{row.projectTitle}</Typography>
-          <Typography variant='body2' sx={{ color: 'text.disabled' }}>
-            {row.projectType}
-          </Typography>
-        </Box>
-      </Box>
-    )
-  },
-  {
-    flex: 0.2,
-    minWidth: 126,
-    field: 'totalTask',
-    headerName: 'Total Tasks',
-    renderCell: ({ row }) => <Typography sx={{ color: 'text.secondary' }}>{row.totalTask}</Typography>
-  },
-  {
-    flex: 0.25,
-    minWidth: 180,
-    headerName: 'Progress',
-    field: 'progressValue',
-    renderCell: ({ row }) => (
-      <Box sx={{ width: '100%' }}>
-        <Typography sx={{ mb: 1.5, color: 'text.secondary' }}>{`${row.progressValue}%`}</Typography>
-        <LinearProgress sx={{ height: 8 }} variant='determinate' value={row.progressValue} color={row.progressColor} />
-      </Box>
-    )
-  },
-  {
-    flex: 0.2,
-    minWidth: 110,
-    field: 'hours',
-    headerName: 'Hours',
-    renderCell: ({ row }) => <Typography sx={{ color: 'text.secondary' }}>{`${row.hours}h`}</Typography>
-  }
-]
+// const columns = [
+//   {
+//     flex: 0.35,
+//     minWidth: 250,
+//     field: 'projectTitle',
+//     headerName: 'Project',
+//     renderCell: ({ row }) => (
+//       <Box sx={{ display: 'flex', alignItems: 'center' }}>
+//         <Img src={row.img} alt={`project-${row.projectTitle}`} />
+//         <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+//           <Typography sx={{ fontWeight: 500, color: 'text.secondary' }}>{row.projectTitle}</Typography>
+//           <Typography variant='body2' sx={{ color: 'text.disabled' }}>
+//             {row.projectType}
+//           </Typography>
+//         </Box>
+//       </Box>
+//     )
+//   },
+//   {
+//     flex: 0.2,
+//     minWidth: 126,
+//     field: 'totalTask',
+//     headerName: t('Total Tasks'),
+//     renderCell: ({ row }) => <Typography sx={{ color: 'text.secondary' }}>{row.totalTask}</Typography>
+//   },
+//   {
+//     flex: 0.25,
+//     minWidth: 180,
+//     headerName: 'Progress',
+//     field: 'progressValue',
+//     renderCell: ({ row }) => (
+//       <Box sx={{ width: '100%' }}>
+//         <Typography sx={{ mb: 1.5, color: 'text.secondary' }}>{`${row.progressValue}%`}</Typography>
+//         <LinearProgress sx={{ height: 8 }} variant='determinate' value={row.progressValue} color={row.progressColor} />
+//       </Box>
+//     )
+//   },
+//   {
+//     flex: 0.2,
+//     minWidth: 110,
+//     field: 'hours',
+//     headerName: 'Hours',
+//     renderCell: ({ row }) => <Typography sx={{ color: 'text.secondary' }}>{`${row.hours}h`}</Typography>
+//   }
+// ]
 
 const InvoiceListTable = () => {
+  const {t}=useTranslation();
   // ** State
   const [value, setValue] = useState('')
   const [data, setData] = useState([])
@@ -84,14 +88,58 @@ const InvoiceListTable = () => {
       })
       .then(res => setData(res.data))
   }, [value])
-
+  const columns = [
+    {
+      flex: 0.35,
+      minWidth: 250,
+      field: 'projectTitle',
+      headerName: t('Project'),
+      renderCell: ({ row }) => (
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <Img src={row.img} alt={`project-${row.projectTitle}`} />
+          <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+            <Typography sx={{ fontWeight: 500, color: 'text.secondary' }}>{row.projectTitle}</Typography>
+            <Typography variant='body2' sx={{ color: 'text.disabled' }}>
+              {row.projectType}
+            </Typography>
+          </Box>
+        </Box>
+      )
+    },
+    {
+      flex: 0.2,
+      minWidth: 126,
+      field: 'totalTask',
+      headerName: t('Total Tasks'),
+      renderCell: ({ row }) => <Typography sx={{ color: 'text.secondary' }}>{row.totalTask}</Typography>
+    },
+    {
+      flex: 0.25,
+      minWidth: 180,
+      headerName: t('Progress'),
+      field: 'progressValue',
+      renderCell: ({ row }) => (
+        <Box sx={{ width: '100%' }}>
+          <Typography sx={{ mb: 1.5, color: 'text.secondary' }}>{`${row.progressValue}%`}</Typography>
+          <LinearProgress sx={{ height: 8 }} variant='determinate' value={row.progressValue} color={row.progressColor} />
+        </Box>
+      )
+    },
+    {
+      flex: 0.2,
+      minWidth: 110,
+      field: 'hours',
+      headerName: t('Hours'),
+      renderCell: ({ row }) => <Typography sx={{ color: 'text.secondary' }}>{`${row.hours}h`}</Typography>
+    }
+  ]
   return (
     <Card>
-      <CardHeader title="User's Projects List" />
+      <CardHeader title={t("User's Projects List")} />
       <CardContent>
         <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
-          <Typography sx={{ mr: 2, color: 'text.secondary' }}>Search:</Typography>
-          <CustomTextField placeholder='Search Project' value={value} onChange={e => setValue(e.target.value)} />
+          <Typography sx={{ mr: 2, color: 'text.secondary' }}>{t('Search')}:</Typography>
+          <CustomTextField placeholder={t('Search Project')} value={value} onChange={e => setValue(e.target.value)} />
         </Box>
       </CardContent>
       <DataGrid
@@ -103,6 +151,7 @@ const InvoiceListTable = () => {
         pageSizeOptions={[7, 10, 25, 50]}
         paginationModel={paginationModel}
         onPaginationModelChange={setPaginationModel}
+        
       />
     </Card>
   )

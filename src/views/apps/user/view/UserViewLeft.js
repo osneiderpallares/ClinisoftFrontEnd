@@ -1,3 +1,6 @@
+/*Traducir*/
+import { useTranslation } from 'react-i18next'
+
 // ** React Imports
 import { useState } from 'react'
 
@@ -81,6 +84,7 @@ const Sub = styled('sub')(({ theme }) => ({
 }))
 
 const UserViewLeft = () => {
+  const {t}=useTranslation();
   // ** States
   const [openEdit, setOpenEdit] = useState(false)
   const [openPlans, setOpenPlans] = useState(false)
@@ -157,19 +161,19 @@ const UserViewLeft = () => {
 
             <CardContent sx={{ pb: 4 }}>
               <Typography variant='body2' sx={{ color: 'text.disabled', textTransform: 'uppercase' }}>
-                Details
+                {t('Details')}
               </Typography>
               <Box sx={{ pt: 4 }}>
                 <Box sx={{ display: 'flex', mb: 3 }}>
-                  <Typography sx={{ mr: 2, fontWeight: 500, color: 'text.secondary' }}>Username:</Typography>
+                  <Typography sx={{ mr: 2, fontWeight: 500, color: 'text.secondary' }}>{t('Username')}:</Typography>
                   <Typography sx={{ color: 'text.secondary' }}>@{data.username}</Typography>
                 </Box>
                 <Box sx={{ display: 'flex', mb: 3 }}>
-                  <Typography sx={{ mr: 2, fontWeight: 500, color: 'text.secondary' }}>Email:</Typography>
+                  <Typography sx={{ mr: 2, fontWeight: 500, color: 'text.secondary' }}>{t('Email')}:</Typography>
                   <Typography sx={{ color: 'text.secondary' }}>{data.email}</Typography>
                 </Box>
                 <Box sx={{ display: 'flex', mb: 3, alignItems: 'center' }}>
-                  <Typography sx={{ mr: 2, fontWeight: 500, color: 'text.secondary' }}>Status:</Typography>
+                  <Typography sx={{ mr: 2, fontWeight: 500, color: 'text.secondary' }}>{t('Status')}:</Typography>
                   <CustomChip
                     rounded
                     skin='light'
@@ -182,23 +186,23 @@ const UserViewLeft = () => {
                   />
                 </Box>
                 <Box sx={{ display: 'flex', mb: 3 }}>
-                  <Typography sx={{ mr: 2, fontWeight: 500, color: 'text.secondary' }}>Role:</Typography>
+                  <Typography sx={{ mr: 2, fontWeight: 500, color: 'text.secondary' }}>{t('Role')}:</Typography>
                   <Typography sx={{ color: 'text.secondary', textTransform: 'capitalize' }}>{data.role}</Typography>
                 </Box>
                 <Box sx={{ display: 'flex', mb: 3 }}>
-                  <Typography sx={{ mr: 2, fontWeight: 500, color: 'text.secondary' }}>Tax ID:</Typography>
+                  <Typography sx={{ mr: 2, fontWeight: 500, color: 'text.secondary' }}>{t('Tax ID')}:</Typography>
                   <Typography sx={{ color: 'text.secondary' }}>Tax-8894</Typography>
                 </Box>
                 <Box sx={{ display: 'flex', mb: 3 }}>
-                  <Typography sx={{ mr: 2, fontWeight: 500, color: 'text.secondary' }}>Contact:</Typography>
+                  <Typography sx={{ mr: 2, fontWeight: 500, color: 'text.secondary' }}>{t('Contact')}:</Typography>
                   <Typography sx={{ color: 'text.secondary' }}>+1 {data.contact}</Typography>
                 </Box>
                 <Box sx={{ display: 'flex', mb: 3 }}>
-                  <Typography sx={{ mr: 2, fontWeight: 500, color: 'text.secondary' }}>Language:</Typography>
+                  <Typography sx={{ mr: 2, fontWeight: 500, color: 'text.secondary' }}>{t('Language')}:</Typography>
                   <Typography sx={{ color: 'text.secondary' }}>English</Typography>
                 </Box>
                 <Box sx={{ display: 'flex' }}>
-                  <Typography sx={{ mr: 2, fontWeight: 500, color: 'text.secondary' }}>Country:</Typography>
+                  <Typography sx={{ mr: 2, fontWeight: 500, color: 'text.secondary' }}>{t('Country')}:</Typography>
                   <Typography sx={{ color: 'text.secondary' }}>{data.country}</Typography>
                 </Box>
               </Box>

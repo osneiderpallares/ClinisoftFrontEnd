@@ -1,3 +1,6 @@
+/*Traducir*/
+import { useTranslation } from 'react-i18next'
+
 // ** MUI Imports
 import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
@@ -32,6 +35,7 @@ const Timeline = styled(MuiTimeline)({
 })
 
 const UserViewAccount = ({ invoiceData }) => {
+  const {t}=useTranslation();
   return (
     <Grid container spacing={6}>
       <Grid item xs={12}>
@@ -40,10 +44,10 @@ const UserViewAccount = ({ invoiceData }) => {
       <Grid item xs={12}>
         <Card>
           <CardHeader
-            title='User Activity Timeline'
+            title={t('User Activity Timeline')}
             action={
               <OptionsMenu
-                options={['Share timeline', 'Suggest edits', 'Report bug']}
+                options={[t('Share timeline'), t('Suggest edits'), t('Report bug')]}
                 iconButtonProps={{ size: 'small', sx: { color: 'text.disabled' } }}
               />
             }

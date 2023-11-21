@@ -23,7 +23,7 @@ import IconButton from '@mui/material/IconButton'
 import Tooltip from '@mui/material/Tooltip'
 import DialogTitle from '@mui/material/DialogTitle'
 import DialogContentText from '@mui/material/DialogContentText'
-import { GridLocaleTextES } from 'src/@fake-db/table/constants/index.js'
+
 
 // ** Icon Imports
 import Icon from 'src/@core/components/icon'

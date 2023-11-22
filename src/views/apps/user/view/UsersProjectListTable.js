@@ -143,6 +143,7 @@ const InvoiceListTable = () => {
         </Box>
       </CardContent>
       <DataGrid
+        disableColumnMenu
         autoHeight
         rows={data}
         rowHeight={60}

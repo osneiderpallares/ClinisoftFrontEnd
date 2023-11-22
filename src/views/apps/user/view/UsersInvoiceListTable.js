@@ -42,112 +42,112 @@ const invoiceStatusObj = {
   Downloaded: { color: 'info', icon: 'tabler:arrow-down-circle' }
 }
 
-const columns = [
-  {
-    flex: 0.2,
-    field: 'id',
-    minWidth: 100,
-    headerName: 'ID',
-    renderCell: ({ row }) => (
-      <Typography component={LinkStyled} href={`/apps/invoice/preview/${row.id}`}>{`#${row.id}`}</Typography>
-    )
-  },
-  {
-    flex: 0.15,
-    minWidth: 80,
-    field: 'invoiceStatus',
-    renderHeader: () => <Icon icon='tabler:trending-up' fontSize='1.125rem' />,
-    renderCell: ({ row }) => {
-      const { dueDate, balance, invoiceStatus } = row
-      const color = invoiceStatusObj[invoiceStatus] ? invoiceStatusObj[invoiceStatus].color : 'primary'
+// const columns = [
+//   {
+//     flex: 0.2,
+//     field: 'id',
+//     minWidth: 100,
+//     headerName: 'ID',
+//     renderCell: ({ row }) => (
+//       <Typography component={LinkStyled} href={`/apps/invoice/preview/${row.id}`}>{`#${row.id}`}</Typography>
+//     )
+//   },
+//   {
+//     flex: 0.15,
+//     minWidth: 80,
+//     field: 'invoiceStatus',
+//     renderHeader: () => <Icon icon='tabler:trending-up' fontSize='1.125rem' />,
+//     renderCell: ({ row }) => {
+//       const { dueDate, balance, invoiceStatus } = row
+//       const color = invoiceStatusObj[invoiceStatus] ? invoiceStatusObj[invoiceStatus].color : 'primary'
 
-      return (
-        <Tooltip
-          title={
-            <>
-              <Typography variant='caption' sx={{ color: 'common.white', fontWeight: 600 }}>
-                {invoiceStatus}
-              </Typography>
-              <br />
-              <Typography variant='caption' sx={{ color: 'common.white', fontWeight: 600 }}>
-                Balance:
-              </Typography>{' '}
-              {balance}
-              <br />
-              <Typography variant='caption' sx={{ color: 'common.white', fontWeight: 600 }}>
-                Due Date:
-              </Typography>{' '}
-              {dueDate}
-            </>
-          }
-        >
-          <CustomAvatar skin='light' color={color} sx={{ width: 30, height: 30 }}>
-            <Icon icon={invoiceStatusObj[invoiceStatus].icon} />
-          </CustomAvatar>
-        </Tooltip>
-      )
-    }
-  },
-  {
-    flex: 0.2,
-    minWidth: 90,
-    field: 'total',
-    headerName: 'Total',
-    renderCell: ({ row }) => <Typography sx={{ color: 'text.secondary' }}>${row.total || 0}</Typography>
-  },
-  {
-    flex: 0.3,
-    minWidth: 125,
-    field: 'issuedDate',
-    headerName: 'Issued Date',
-    renderCell: ({ row }) => <Typography sx={{ color: 'text.secondary' }}>{row.issuedDate}</Typography>
-  },
-  {
-    flex: 0.1,
-    minWidth: 130,
-    sortable: false,
-    field: 'actions',
-    headerName: 'Actions',
-    renderCell: ({ row }) => (
-      <Box sx={{ display: 'flex', alignItems: 'center' }}>
-        <Tooltip title='Delete Invoice'>
-          <IconButton size='small' sx={{ color: 'text.secondary' }}>
-            <Icon icon='tabler:trash' />
-          </IconButton>
-        </Tooltip>
-        <Tooltip title='View'>
-          <IconButton
-            size='small'
-            component={Link}
-            sx={{ color: 'text.secondary' }}
-            href={`/apps/invoice/preview/${row.id}`}
-          >
-            <Icon icon='tabler:eye' />
-          </IconButton>
-        </Tooltip>
-        <OptionsMenu
-          iconButtonProps={{ size: 'small' }}
-          menuProps={{ sx: { '& .MuiMenuItem-root svg': { mr: 2 } } }}
-          options={[
-            {
-              text: 'Download',
-              icon: <Icon icon='tabler:download' />
-            },
-            {
-              text: 'Edit',
-              href: `/apps/invoice/edit/${row.id}`,
-              icon: <Icon icon='tabler:pencil' />
-            },
-            {
-              text: 'Duplicate',
-              icon: <Icon icon='tabler:copy' />
-            }
-          ]}
-        />
-      </Box>
-    )
-  }
-]
+//       return (
+//         <Tooltip
+//           title={
+//             <>
+//               <Typography variant='caption' sx={{ color: 'common.white', fontWeight: 600 }}>
+//                 {invoiceStatus}
+//               </Typography>
+//               <br />
+//               <Typography variant='caption' sx={{ color: 'common.white', fontWeight: 600 }}>
+//                 Balance:
+//               </Typography>{' '}
+//               {balance}
+//               <br />
+//               <Typography variant='caption' sx={{ color: 'common.white', fontWeight: 600 }}>
+//                 Due Date:
+//               </Typography>{' '}
+//               {dueDate}
+//             </>
+//           }
+//         >
+//           <CustomAvatar skin='light' color={color} sx={{ width: 30, height: 30 }}>
+//             <Icon icon={invoiceStatusObj[invoiceStatus].icon} />
+//           </CustomAvatar>
+//         </Tooltip>
+//       )
+//     }
+//   },
+//   {
+//     flex: 0.2,
+//     minWidth: 90,
+//     field: 'total',
+//     headerName: 'Total',
+//     renderCell: ({ row }) => <Typography sx={{ color: 'text.secondary' }}>${row.total || 0}</Typography>
+//   },
+//   {
+//     flex: 0.3,
+//     minWidth: 125,
+//     field: 'issuedDate',
+//     headerName: 'Issued Date',
+//     renderCell: ({ row }) => <Typography sx={{ color: 'text.secondary' }}>{row.issuedDate}</Typography>
+//   },
+//   {
+//     flex: 0.1,
+//     minWidth: 130,
+//     sortable: false,
+//     field: 'actions',
+//     headerName: 'Actions',
+//     renderCell: ({ row }) => (
+//       <Box sx={{ display: 'flex', alignItems: 'center' }}>
+//         <Tooltip title='Delete Invoice'>
+//           <IconButton size='small' sx={{ color: 'text.secondary' }}>
+//             <Icon icon='tabler:trash' />
+//           </IconButton>
+//         </Tooltip>
+//         <Tooltip title='View'>
+//           <IconButton
+//             size='small'
+//             component={Link}
+//             sx={{ color: 'text.secondary' }}
+//             href={`/apps/invoice/preview/${row.id}`}
+//           >
+//             <Icon icon='tabler:eye' />
+//           </IconButton>
+//         </Tooltip>
+//         <OptionsMenu
+//           iconButtonProps={{ size: 'small' }}
+//           menuProps={{ sx: { '& .MuiMenuItem-root svg': { mr: 2 } } }}
+//           options={[
+//             {
+//               text: 'Download',
+//               icon: <Icon icon='tabler:download' />
+//             },
+//             {
+//               text: 'Edit',
+//               href: `/apps/invoice/edit/${row.id}`,
+//               icon: <Icon icon='tabler:pencil' />
+//             },
+//             {
+//               text: 'Duplicate',
+//               icon: <Icon icon='tabler:copy' />
+//             }
+//           ]}
+//         />
+//       </Box>
+//     )
+//   }
+// ]
 
 const InvoiceListTable = ({ invoiceData }) => {
   const {t}=useTranslation();
@@ -271,7 +271,7 @@ const InvoiceListTable = ({ invoiceData }) => {
         </Box>
       )
     }
-  ]
+  ]  
   return (
     <Card>
       <CardHeader
@@ -298,7 +298,9 @@ const InvoiceListTable = ({ invoiceData }) => {
           </>
         }
       />
+  
       <DataGrid
+        disableColumnMenu
         autoHeight
         rowHeight={54}
         columns={columns}
@@ -307,6 +309,9 @@ const InvoiceListTable = ({ invoiceData }) => {
         pageSizeOptions={[7, 10, 25, 50]}
         paginationModel={paginationModel}
         onPaginationModelChange={setPaginationModel}
+        localeText={{
+          rowsPerPageText: 'Filas por página', // Aquí es donde cambias el texto
+        }}
       />
     </Card>
   )

@@ -1,3 +1,6 @@
+/*Traducir*/
+import { useTranslation } from 'react-i18next'
+
 // ** MUI Imports
 import Card from '@mui/material/Card'
 import Table from '@mui/material/Table'
@@ -14,9 +17,10 @@ import CardActions from '@mui/material/CardActions'
 import TableContainer from '@mui/material/TableContainer'
 
 const UserViewNotification = () => {
+  const {t}=useTranslation()
   return (
     <Card>
-      <CardHeader title='Notifications' sx={{ pb: 1.5 }} />
+      <CardHeader title={t('Notifications')} sx={{ pb: 1.5 }} />
 
       <CardContent>
         <Typography sx={{ mb: 6, color: 'text.secondary' }}>
@@ -26,10 +30,10 @@ const UserViewNotification = () => {
           <Table sx={{ minWidth: 500 }}>
             <TableHead>
               <TableRow>
-                <TableCell>Type</TableCell>
-                <TableCell align='center'>Email</TableCell>
-                <TableCell align='center'>Browser</TableCell>
-                <TableCell align='center'>App</TableCell>
+                <TableCell>{t('Type')}</TableCell>
+                <TableCell align='center'>{t('Email')}</TableCell>
+                <TableCell align='center'>{t('Browser')}</TableCell>
+                <TableCell align='center'>{t('App')}</TableCell>
               </TableRow>
             </TableHead>
 
@@ -93,10 +97,10 @@ const UserViewNotification = () => {
 
       <CardActions>
         <Button variant='contained' sx={{ mr: 2 }}>
-          Save Changes
+          {t('Save Changes')}
         </Button>
         <Button color='secondary' variant='tonal'>
-          Discard
+          {t('Discard')}
         </Button>
       </CardActions>
     </Card>

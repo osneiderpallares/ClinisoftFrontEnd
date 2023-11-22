@@ -320,7 +320,7 @@ const UserViewSecurity = () => {
 
       <Grid item xs={12}>
         <Card>
-          <CardHeader title='Recent devices' />
+          <CardHeader title={t('Recent devices')} />
 
           <Divider sx={{ m: '0 !important' }} />
 
@@ -328,10 +328,10 @@ const UserViewSecurity = () => {
             <Table sx={{ minWidth: 500 }}>
               <TableHead>
                 <TableRow>
-                  <TableCell>Browser</TableCell>
-                  <TableCell>Device</TableCell>
-                  <TableCell>Location</TableCell>
-                  <TableCell>Recent Activity</TableCell>
+                  <TableCell>{t('Browser')}</TableCell>
+                  <TableCell>{t('Device')}</TableCell>
+                  <TableCell>{t('Location')}</TableCell>
+                  <TableCell>{t('Recent Activity')}</TableCell>
                 </TableRow>
               </TableHead>
 

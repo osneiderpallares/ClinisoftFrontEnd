@@ -511,5 +511,21 @@
   "Sort DESC": "Orden DESC",
   "Hide column": "Ocultar Columna",
   "Manage columns": "Administrar columnas",
-  "Unsort": "Desordenar"
+  "Unsort": "Desordenar",
+  "Recent devices": "Dispositivos Recientes",
+  "Browser": "Navegador",
+  "Device": "Dispositivo",
+  "Recent Activity": "Actividad Reciente",
+  "Current plan": "Plan actual",
+  "Payment Methods": "Metodos de pago",
+  "Billing Address": "Dirección de facturación",
+  "Add Card": "Agregar tarjeta",
+  "Card expires at": "La tarjeta vence el",
+  "Edit Address": "Editar dirección",
+  "Type": "Tipo",
+  "App": "Aplicación",
+  "Save Changes": "Guardar Cambios",
+  "Discard": "Descartar",
+  "Connected Accounts": "Cuentas vinculadas",
+  "Social Accounts": "Cuentas sociales"
 }

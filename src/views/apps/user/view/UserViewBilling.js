@@ -1,3 +1,6 @@
+/*Traducir*/
+import { useTranslation } from 'react-i18next'
+
 // ** React Imports
 import { useState } from 'react'
 
@@ -96,6 +99,7 @@ const data = [
 ]
 
 const UserViewBilling = () => {
+  const {t}=useTranslation();
   // ** States
   const [cvc, setCvc] = useState('')
   const [name, setName] = useState('')
@@ -160,7 +164,7 @@ const UserViewBilling = () => {
     <Grid container spacing={6}>
       <Grid item xs={12}>
         <Card>
-          <CardHeader title='Current plan' />
+          <CardHeader title={t('Current plan')} />
           <CardContent>
             <Grid container spacing={4}>
               <Grid item xs={12} md={6}>
@@ -310,11 +314,11 @@ const UserViewBilling = () => {
       <Grid item xs={12}>
         <Card>
           <CardHeader
-            title='Payment Methods'
+            title={t('Payment Methods')}
             action={
               <Button variant='contained' onClick={handleAddCardClickOpen} sx={{ '& svg': { mr: 1 } }}>
                 <Icon icon='tabler:plus' fontSize='1rem' />
-                Add Card
+                {t('Add Card')}
               </Button>
             }
           />
@@ -348,13 +352,13 @@ const UserViewBilling = () => {
 
                 <Box sx={{ mt: [3, 0], textAlign: ['start', 'end'] }}>
                   <Button variant='tonal' sx={{ mr: 2.5 }} onClick={() => handleEditCardClickOpen(index)}>
-                    Edit
+                    {t('Edit')}
                   </Button>
                   <Button variant='tonal' color='secondary'>
-                    Delete
+                    {t('Delete')}
                   </Button>
                   <Typography sx={{ mt: [6, 10], color: 'text.secondary' }}>
-                    Card expires at {item.expiryDate}
+                    {t('Card expires at')} {item.expiryDate}
                   </Typography>
                 </Box>
               </Box>
@@ -495,10 +499,10 @@ const UserViewBilling = () => {
       <Grid item xs={12}>
         <Card>
           <CardHeader
-            title='Billing Address'
+            title={t('Billing Address')}
             action={
               <Button variant='contained' onClick={() => setOpenAddressCard(true)}>
-                Edit Address
+               {t('Edit Address')}
               </Button>
             }
           />

@@ -1,3 +1,6 @@
+/*Traducir*/
+import { useTranslation } from 'react-i18next'
+
 // ** Next Import
 import Link from 'next/link'
 
@@ -78,12 +81,13 @@ const socialAccountsArr = [
 ]
 
 const UserViewConnection = () => {
+  const {t}=useTranslation()
   return (
     <Grid container spacing={6}>
       {/* Connected Accounts Cards */}
       <Grid item xs={12}>
         <Card>
-          <CardHeader title='Connected Accounts' sx={{ pb: 1.5 }} />
+          <CardHeader title={t('Connected Accounts')} sx={{ pb: 1.5 }} />
           <CardContent>
             <Typography sx={{ mb: 6, color: 'text.secondary' }}>
               Display content from your connected accounts on your site
@@ -122,7 +126,7 @@ const UserViewConnection = () => {
       {/* Social Accounts Cards */}
       <Grid item xs={12}>
         <Card>
-          <CardHeader title='Social Accounts' sx={{ pb: 1.5 }} />
+          <CardHeader title={t('Social Accounts')} sx={{ pb: 1.5 }} />
           <CardContent>
             <Typography sx={{ mb: 6, color: 'text.secondary' }}>
               Display content from social accounts on your site

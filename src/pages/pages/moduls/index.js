@@ -1040,6 +1040,46 @@ const moduls = () => {
           </CardContent>
         </Card>
       </Grid>
+
+      <Grid item xs={12} sm={6} md={4}>
+        <Card>
+          {/* <CardHeader title='Seguridad' /> */}
+          <CardHeader title={t('Company')} />
+          <CardContent>
+            <Accordion>
+              <AccordionSummary
+                id='panel-header-2'
+                aria-controls='panel-content-2'
+                expandIcon={<Icon fontSize='1.25rem' icon='tabler:chevron-down' />}
+              >
+                <Typography>{t('Company')}</Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <List component='nav' aria-label='main mailbox'>
+                  <ListItem disablePadding onClick={() => handleDropdownClose('../empresas')}>
+                    <ListItemButton>
+                      <ListItemIcon>
+                        <Icon icon='mdi:company' fontSize={20} />
+                      </ListItemIcon>
+                      <ListItemText primary={t('Company')} />
+                    </ListItemButton>
+                  </ListItem>
+                </List>
+              </AccordionDetails>
+            </Accordion>
+            <List component='nav' aria-label='main mailbox'>
+              <ListItem disablePadding onClick={() => handleDropdownClose('../empresas')}>
+                <ListItemButton>
+                  <ListItemIcon>
+                    <Icon icon='pixelarticons:git-branch' fontSize={20} />
+                  </ListItemIcon>
+                  <ListItemText primary={t('Campus')} />
+                </ListItemButton>
+              </ListItem>
+            </List>
+          </CardContent>
+        </Card>
+      </Grid>
     </Grid>
   )
 }

@@ -7,7 +7,7 @@ import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
 import CardHeader from '@mui/material/CardHeader'
 
-import { DataGrid, esES,enUS} from '@mui/x-data-grid'
+import { DataGrid, esES, enUS } from '@mui/x-data-grid'
 
 import QuickSearchToolbar from 'src/views/table/data-grid/QuickSearchToolbar'
 import Grid from '@mui/material/Grid'
@@ -23,7 +23,6 @@ import IconButton from '@mui/material/IconButton'
 import Tooltip from '@mui/material/Tooltip'
 import DialogTitle from '@mui/material/DialogTitle'
 import DialogContentText from '@mui/material/DialogContentText'
-
 
 // ** Icon Imports
 import Icon from 'src/@core/components/icon'
@@ -76,7 +75,7 @@ const CustomCloseButton = styled(IconButton)(({ theme }) => ({
 }))
 
 const AppPage = ({}) => {
-  const { t, i18n  } = useTranslation()
+  const { t, i18n } = useTranslation()
 
   //** DataGrid
   const columns = [
@@ -317,11 +316,15 @@ const AppPage = ({}) => {
   useEffect(() => {
     peticionGet()
   }, [router])
+
   const currentLocaleText =
-  i18n.language === 'es' ? esES.components.MuiDataGrid.defaultProps.localeText : enUS.components.MuiDataGrid.defaultProps.localeText;
+    i18n.language === 'es'
+      ? esES.components.MuiDataGrid.defaultProps.localeText
+      : enUS.components.MuiDataGrid.defaultProps.localeText
+
   const table = (
     <DataGrid
-      disableColumnMenu  
+      disableColumnMenu
       columnHeaderHeight={38}
       rowHeight={38}
       stickyHeader
@@ -462,10 +465,8 @@ const AppPage = ({}) => {
                   )}
                 />
               </Grid>
-              <Grid item sm={2} xs={2}>
+              <Grid item sm={6} xs={6}>
                 <Typography sx={{ color: 'text.secondary' }}>{t('Commune')}</Typography>
-              </Grid>
-              <Grid item sm={4} xs={4}>
                 <Controller
                   name='comuna'
                   control={control}
@@ -485,9 +486,10 @@ const AppPage = ({}) => {
                       valueLabelDisplay='on'
                       getAriaValueText={valuetext}
                       aria-labelledby='discrete-slider'
-                      error={Boolean(errors.comuna)}
-                      aria-describedby='validation-basic-strata-groups'
-                      {...(errors.comuna && { helperText: errors.comuna.message })}
+
+                      // error={Boolean(errors.comuna)}
+                      // aria-describedby='validation-basic-strata-groups'
+                      // {...(errors.comuna && { helperText: errors.comuna.message })}
                     />
                   )}
                 />

@@ -100,7 +100,7 @@ const App = props => {
   const [company, setCompany] = useState(null)
 
   const peticionGet = async () => {
-    await axios.get('http://127.0.0.1:8000/show_company/').then(response => {
+    await axios.get('http://127.0.0.1:8000/show_empresa/').then(response => {
       setCompany(response.data)
     })
   }

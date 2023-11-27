@@ -1,3 +1,6 @@
+/*Traducir*/
+import { useTranslation } from 'react-i18next'
+
 // ** React Imports
 import { useEffect, useCallback, useState } from 'react'
 
@@ -63,121 +66,9 @@ const renderClient = row => {
   }
 }
 
-const columns = [
-  {
-    flex: 0.25,
-    minWidth: 280,
-    field: 'fullName',
-    headerName: 'User',
-    renderCell: ({ row }) => {
-      const { fullName, email } = row
-
-      return (
-        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          {renderClient(row)}
-          <Box sx={{ display: 'flex', alignItems: 'flex-start', flexDirection: 'column' }}>
-            <Typography
-              noWrap
-              component={Link}
-              href='/apps/user/view/account'
-              sx={{
-                fontWeight: 500,
-                textDecoration: 'none',
-                color: 'text.secondary',
-                '&:hover': { color: 'primary.main' }
-              }}
-            >
-              {fullName}
-            </Typography>
-            <Typography noWrap variant='body2' sx={{ color: 'text.disabled' }}>
-              {email}
-            </Typography>
-          </Box>
-        </Box>
-      )
-    }
-  },
-  {
-    flex: 0.15,
-    field: 'role',
-    minWidth: 170,
-    headerName: 'Role',
-    renderCell: ({ row }) => {
-      return (
-        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          <CustomAvatar
-            skin='light'
-            sx={{ mr: 4, width: 30, height: 30 }}
-            color={userRoleObj[row.role].color || 'primary'}
-          >
-            <Icon icon={userRoleObj[row.role].icon} />
-          </CustomAvatar>
-          <Typography noWrap sx={{ color: 'text.secondary', textTransform: 'capitalize' }}>
-            {row.role}
-          </Typography>
-        </Box>
-      )
-    }
-  },
-  {
-    flex: 0.1,
-    minWidth: 120,
-    headerName: 'Plan',
-    field: 'currentPlan',
-    renderCell: ({ row }) => {
-      return (
-        <Typography noWrap sx={{ fontWeight: 500, color: 'text.secondary', textTransform: 'capitalize' }}>
-          {row.currentPlan}
-        </Typography>
-      )
-    }
-  },
-  {
-    flex: 0.15,
-    minWidth: 190,
-    field: 'billing',
-    headerName: 'Billing',
-    renderCell: ({ row }) => {
-      return (
-        <Typography noWrap sx={{ color: 'text.secondary' }}>
-          {row.billing}
-        </Typography>
-      )
-    }
-  },
-  {
-    flex: 0.1,
-    minWidth: 110,
-    field: 'status',
-    headerName: 'Status',
-    renderCell: ({ row }) => {
-      return (
-        <CustomChip
-          rounded
-          skin='light'
-          size='small'
-          label={row.status}
-          color={userStatusObj[row.status]}
-          sx={{ textTransform: 'capitalize' }}
-        />
-      )
-    }
-  },
-  {
-    flex: 0.1,
-    minWidth: 100,
-    sortable: false,
-    field: 'actions',
-    headerName: 'Actions',
-    renderCell: () => (
-      <IconButton component={Link} href='/apps/user/view/account'>
-        <Icon icon='tabler:eye' />
-      </IconButton>
-    )
-  }
-]
 
 const UserList = () => {
+  const {t}=useTranslation()
   // ** State
   const [plan, setPlan] = useState('')
   const [value, setValue] = useState('')
@@ -204,13 +95,127 @@ const UserList = () => {
   const handlePlanChange = useCallback(e => {
     setPlan(e.target.value)
   }, [])
-
+  const columns = [
+    {
+      flex: 0.25,
+      minWidth: 280,
+      field: 'fullName',
+      headerName: t('User'),
+      renderCell: ({ row }) => {
+        const { fullName, email } = row
+  
+        return (
+          <Box sx={{ display: 'flex', alignItems: 'center' }}>
+            {renderClient(row)}
+            <Box sx={{ display: 'flex', alignItems: 'flex-start', flexDirection: 'column' }}>
+              <Typography
+                noWrap
+                component={Link}
+                href='/apps/user/view/account'
+                sx={{
+                  fontWeight: 500,
+                  textDecoration: 'none',
+                  color: 'text.secondary',
+                  '&:hover': { color: 'primary.main' }
+                }}
+              >
+                {fullName}
+              </Typography>
+              <Typography noWrap variant='body2' sx={{ color: 'text.disabled' }}>
+                {email}
+              </Typography>
+            </Box>
+          </Box>
+        )
+      }
+    },
+    {
+      flex: 0.15,
+      field: 'role',
+      minWidth: 170,
+      headerName: t('Role'),
+      renderCell: ({ row }) => {
+        return (
+          <Box sx={{ display: 'flex', alignItems: 'center' }}>
+            <CustomAvatar
+              skin='light'
+              sx={{ mr: 4, width: 30, height: 30 }}
+              color={userRoleObj[row.role].color || 'primary'}
+            >
+              <Icon icon={userRoleObj[row.role].icon} />
+            </CustomAvatar>
+            <Typography noWrap sx={{ color: 'text.secondary', textTransform: 'capitalize' }}>
+              {row.role}
+            </Typography>
+          </Box>
+        )
+      }
+    },
+    {
+      flex: 0.1,
+      minWidth: 120,
+      headerName: 'Plan',
+      field: 'currentPlan',
+      renderCell: ({ row }) => {
+        return (
+          <Typography noWrap sx={{ fontWeight: 500, color: 'text.secondary', textTransform: 'capitalize' }}>
+            {row.currentPlan}
+          </Typography>
+        )
+      }
+    },
+    {
+      flex: 0.15,
+      minWidth: 190,
+      field: 'billing',
+      headerName: t('Billing'),
+      renderCell: ({ row }) => {
+        return (
+          <Typography noWrap sx={{ color: 'text.secondary' }}>
+            {row.billing}
+          </Typography>
+        )
+      }
+    },
+    {
+      flex: 0.1,
+      minWidth: 110,
+      field: 'status',
+      headerName: t('Status'),
+      renderCell: ({ row }) => {
+        return (
+          <CustomChip
+            rounded
+            skin='light'
+            size='small'
+            label={row.status}
+            color={userStatusObj[row.status]}
+            sx={{ textTransform: 'capitalize' }}
+          />
+        )
+      }
+    },
+    {
+      flex: 0.1,
+      minWidth: 100,
+      sortable: false,
+      field: 'actions',
+      headerName: t('Actions'),
+      renderCell: () => (
+        <IconButton component={Link} href='/apps/user/view/account'>
+          <Icon icon='tabler:eye' />
+        </IconButton>
+      )
+    }
+  ]
+  
   return (
     <Grid container spacing={6}>
       <Grid item xs={12}>
         <Card>
           <TableHeader plan={plan} value={value} handleFilter={handleFilter} handlePlanChange={handlePlanChange} />
           <DataGrid
+            disableColumnMenu
             autoHeight
             rowHeight={62}
             rows={store.data}

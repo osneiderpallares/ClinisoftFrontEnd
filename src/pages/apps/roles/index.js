@@ -1,3 +1,6 @@
+/*Traducir*/
+import { useTranslation } from 'react-i18next'
+
 // ** MUI Imports
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
@@ -10,12 +13,13 @@ import Table from 'src/views/apps/roles/Table'
 import RoleCards from 'src/views/apps/roles/RoleCards'
 
 const RolesComponent = () => {
+  const {t}=useTranslation()
   return (
     <Grid container spacing={6}>
       <PageHeader
         title={
           <Typography variant='h4' sx={{ mb: 6 }}>
-            Roles List
+           {t('Roles List')}
           </Typography>
         }
         subtitle={

@@ -1,12 +1,17 @@
+/*Traducir*/
+import { useTranslation } from 'react-i18next'
+
 // ** MUI Imports
 import Box from '@mui/material/Box'
 import MenuItem from '@mui/material/MenuItem'
+//import { t } from 'i18next'
 
 // ** Custom Component Import
 import CustomTextField from 'src/@core/components/mui/text-field'
 
 const TableHeader = props => {
-  // ** Props
+  const {t}=useTranslation()
+  // ** Props 
   const { plan, handlePlanChange, handleFilter, value } = props
 
   return (
@@ -25,21 +30,21 @@ const TableHeader = props => {
         <CustomTextField
           value={value}
           sx={{ mr: 4, mb: 2 }}
-          placeholder='Search User'
+          placeholder={t('Search User')}
           onChange={e => handleFilter(e.target.value)}
         />
         <CustomTextField
           select
           value={plan}
-          sx={{ mb: 2 }}
-          defaultValue='Select Plan'
-          SelectProps={{ displayEmpty: true, value: plan, onChange: e => handlePlanChange(e) }}
+          sx={{ mr: 2, mb: 2}}
+          defaultValue={t('Select Plan')}
+          SelectProps={{displayEmpty: true, value: plan, onChange: e => handlePlanChange(e),style: { minWidth: '160px' } }}
         >
-          <MenuItem value=''>Select Plan</MenuItem>
-          <MenuItem value='basic'>Basic</MenuItem>
-          <MenuItem value='company'>Company</MenuItem>
-          <MenuItem value='enterprise'>Enterprise</MenuItem>
-          <MenuItem value='team'>Team</MenuItem>
+          <MenuItem value=''>{t('Select Plan')}</MenuItem>
+          <MenuItem value='basic'>{t('Basic')}</MenuItem>
+          <MenuItem value='company'>{t('Company')}</MenuItem>
+          <MenuItem value='enterprise'>{t('Enterprise')}</MenuItem>
+          <MenuItem value='team'>{t('Team')}</MenuItem>
         </CustomTextField>
       </Box>
     </Box>

@@ -65,7 +65,7 @@ const AppPage = ({}) => {
   const peticionGet = async () => {
     await axios.get('http://127.0.0.1:8000/show_empresa/').then(response => {
       setCompany(response.data[0])
-      setResponsabilidades(response.data[0].responsabilidad.split(','))
+      setResponsabilidades(response.data[0].resp_codigo?.split(','))
     })
     await axios.get('http://127.0.0.1:8000/show_tiposdid/').then(response => {
       setTiposDid(response.data)
@@ -626,7 +626,8 @@ const AppPage = ({}) => {
                           responsabilidad: e.target.value
                         })
                         setResponsabilidades(e.target.value)
-                        error.responsabilidad = e.target.checked ? '' : `${t('The responsibility is required')}`
+                        error.responsabilidad =
+                          e.target.value.length != 0 ? '' : `${t('The responsibility is required')}`
                       },
                       renderValue: selected => selected.join(',')
                     }}
@@ -634,8 +635,8 @@ const AppPage = ({}) => {
                     {...(error.responsabilidad && { helperText: error.responsabilidad })}
                   >
                     {responsabilidadRow?.map(o => (
-                      <MenuItem key={o.codigo} value={o.codigo}>
-                        <Checkbox checked={responsabilidades.indexOf(o.codigo) > -1} />
+                      <MenuItem key={o.id} value={o.codigo}>
+                        <Checkbox checked={responsabilidades?.indexOf(o.codigo) > -1} />
                         <ListItemText primary={o.codigo + ' ' + o.nombre} />
                       </MenuItem>
                     ))}

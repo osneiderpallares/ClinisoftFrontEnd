@@ -1,3 +1,6 @@
+/*Traducir*/
+import { useTranslation } from 'react-i18next'
+
 // ** React Imports
 import { useState, useEffect, useCallback } from 'react'
 
@@ -78,6 +81,7 @@ const defaultColumns = [
 ]
 
 const PermissionsTable = () => {
+  const {t}=useTranslation()
   // ** State
   const [value, setValue] = useState('')
   const [editValue, setEditValue] = useState('')
@@ -138,7 +142,7 @@ const PermissionsTable = () => {
           <PageHeader
             title={
               <Typography variant='h4' sx={{ mb: 6 }}>
-                Permissions List
+                {t('Permissions List')}
               </Typography>
             }
             subtitle={

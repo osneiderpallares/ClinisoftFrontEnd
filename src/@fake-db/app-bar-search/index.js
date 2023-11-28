@@ -911,6 +911,13 @@ const searchData = [
     icon: 'material-symbols-light:location-home-rounded',
     title: 'Barrio',
     category: 'appsPages'
+  },
+  {
+    id: 131,
+    url: '/empresas/empresa',
+    icon: 'mdi:company',
+    title: 'Empresa',
+    category: 'appsPages'
   }
 ]
 

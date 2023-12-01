@@ -26,12 +26,12 @@ import CustomTextField from 'src/@core/components/mui/text-field'
 import { useRouter } from 'next/router'
 import axios from 'axios'
 
-// import md5 from 'md5'
-
 import calcularDV from 'src/@fake-db/funciones/calcular-dv'
 import toast from 'react-hot-toast'
 
 import { saveRow } from 'src/@fake-db/requests/peticiones.js'
+
+import { handleValid } from 'src/@fake-db/table/constants'
 
 const AppPage = ({}) => {
   const { t } = useTranslation()
@@ -138,26 +138,6 @@ const AppPage = ({}) => {
       email: '',
       responsabilidad: ''
     })
-  }
-
-  // const convertToMd5 = pass => {
-  //   const hash = md5(pass)
-
-  //   return hash
-  // }
-  function handleValid(email) {
-    let msn = ''
-
-    const isValidEmail =
-      /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-
-    if (email === '') {
-      msn = email.required || `${t('Please enter email')}`
-    } else if (!isValidEmail.test(email)) {
-      msn = email.validEmail || `${t('Please enter a valid email address')}`
-    }
-
-    return msn
   }
 
   function validaciones() {
@@ -881,7 +861,7 @@ const AppPage = ({}) => {
                         fe_tipo_servidor: company.fe_tipo_servidor,
                         responsabilidad: company.responsabilidad
                       })
-                      error.email = handleValid(e.target.value)
+                      error.email = t(`${handleValid(e.target.value)}`)
                     }}
                     placeholder={t('Enter the invoice email')}
                     error={Boolean(error.email)}

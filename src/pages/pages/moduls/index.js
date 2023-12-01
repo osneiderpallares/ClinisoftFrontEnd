@@ -1056,7 +1056,7 @@ const moduls = () => {
               </AccordionSummary>
               <AccordionDetails>
                 <List component='nav' aria-label='main mailbox'>
-                  <ListItem disablePadding onClick={() => handleDropdownClose('../empresas')}>
+                  <ListItem disablePadding onClick={() => handleDropdownClose('../empresas/empresa')}>
                     <ListItemButton>
                       <ListItemIcon>
                         <Icon icon='mdi:company' fontSize={20} />
@@ -1068,7 +1068,7 @@ const moduls = () => {
               </AccordionDetails>
             </Accordion>
             <List component='nav' aria-label='main mailbox'>
-              <ListItem disablePadding onClick={() => handleDropdownClose('../empresas')}>
+              <ListItem disablePadding onClick={() => handleDropdownClose('../empresas/sede')}>
                 <ListItemButton>
                   <ListItemIcon>
                     <Icon icon='pixelarticons:git-branch' fontSize={20} />

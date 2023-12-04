@@ -114,11 +114,13 @@ const LoginPage = () => {
     setError,
     handleSubmit,
     formState: { errors }
-  } = useForm({
+  } = useForm(
+    {
     defaultValues,
     mode: 'onBlur',
     resolver: yupResolver(schema)
-  })
+  }
+  )
 
   const onSubmit = data => {
     const { email, password } = data
@@ -225,7 +227,7 @@ const LoginPage = () => {
                       onChange={onChange}
                       placeholder='admin@vuexy.com'
                       error={Boolean(errors.email)}
-                      {...(errors.email && { helperText: errors.email.message })}
+                      {...(errors.email && { helperText: `${t(errors.email.message)}`  })}
                     />
                   )}
                 />
@@ -244,7 +246,7 @@ const LoginPage = () => {
                       onChange={onChange}
                       id='auth-login-v2-password'
                       error={Boolean(errors.password)}
-                      {...(errors.password && { helperText: errors.password.message })}
+                      {...(errors.password && { helperText: `${t(errors.password.message)}` })}
                       type={showPassword ? 'text' : 'password'}
                       InputProps={{
                         endAdornment: (

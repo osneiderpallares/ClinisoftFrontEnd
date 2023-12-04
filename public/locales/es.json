@@ -594,5 +594,6 @@
   "Enter the sgsss": "Ingresa el sgsss",
   "Enter the address": "Ingresa la dirección",
   "Enter the email": "Ingresa el correo",
-  "Enter the legal representative": "Ingresa representante legal"
+  "Enter the legal representative": "Ingresa representante legal",
+  "Email or Password is invalid": "Correo o Contraseña incorrecta"
 }

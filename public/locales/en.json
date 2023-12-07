@@ -596,5 +596,9 @@
   "Enter the legal representative": "Enter the legal representative",
   "Email or Password is invalid": "Email or Password is invalid",
   "email is a required field": "email is a required field",
-  "password must be at least 5 characters": "password must be at least 5 characters"
+  "password must be at least 5 characters": "password must be at least 5 characters",
+  "My Profile": "My Profile",
+  "Settings": "Settings",
+  "Help": "Help",
+  "Sign Out": "Sign Out"
 }

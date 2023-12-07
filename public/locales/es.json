@@ -597,5 +597,9 @@
   "Enter the legal representative": "Ingresa representante legal",
   "Email or Password is invalid": "Correo o Contraseña incorrecta",
   "email is a required field": "campo email es requerido",
-  "password must be at least 5 characters": "la contraseña debe contener como mínimo 5 caracteres"
+  "password must be at least 5 characters": "la contraseña debe contener como mínimo 5 caracteres",
+  "My Profile": "Mi Perfil",
+  "Settings": "Configuración",
+  "Help": "Ayuda",
+  "Sign Out": "Cerrar Sesión"
 }

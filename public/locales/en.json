@@ -223,6 +223,7 @@
   "Administrative Novelty": "Administrative Novelty",
   "Clinical novelty": "Clinical novelty",
   "Rtx End Of Treatment States": "Rtx End Of Treatment States",
+  "Rtx Reasons for Treatment Completion": "Rtx Reasons for Treatment Completion",
   "Drug Groups": "Drug Groups",
   "Drug Classes": "Drug classes",
   "Drug Temperatures": "Drug Temperatures",
@@ -536,6 +537,7 @@
   "Permissions List": "Permissions List",
   "Department Code": "Department Code",
   "DEPARTMENT CODE": "DEPARTMENT CODE",
+  "department code": "department code",
   "CITY CODE": "CITY CODE",
   "city code": "city code",
   "City Code": "City Code",
@@ -600,5 +602,16 @@
   "My Profile": "My Profile",
   "Settings": "Settings",
   "Help": "Help",
-  "Sign Out": "Sign Out"
+  "Sign Out": "Sign Out",
+  "Affiliation Type": "Affiliation Type",
+  "User Type": "User Type",
+  "RIPS_CODE": "RIPS_CODE",
+  "Rips_Code": "Rips_Code",
+  "rips_code": "rips_code",
+  "CAC_Abbreviation": "CAC_Abbreviation",
+  "cac_abbreviation": "cac_abbreviation",
+  "Enter the cac abbreviation": "Enter the cac abbreviation",
+  "Enter the rips code": "Enter the rips code",
+  "Dian homologation": "Dian homologation",
+  "rips codigo": "The field rips code is required"
 }

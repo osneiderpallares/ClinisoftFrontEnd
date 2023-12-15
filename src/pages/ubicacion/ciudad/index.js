@@ -630,7 +630,7 @@ const AppPage = ({}) => {
                   required
                   fullWidth
                   name='departamento'
-                  label={t('Service')}
+                  label={t('Department')}
                   SelectProps={{
                     MenuProps,
                     value: registroSeleccionado.departamento,

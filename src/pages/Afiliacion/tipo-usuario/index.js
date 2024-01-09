@@ -496,7 +496,7 @@ const AppPage = ({}) => {
                       label={t('Dian homologation')}
                       SelectProps={{
                         MenuProps,
-                        value,value,
+                        value:value,
                         onChange:onChange
                       }}
                       // inputProps={{ maxLength: 50 }}
@@ -798,9 +798,9 @@ const AppPage = ({}) => {
   )
 }
 
-AppPage.acl = {
-  action: 'read',
-  subject: 'acl-page'
-}
+// AppPage.acl = {
+//   action: 'read',
+//   subject: 'acl-page'
+// }
 
 export default AppPage

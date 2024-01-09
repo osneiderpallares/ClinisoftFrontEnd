@@ -1,6 +1,9 @@
 // ** Next Import
 import Link from 'next/link'
 
+//Traducir
+import { useTranslation } from 'react-i18next'
+
 // ** MUI Components
 import Button from '@mui/material/Button'
 import { styled } from '@mui/material/styles'
@@ -34,19 +37,21 @@ const Img = styled('img')(({ theme }) => ({
 }))
 
 const Error401 = () => {
+  const { t } = useTranslation()
   return (
     <Box className='content-center'>
       <Box sx={{ p: 5, display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
         <BoxWrapper>
           <Typography variant='h2' sx={{ mb: 1.5 }}>
-            You are not authorized!
+            {t('You are not authorized!')}
           </Typography>
           <Typography sx={{ color: 'text.secondary' }}>
-            You do not have permission to view this page using the credentials that you have provided while login.
+            {t('You do not have permission to view this page using the credentials that you have provided while login.')}
           </Typography>
-          <Typography sx={{ mb: 6, color: 'text.secondary' }}>Please contact your site administrator.</Typography>
-          <Button href='/' component={Link} variant='contained'>
-            Back to Home
+          <Typography sx={{ mb: 6, color: 'text.secondary' }}>{t('Please contact your site administrator.')}</Typography>
+          {/* <Button href='/' component={Link} variant='contained'> */}
+          <Button href='/' variant='contained'>
+          {t('Back to Home')}
           </Button>
         </BoxWrapper>
         <Img height='500' alt='error-illustration' src='/images/pages/401.png' />

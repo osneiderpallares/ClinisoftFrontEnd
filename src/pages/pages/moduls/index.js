@@ -486,7 +486,7 @@ const moduls = () => {
               </AccordionSummary>
               <AccordionDetails>
                 <List component='nav' aria-label='main mailbox'>
-                  <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
+                <ListItem disablePadding onClick={() => handleDropdownClose('../agenda/agenda')}>
                     <ListItemButton>
                       <ListItemIcon>
                         <Icon icon='fluent-mdl2:calendar-agenda' fontSize={20} />
@@ -494,7 +494,15 @@ const moduls = () => {
                       <ListItemText primary='Agenda' />
                     </ListItemButton>
                   </ListItem>
-                  <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
+                  <ListItem disablePadding onClick={() => handleDropdownClose('../agenda/agenda/agenda-medica')}>
+                    <ListItemButton>
+                      <ListItemIcon>
+                        <Icon icon='fluent-mdl2:calendar-agenda' fontSize={20} />
+                      </ListItemIcon>
+                      <ListItemText primary='Agenda Médica' />
+                    </ListItemButton>
+                  </ListItem>
+                  <ListItem disablePadding onClick={() => handleDropdownClose('../agenda/grupo-agenda')}>
                     <ListItemButton>
                       <ListItemIcon>
                         <Icon icon='arcticons:todoagenda' fontSize={20} />
@@ -506,7 +514,7 @@ const moduls = () => {
               </AccordionDetails>
             </Accordion>
             <List component='nav' aria-label='main mailbox'>
-              <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
+              <ListItem disablePadding onClick={() => handleDropdownClose('../notas-medicas/tipo-cita')}>
                 <ListItemButton>
                   <ListItemIcon>
                     <Icon icon='streamline:waiting-appointments-calendar-solid' fontSize={20} />
@@ -514,7 +522,7 @@ const moduls = () => {
                   <ListItemText primary={t('Appointment Types')} />
                 </ListItemButton>
               </ListItem>
-              <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
+              <ListItem disablePadding onClick={() => handleDropdownClose('../notas-medicas/tipo-consulta')}>
                 <ListItemButton>
                   <ListItemIcon>
                     <Icon icon='icon-park-outline:history-query' fontSize={20} />
@@ -530,7 +538,7 @@ const moduls = () => {
                   <ListItemText primary={t('Healthcare location')} />
                 </ListItemButton>
               </ListItem>
-              <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
+              <ListItem disablePadding onClick={() => handleDropdownClose('../notas-medicas/tipo-admisiones')}>
                 <ListItemButton>
                   <ListItemIcon>
                     <Icon icon='healthicons:admissions-negative' fontSize={20} />
@@ -538,7 +546,7 @@ const moduls = () => {
                   <ListItemText primary={t('Type of Admission')} />
                 </ListItemButton>
               </ListItem>
-              <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
+              <ListItem disablePadding onClick={() => handleDropdownClose('../notas-medicas/modalidad-atencion')}>
                 <ListItemButton>
                   <ListItemIcon>
                     <Icon icon='guidance:care-staff-area' fontSize={20} />
@@ -546,7 +554,7 @@ const moduls = () => {
                   <ListItemText primary={t('Care Modality')} />
                 </ListItemButton>
               </ListItem>
-              <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
+              <ListItem disablePadding onClick={() => handleDropdownClose('../notas-medicas/vias-ingreso')}>
                 <ListItemButton>
                   <ListItemIcon>
                     <Icon icon='maki:entrance-alt1' fontSize={20} />
@@ -565,7 +573,7 @@ const moduls = () => {
               </AccordionSummary>
               <AccordionDetails>
                 <List component='nav' aria-label='main mailbox'>
-                  <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
+                  <ListItem disablePadding onClick={() => handleDropdownClose('../indices/grupo-indice')}>
                     <ListItemButton>
                       <ListItemIcon>
                         <Icon icon='dashicons:index-card' fontSize={20} />
@@ -573,7 +581,7 @@ const moduls = () => {
                       <ListItemText primary={t('Index Group')} />
                     </ListItemButton>
                   </ListItem>
-                  <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
+                  <ListItem disablePadding onClick={() => handleDropdownClose('../indices/indices-calidad-vida')}>
                     <ListItemButton>
                       <ListItemIcon>
                         <Icon icon='game-icons:life-bar' fontSize={20} />
@@ -585,7 +593,7 @@ const moduls = () => {
               </AccordionDetails>
             </Accordion>
             <List component='nav' aria-label='main mailbox'>
-              <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
+              <ListItem disablePadding onClick={() => handleDropdownClose('../notas-medicas/turnos')}>
                 <ListItemButton>
                   <ListItemIcon>
                     <Icon icon='game-icons:turnstile' fontSize={20} />
@@ -606,7 +614,7 @@ const moduls = () => {
               </AccordionSummary>
               <AccordionDetails>
                 <List component='nav' aria-label='main mailbox'>
-                  <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
+                  <ListItem disablePadding onClick={() => handleDropdownClose('../incapacidades/incapacidades')}>
                     <ListItemButton>
                       <ListItemIcon>
                         <Icon icon='fontisto:paralysis-disability' fontSize={20} />
@@ -614,7 +622,7 @@ const moduls = () => {
                       <ListItemText primary={t('Disabilities')} />
                     </ListItemButton>
                   </ListItem>
-                  <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
+                  <ListItem disablePadding onClick={() => handleDropdownClose('../incapacidades/incapacidades-tipo')}>
                     <ListItemButton>
                       <ListItemIcon>
                         <Icon icon='streamline:lift-disability-solid' fontSize={20} />
@@ -636,7 +644,7 @@ const moduls = () => {
               </AccordionSummary>
               <AccordionDetails>
                 <List component='nav' aria-label='main mailbox'>
-                  <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
+                  <ListItem disablePadding onClick={() => handleDropdownClose('../diagnosticos/diagnosticos')}>
                     <ListItemButton>
                       <ListItemIcon>
                         <Icon icon='material-symbols-light:diagnosis-outline-rounded' fontSize={20} />
@@ -644,7 +652,7 @@ const moduls = () => {
                       <ListItemText primary={t('Diagnoses')} />
                     </ListItemButton>
                   </ListItem>
-                  <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
+                  <ListItem disablePadding onClick={() => handleDropdownClose('../diagnosticos/diagnosticos-grupos')}>
                     <ListItemButton>
                       <ListItemIcon>
                         <Icon icon='fluent-mdl2:diagnostic-data-bar-tooltip' fontSize={20} />
@@ -652,7 +660,7 @@ const moduls = () => {
                       <ListItemText primary={t('Diagnostic Groups')} />
                     </ListItemButton>
                   </ListItem>
-                  <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
+                  <ListItem disablePadding onClick={() => handleDropdownClose('../diagnosticos/diagnosticos-tipos')}>
                     <ListItemButton>
                       <ListItemIcon>
                         <Icon icon='streamline:medical-search-diagnosis' fontSize={20} />
@@ -668,7 +676,7 @@ const moduls = () => {
                       <ListItemText primary={t('Stage')} />
                     </ListItemButton>
                   </ListItem>
-                  <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
+                  <ListItem disablePadding onClick={() => handleDropdownClose('../diagnosticos/tipos-tratamientos')}>
                     <ListItemButton>
                       <ListItemIcon>
                         <Icon icon='healthicons:health-data-sync-outline' fontSize={20} />
@@ -676,7 +684,7 @@ const moduls = () => {
                       <ListItemText primary={t('Treatment Types')} />
                     </ListItemButton>
                   </ListItem>
-                  <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
+                  <ListItem disablePadding onClick={() => handleDropdownClose('../diagnosticos/entidad-diagnostica')}>
                     <ListItemButton>
                       <ListItemIcon>
                         <Icon icon='fa6-solid:kit-medical' fontSize={20} />
@@ -684,7 +692,7 @@ const moduls = () => {
                       <ListItemText primary={t('Diagnosing Entity')} />
                     </ListItemButton>
                   </ListItem>
-                  <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
+                  <ListItem disablePadding onClick={() => handleDropdownClose('../diagnosticos/forma-diagnostico')}>
                     <ListItemButton>
                       <ListItemIcon>
                         <Icon icon='bi:file-medical' fontSize={20} />
@@ -705,7 +713,7 @@ const moduls = () => {
               </AccordionSummary>
               <AccordionDetails>
                 <List component='nav' aria-label='main mailbox'>
-                  <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
+                  <ListItem disablePadding onClick={() => handleDropdownClose('../cac/motivos-histologia')}>
                     <ListItemButton>
                       <ListItemIcon>
                         <Icon icon='healthicons:malaria-pv-microscope' fontSize={20} />
@@ -713,7 +721,7 @@ const moduls = () => {
                       <ListItemText primary={t('Histology Reasons')} />
                     </ListItemButton>
                   </ListItem>
-                  <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
+                  <ListItem disablePadding onClick={() => handleDropdownClose('../cac/histologia')}>
                     <ListItemButton>
                       <ListItemIcon>
                         <Icon icon='icon-park-solid:microscope' fontSize={20} />
@@ -721,7 +729,7 @@ const moduls = () => {
                       <ListItemText primary={t('Histologies')} />
                     </ListItemButton>
                   </ListItem>
-                  <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
+                  <ListItem disablePadding onClick={() => handleDropdownClose('../cac/bases-dx-diferenciaciones')}>
                     <ListItemButton>
                       <ListItemIcon>
                         <Icon icon='healthicons:medical-records-outline' fontSize={20} />
@@ -729,7 +737,7 @@ const moduls = () => {
                       <ListItemText primary={t('Differential Dx Bases')} />
                     </ListItemButton>
                   </ListItem>
-                  <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
+                  <ListItem disablePadding onClick={() => handleDropdownClose('../cac/objetivos-de-tratamientos')}>
                     <ListItemButton>
                       <ListItemIcon>
                         <Icon icon='bi:file-earmark-medical-fill' fontSize={20} />
@@ -737,7 +745,7 @@ const moduls = () => {
                       <ListItemText primary={t('Treatment Objectives')} />
                     </ListItemButton>
                   </ListItem>
-                  <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
+                  <ListItem disablePadding onClick={() => handleDropdownClose('../cac/objetivos-intervenciones')}>
                     <ListItemButton>
                       <ListItemIcon>
                         <Icon icon='fa6-solid:notes-medical' fontSize={20} />
@@ -745,7 +753,7 @@ const moduls = () => {
                       <ListItemText primary={t('Intervention Objectives')} />
                     </ListItemButton>
                   </ListItem>
-                  <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
+                  <ListItem disablePadding onClick={() => handleDropdownClose('../cac/her2-resultados')}>
                     <ListItemButton>
                       <ListItemIcon>
                         <Icon icon='carbon:result-new' fontSize={20} />
@@ -753,7 +761,7 @@ const moduls = () => {
                       <ListItemText primary={t('Her2 Results')} />
                     </ListItemButton>
                   </ListItem>
-                  <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
+                  <ListItem disablePadding onClick={() => handleDropdownClose('../cac/colonrec-estadificacion')}>
                     <ListItemButton>
                       <ListItemIcon>
                         <Icon icon='carbon:result-old' fontSize={20} />
@@ -761,7 +769,7 @@ const moduls = () => {
                       <ListItemText primary={t('ColonRec Staging')} />
                     </ListItemButton>
                   </ListItem>
-                  <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
+                  <ListItem disablePadding onClick={() => handleDropdownClose('../cac/hematologicos-estadificacion')}>
                     <ListItemButton>
                       <ListItemIcon>
                         <Icon icon='pajamas:search-results' fontSize={20} />
@@ -769,7 +777,7 @@ const moduls = () => {
                       <ListItemText primary={t('Hematological Staging')} />
                     </ListItemButton>
                   </ListItem>
-                  <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
+                  <ListItem disablePadding onClick={() => handleDropdownClose('../cac/prostata-gleason')}>
                     <ListItemButton>
                       <ListItemIcon>
                         <Icon icon='healthicons:virus-research-alt-outline' fontSize={20} />
@@ -777,7 +785,7 @@ const moduls = () => {
                       <ListItemText primary={t('Prostate Gleason')} />
                     </ListItemButton>
                   </ListItem>
-                  <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
+                  <ListItem disablePadding onClick={() => handleDropdownClose('../cac/leucemia-clasificada')}>
                     <ListItemButton>
                       <ListItemIcon>
                         <Icon icon='healthicons:health-worker-form' fontSize={20} />
@@ -785,7 +793,7 @@ const moduls = () => {
                       <ListItemText primary={t('Classified Leukemia')} />
                     </ListItemButton>
                   </ListItem>
-                  <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
+                  <ListItem disablePadding onClick={() => handleDropdownClose('../cac/estado-fin-tto')}>
                     <ListItemButton>
                       <ListItemIcon>
                         <Icon icon='uil:medical' fontSize={20} />
@@ -793,7 +801,7 @@ const moduls = () => {
                       <ListItemText primary={t('End of Treatment Status')} />
                     </ListItemButton>
                   </ListItem>
-                  <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
+                  <ListItem disablePadding onClick={() => handleDropdownClose('../cac/motivos-fin-tto')}>
                     <ListItemButton>
                       <ListItemIcon>
                         <Icon icon='uil:file-medical-alt' fontSize={20} />
@@ -801,7 +809,7 @@ const moduls = () => {
                       <ListItemText primary={t('Reasons For End of Treatment')} />
                     </ListItemButton>
                   </ListItem>
-                  <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
+                  <ListItem disablePadding onClick={() => handleDropdownClose('../cac/quimioterapia-fases')}>
                     <ListItemButton>
                       <ListItemIcon>
                         <Icon icon='game-icons:medical-drip' fontSize={20} />
@@ -1083,9 +1091,9 @@ const moduls = () => {
     </Grid>
   )
 }
-moduls.acl = {
-  action: 'read',
-  subject: 'acl-page'
-}
+// moduls.acl = {
+//   action: 'read',
+//   subject: 'acl-page'
+// }
 
 export default moduls

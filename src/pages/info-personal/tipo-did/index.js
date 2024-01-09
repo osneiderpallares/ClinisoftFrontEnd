@@ -152,6 +152,9 @@ const AppPage = ({}) => {
   const [filteredData, setFilteredData] = useState([])
   const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 7 })
 
+  //desactivar boton guardar y borrar al abrir modal
+  const [isSubmitting, setIsSubmitting] = useState(false)
+
   const router = useRouter()
 
   const handleSearch = searchValue => {
@@ -234,6 +237,7 @@ const AppPage = ({}) => {
     //registroSeleccionado.id = null
 
     setShow(true)
+    setIsSubmitting(false)//desactivar boton guardar y borrar al abrir modal
   }
 
   const showErrors = (field, valueLen, min) => {
@@ -249,6 +253,7 @@ const AppPage = ({}) => {
   const {
     control,
     handleSubmit,
+    reset,//desactivar boton guardar y borrar al abrir modal
     formState: { errors }
   } = useForm({
     defaultValues,
@@ -257,9 +262,11 @@ const AppPage = ({}) => {
   })
 
   const onSubmit = data => {
+    setIsSubmitting(true) //desactivar boton guardar y borrar al abrir modal
     if (saveRow(data, '/store_tiposdid')) {
       toast.success(t('Log saved successfully!'))
       router.push('./tipo-did')
+      reset()//desactivar boton guardar y borrar al abrir modal
     } else {
       toast.error(t('Error saving log'))
     }
@@ -375,7 +382,7 @@ const AppPage = ({}) => {
                       value={value}
                       label={t('Name')}
                       onChange={onChange}
-                      placeholder={t('Enter your name')}
+                      placeholder={t('Enter the name')}
                       error={Boolean(errors.nombre)}
                       aria-describedby='validation-schema-name'
                       {...(errors.nombre && { helperText: errors.nombre.message })}
@@ -474,7 +481,7 @@ const AppPage = ({}) => {
               pb: theme => [`${theme.spacing(8)} !important`, `${theme.spacing(12.5)} !important`]
             }}
           >
-            <Button variant='contained' sx={{ mr: 1 }} type='submit'>
+            <Button variant='contained' sx={{ mr: 1 }} type='submit' disabled={isSubmitting}> {/*desactivar boton guardar y borrar al abrir modal */}
               {t('Save')}
             </Button>
             <Button variant='tonal' color='secondary' onClick={() => setShow(false)}>
@@ -681,9 +688,9 @@ const AppPage = ({}) => {
   )
 }
 
-AppPage.acl = {
-  action: 'read',
-  subject: 'acl-page'
-}
+// AppPage.acl = {
+//   action: 'read',
+//   subject: 'acl-page'
+// }
 
 export default AppPage

@@ -9,6 +9,8 @@ import CardHeader from '@mui/material/CardHeader'
 
 import { DataGrid, esES,enUS} from '@mui/x-data-grid'
 
+import Pagination from '@mui/material/Pagination'
+
 import QuickSearchToolbar from 'src/views/table/data-grid/QuickSearchToolbar'
 import Grid from '@mui/material/Grid'
 import Dialog from '@mui/material/Dialog'
@@ -272,7 +274,17 @@ const AppPage = ({}) => {
   }, [router])
   const currentLocaleText =
   i18n.language === 'es' ? esES.components.MuiDataGrid.defaultProps.localeText : enUS.components.MuiDataGrid.defaultProps.localeText;
+  
+  const handlePageChange = (event, value) => {
+    setPaginationModel({ ...paginationModel, page: value });
+    };
+  let totalfilas = 0;
+  if (rows !== null) {
+    totalfilas = rows.length;
+  }
+  const totalPages = Math.ceil((totalfilas-1) / paginationModel.pageSize);
   const table = (
+    <div style={{ height: 425, width: '100%' }}>
     <DataGrid
       disableColumnMenu  
       columnHeaderHeight={38}
@@ -303,6 +315,10 @@ const AppPage = ({}) => {
       // // Para inglés
       // localeText={enUS.components.MuiDataGrid.defaultProps.localeText} 
    />
+   <div style={{ display: 'flex', justifyContent: 'center', marginTop: '0px' }}>
+    <Pagination count={totalPages} page={paginationModel.page} onChange={handlePageChange} />
+    </div>
+     </div>
    )
 
   if (!rows) return null
@@ -321,7 +337,7 @@ const AppPage = ({}) => {
         }
       />
       <CardContent>
-        <Box sx={{ height: 500 }}>{table}</Box>
+        <Box sx={{ height: 460 }}>{table}</Box>
       </CardContent>
       {/* Modal insertar registro */}
       <Dialog
@@ -589,9 +605,9 @@ const AppPage = ({}) => {
   )
 }
 
-AppPage.acl = {
-  action: 'read',
-  subject: 'acl-page'
-}
+// AppPage.acl = {
+//   action: 'read',
+//   subject: 'acl-page'
+// }
 
 export default AppPage

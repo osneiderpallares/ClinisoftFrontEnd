@@ -1,6 +1,9 @@
 // ** Next Import
 import Link from 'next/link'
 
+//Traducir
+import { useTranslation } from 'react-i18next'
+
 // ** MUI Components
 import Button from '@mui/material/Button'
 import { styled } from '@mui/material/styles'
@@ -34,18 +37,20 @@ const Img = styled('img')(({ theme }) => ({
 }))
 
 const Error404 = () => {
+  const { t } = useTranslation()
   return (
     <Box className='content-center'>
       <Box sx={{ p: 5, display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
         <BoxWrapper>
           <Typography variant='h2' sx={{ mb: 1.5 }}>
-            Page Not Found :(
+            {t('Page Not Found')} :(
           </Typography>
           <Typography sx={{ mb: 6, color: 'text.secondary' }}>
-            Oops! 😖 The requested URL was not found on this server.
+            {/* Oops! {t('The requested URL was not found on this server.')} */}
+            😖 {t('The requested URL was not found on this server.')}
           </Typography>
           <Button href='/' component={Link} variant='contained'>
-            Back to Home
+          {t('Back to Home')}
           </Button>
         </BoxWrapper>
         <Img height='500' alt='error-illustration' src='/images/pages/404.png' />

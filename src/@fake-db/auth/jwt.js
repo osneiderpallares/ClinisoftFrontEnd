@@ -1,4 +1,5 @@
 // ** JWT import
+import { exists } from 'i18next'
 import jwt from 'jsonwebtoken'
 
 // ** Mock Adapter
@@ -6,6 +7,10 @@ import mock from 'src/@fake-db/mock'
 
 // ** Default AuthConfig
 import defaultAuthConfig from 'src/configs/auth'
+
+//* Mensaje en ventana
+import toast from 'react-hot-toast'
+import { end } from '@popperjs/core'
 
 const users = [
   {
@@ -102,54 +107,81 @@ mock.onGet('/auth/me').reply(config => {
   // ** Get token from header
   // @ts-ignore
   const token = config.headers.Authorization
-
   // ** Default response
   let response = [200, {}]
 
   // ** Checks if the token is valid or expired
   jwt.verify(token, jwtConfig.secret, (err, decoded) => {
     // ** If token is expired
-    if (err) {
-      // ** If onTokenExpiration === 'logout' then send 401 error
-      if (defaultAuthConfig.onTokenExpiration === 'logout') {
-        // ** 401 response will logout user from AuthContext file
-        response = [401, { error: { error: 'Invalid User' } }]
+    try{  
+      
+      if (err===null) {
+        // ** If onTokenExpiration === 'logout' then send 401 error
+        if (defaultAuthConfig.onTokenExpiration === 'logout') {
+          // ** 401 response will logout user from AuthContext file
+          response = [401, { error: { error: 'Invalid User' } }]
+        } else {
+          // ** If onTokenExpiration === 'refreshToken' then generate the new token
+          const oldTokenDecoded = jwt.decode(token, { complete: true })
+          // ** Get user id from old token
+          // @ts-ignore
+          const { id: userId } = oldTokenDecoded.payload
+          
+          //****CODIGO ORIGINAL QUE ACTUALIZA Y CIERRA SESION****************** */
+          // ** Get user that matches id in token
+          //const user = users.find(u => u.id === userId)
+          //******************************************************************* */
+        
+          //****CODIGO QUE ACTUALIZA Y NO CIERRA SESION************************* */
+          //Recuperar los datos de inicio de sesión de localStorage
+          const loginDataString = localStorage.getItem('userData');
+          
+          if(loginDataString !==null)
+          {
+          // alert(loginDataString)
+          // Convertir la cadena de datos de inicio de sesión a un objeto JavaScript
+          const users = JSON.parse(loginDataString);
+
+          // // Buscar al usuario que coincide con userId
+           const user = users.find(u => u.id === userId);
+          //******************************************************************** */
+      
+          // ** Sign a new token CREA EL TOKEN CON TIEMPO DE EXPIRACION
+          // const accessToken = jwt.sign({ id: userId }, jwtConfig.secret, {
+          //   expiresIn: jwtConfig.expirationTime
+          // })
+          // CREA EL TOKEN SIN TIEMPO DE EXPIRACION   
+          const accessToken = jwt.sign({ id: userId }, jwtConfig.secret)
+          // ** Set new token in localStorage
+          window.localStorage.setItem(defaultAuthConfig.storageTokenKeyName, accessToken)
+          const obj = { userData: { ...user, password: undefined } }
+          // ** return 200 with user data
+          response = [200, obj]
+          }
+        }
       } else {
-        // ** If onTokenExpiration === 'refreshToken' then generate the new token
-        const oldTokenDecoded = jwt.decode(token, { complete: true })
-
-        // ** Get user id from old token
+        // ** If token is valid do nothing
         // @ts-ignore
-        const { id: userId } = oldTokenDecoded.payload
-
+        const userId = decoded.id
+        
         // ** Get user that matches id in token
-        const user = users.find(u => u.id === userId)
-
-        // ** Sign a new token
-        const accessToken = jwt.sign({ id: userId }, jwtConfig.secret, {
-          expiresIn: jwtConfig.expirationTime
-        })
-
-        // ** Set new token in localStorage
-        window.localStorage.setItem(defaultAuthConfig.storageTokenKeyName, accessToken)
-        const obj = { userData: { ...user, password: undefined } }
+        const userData = JSON.parse(JSON.stringify(users.find(u => u.id === userId)))
+        delete userData.password
 
         // ** return 200 with user data
-        response = [200, obj]
+        response = [200, { userData }]
       }
-    } else {
-      // ** If token is valid do nothing
-      // @ts-ignore
-      const userId = decoded.id
-
-      // ** Get user that matches id in token
-      const userData = JSON.parse(JSON.stringify(users.find(u => u.id === userId)))
-      delete userData.password
-
-      // ** return 200 with user data
-      response = [200, { userData }]
+    } catch(e) {
+      //console.log("error: "+e)
+      toast.success('Sesion finalizada', {
+        position: "top-center",
+      })
+      localStorage.removeItem('userData')
+      localStorage.removeItem('accessToken')
+      // window.location.replace('/login/')
     }
   })
-
   return response
 })
+
+

@@ -1,6 +1,9 @@
 // ** Next Import
 import Link from 'next/link'
 
+//Traducir
+import { useTranslation } from 'react-i18next'
+
 // ** MUI Components
 import Button from '@mui/material/Button'
 import { styled } from '@mui/material/styles'
@@ -34,6 +37,7 @@ const Img = styled('img')(({ theme }) => ({
 }))
 
 const Error500 = () => {
+  const { t } = useTranslation()
   return (
     <Box className='content-center'>
       <Box sx={{ p: 5, display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
@@ -44,8 +48,9 @@ const Error500 = () => {
           <Typography sx={{ mb: 6, color: 'text.secondary' }}>
             There was an error with the internal server. Please contact your site administrator.
           </Typography>
-          <Button href='/' component={Link} variant='contained'>
-            Back to Home
+          {/* <Button href='/' component={Link} variant='contained'> */}
+          <Button href='/' variant='contained'>
+            {t('Back to Home')}
           </Button>
         </BoxWrapper>
         <Img height='500' alt='error-illustration' src='/images/pages/404.png' />

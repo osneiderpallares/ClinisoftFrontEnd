@@ -602,9 +602,9 @@ const onSubmit = async data => {
   )
 }
 
-AppPage.acl = {
-  action: 'read',
-  subject: 'acl-page'
-}
+// AppPage.acl = {
+//   action: 'read',
+//   subject: 'acl-page'
+// }
 
 export default AppPage

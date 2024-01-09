@@ -759,9 +759,9 @@ const AppPage = ({}) => {
   )
 }
 
-AppPage.acl = {
-  action: 'read',
-  subject: 'acl-page'
-}
+// AppPage.acl = {
+//   action: 'read',
+//   subject: 'acl-page'
+// }
 
 export default AppPage

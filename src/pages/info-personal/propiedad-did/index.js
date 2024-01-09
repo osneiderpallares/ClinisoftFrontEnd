@@ -144,6 +144,9 @@ const AppPage = ({}) => {
   const [searchText, setSearchText] = useState('')
   const [filteredData, setFilteredData] = useState([])
   const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 7 })
+  
+  //desactivar boton guardar y borrar al abrir modal
+  const [isSubmitting, setIsSubmitting] = useState(false)
  
   const router = useRouter()
 
@@ -218,13 +221,15 @@ const AppPage = ({}) => {
     //registroSeleccionado.id = null
 
     setShow(true)
+    setIsSubmitting(false)//desactivar boton guardar y borrar al abrir modal
+    
   }
 
   const showErrors = (field, valueLen, min) => {
     if (valueLen === 0) {
       return `${t('The field')} ${field} ${t('is required')}`
     } else if (valueLen > 0 && valueLen < min) {
-      return `${t('El campo')} ${field} ${t('must at least have')} ${min} ${t('characters')}`
+      return `${t('The field')} ${field} ${t('must at least have')} ${min} ${t('characters')}`
     } else {
       return ''
     }
@@ -233,17 +238,20 @@ const AppPage = ({}) => {
   const {
     control,
     handleSubmit,
+    reset,//desactivar boton guardar y borrar al abrir modal
     formState: { errors }
   } = useForm({
     defaultValues,
     mode: 'onChange',
     resolver: yupResolver(schema)
   })
-
+  
   const onSubmit = data => {
+    setIsSubmitting(true) //desactivar boton guardar y borrar al abrir modal
     if (saveRow(data, '/store_prodid/')) {
       toast.success(t('Log saved successfully!'))
       router.push('./propiedad-did')
+      reset()//desactivar boton guardar y borrar al abrir modal
     } else {
       toast.error(t('Error saving log'))
     }
@@ -345,7 +353,7 @@ const AppPage = ({}) => {
           >
             <CustomCloseButton onClick={() => setShow(false)}>
               <Icon icon='tabler:x' fontSize='1.25rem' />
-            </CustomCloseButton>
+            </CustomCloseButton> 
             <Box sx={{ mb: 8, textAlign: 'center' }}>
               <Typography variant='h3' sx={{ mb: 3 }}>
                 {t('Start Registration')}
@@ -427,7 +435,7 @@ const AppPage = ({}) => {
               pb: theme => [`${theme.spacing(8)} !important`, `${theme.spacing(12.5)} !important`]
             }}
           >
-            <Button variant='contained' sx={{ mr: 1 }} type='submit'>
+            <Button variant='contained' sx={{ mr: 1 }} type='submit' disabled={isSubmitting}> {/*desactivar boton guardar y borrar al abrir modal */}
               {t('Save')}
             </Button>
             <Button variant='tonal' color='secondary' onClick={() => setShow(false)}>
@@ -589,9 +597,9 @@ const AppPage = ({}) => {
   )
 }
 
-AppPage.acl = {
-  action: 'read',
-  subject: 'acl-page'
-}
+// AppPage.acl = {
+//   action: 'read',
+//   subject: 'acl-page'
+// }
 
 export default AppPage

@@ -42,12 +42,40 @@ const AuthProvider = ({ children }) => {
             }
           })
           .then(async response => {
+          //*************************************************** 
+       // Almacenar el tiempo de inicio de la sesión cuando el usuario inicia sesión
+        const startTime = Date.now();
+        window.localStorage.setItem('startTime', startTime);
+
+        // Rastrea el tiempo de inactividad del usuario
+        let timeoutId = null;
+
+        window.addEventListener('load', resetTimer);
+        window.addEventListener('mousemove', resetTimer);
+        window.addEventListener('mousedown', resetTimer); // catches touchscreen presses as well
+        window.addEventListener('click', resetTimer); // catches touchpad clicks as well
+        window.addEventListener('scroll', resetTimer); // catches scrolling with arrow keys
+        window.addEventListener('keypress', resetTimer);
+
+        function resetTimer() {
+        clearTimeout(timeoutId);
+        timeoutId = setTimeout(() => {
+        // El usuario ha estado inactivo durante un cierto período de tiempo
+        // Cerrar la sesión del usuario
+        setUser(null)
+        window.localStorage.removeItem('userData')
+        window.localStorage.removeItem(authConfig.storageTokenKeyName)
+        window.localStorage.removeItem('startTime')
+        router.push('/login')
+        }, 900000); // 15 minutes
+        }
+       //*************************************************** 
             setLoading(false)
             setUser({ ...response.data.userData })
           })
           .catch(() => {
             localStorage.removeItem('userData')
-            localStorage.removeItem('refreshToken')
+            //localStorage.removeItem('refreshToken')
             localStorage.removeItem('accessToken')
             setUser(null)
             setLoading(false)
@@ -70,28 +98,59 @@ const AuthProvider = ({ children }) => {
   }
 
   const handleLogin = (params, errorCallback) => {
-    const { email, password } = params
+    const { email, password, rememberMe } = params
 
     const formData = new FormData()
     formData.append('email', email)
     formData.append('password', password)
+    formData.append('rememberMe', rememberMe)
     axios({
       url: 'http://127.0.0.1:8000/api/login/',
       method: 'POST',
       data: formData
     })
-      .then(response => {
-        if (!response.data) {
+      .then(async response => {
+       //*************************************************** 
+       // Almacenar el tiempo de inicio de la sesión cuando el usuario inicia sesión
+        const startTime = Date.now();
+        window.localStorage.setItem('startTime', startTime);
+
+        // Rastrea el tiempo de inactividad del usuario
+        let timeoutId = null;
+
+        window.addEventListener('load', resetTimer);
+        window.addEventListener('mousemove', resetTimer);
+        window.addEventListener('mousedown', resetTimer); // catches touchscreen presses as well
+        window.addEventListener('click', resetTimer); // catches touchpad clicks as well
+        window.addEventListener('scroll', resetTimer); // catches scrolling with arrow keys
+        window.addEventListener('keypress', resetTimer);
+
+        function resetTimer() {
+        clearTimeout(timeoutId);
+        timeoutId = setTimeout(() => {
+        // El usuario ha estado inactivo durante un cierto período de tiempo
+        // Cerrar la sesión del usuario
+        setUser(null)
+        window.localStorage.removeItem('userData')
+        window.localStorage.removeItem(authConfig.storageTokenKeyName)
+        window.localStorage.removeItem('startTime')
+        router.push('/login')
+        }, 900000); // 15 minutes
+        }
+       //*************************************************** 
+       if (!response.data) {
           throw 'Credentials are invalid or user was deleted'
         }
-
-        const accessToken = jwt.sign({ id: response.data[0].id }, jwtConfig.secret, {
-          expiresIn: jwtConfig.expirationTime
-        })
-        params.rememberMe ? window.localStorage.setItem(authConfig.storageTokenKeyName, accessToken) : null
+       if(rememberMe){
+        window.localStorage.setItem('emailstore', params.email)
+       } 
+        const accessToken = jwt.sign({ id: response.data[0].id }, jwtConfig.secret)
+        
+        params ? window.localStorage.setItem(authConfig.storageTokenKeyName, accessToken) : null
+        
         const returnUrl = router.query.returnUrl
         setUser(response.data[0])
-        params.rememberMe ? window.localStorage.setItem('userData', JSON.stringify(response.data)) : null
+        params ? window.localStorage.setItem('userData', JSON.stringify(response.data)) : null
         const redirectURL = returnUrl && returnUrl !== '/' ? returnUrl : '/'
         router.replace(redirectURL)
       })
@@ -106,6 +165,7 @@ const AuthProvider = ({ children }) => {
     // axios
     //   .post(authConfig.loginEndpoint, params)
     //   .then(async response => {
+    //     console.log("response")
     //     params.rememberMe
     //       ? window.localStorage.setItem(authConfig.storageTokenKeyName, response.data.accessToken)
     //       : null
@@ -118,6 +178,8 @@ const AuthProvider = ({ children }) => {
     //   .catch(err => {
     //     if (errorCallback) errorCallback(err)
     //   })
+    
+   
   }
 
   const handleLogout = () => {
@@ -125,6 +187,7 @@ const AuthProvider = ({ children }) => {
     window.localStorage.removeItem('userData')
     window.localStorage.removeItem(authConfig.storageTokenKeyName)
     router.push('/login')
+    
   }
 
   const values = {

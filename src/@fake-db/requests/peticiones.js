@@ -18,16 +18,15 @@ export async function saveRow(data, url) {
     Object.keys(data).forEach(e => {
       if (e != 'id') formData.append(e, data[e])
     })
-
+    
     await axios({
       url: endPoint + url,
       method: 'POST',
       data: formData
     })
-
     return true
   } catch (e) {
-    //console.log(e)
+    console.log("error "+e)
 
     return false
   }

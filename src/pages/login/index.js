@@ -2,6 +2,8 @@
 
 import { useTranslation } from 'react-i18next'
 
+import { useEffect } from 'react';
+
 // ** React Imports
 import { useState } from 'react'
 
@@ -98,8 +100,9 @@ const defaultValues = {
 const LoginPage = () => {
   const [rememberMe, setRememberMe] = useState(true)
   const [showPassword, setShowPassword] = useState(false)
+  const [email, setEmail] = useState('');
 
-  // ** Hooks
+   // ** Hooks
   const auth = useAuth()
   const theme = useTheme()
   const bgColors = useBgColor()
@@ -113,18 +116,28 @@ const LoginPage = () => {
     control,
     setError,
     handleSubmit,
-    formState: { errors }
+    formState: { errors },
+    setValue
   } = useForm(
     {
-    defaultValues,
+    //defaultValues,
     mode: 'onBlur',
     resolver: yupResolver(schema)
   }
   )
 
+  useEffect(() => {
+    if (rememberMe) {
+      const storedEmail = localStorage.getItem('emailstore')
+      setValue('email',storedEmail || '')
+      //window.localStorage.removeItem('emailstore')**********para eliminar el correo del navegador
+    }
+  }, [rememberMe, setValue]);
+
   const onSubmit = data => {
-    const { email, password } = data
-    auth.login({ email, password }, () => {
+    const { email,password } = data
+    // auth.login({ email, password }, () => {
+    auth.login({ email, password, rememberMe }, () => {
       //rememberMe
       setError('email', {
         type: 'manual',
@@ -217,6 +230,7 @@ const LoginPage = () => {
                   name='email'
                   control={control}
                   rules={{ required: true }}
+                  defaultValue={email}
                   render={({ field: { value, onChange, onBlur } }) => (
                     <CustomTextField
                       fullWidth
@@ -225,7 +239,7 @@ const LoginPage = () => {
                       value={value}
                       onBlur={onBlur}
                       onChange={onChange}
-                      placeholder='admin@vuexy.com'
+                      //placeholder={t('Email')}
                       error={Boolean(errors.email)}
                       {...(errors.email && { helperText: `${t(errors.email.message)}`  })}
                     />
@@ -275,6 +289,7 @@ const LoginPage = () => {
                 }}
               >
                 <FormControlLabel
+                  // style={{ display: 'none' }}//oculta el checkbox
                   label={t('Remember Me')}
                   control={<Checkbox checked={rememberMe} onChange={e => setRememberMe(e.target.checked)} />}
                 />

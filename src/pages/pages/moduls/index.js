@@ -817,7 +817,7 @@ const moduls = () => {
                       <ListItemText primary={t('Chemotherapy Phases')} />
                     </ListItemButton>
                   </ListItem>
-                  <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
+                  <ListItem disablePadding onClick={() => handleDropdownClose('../cac/cac-tipos-tratamientos')}>
                     <ListItemButton>
                       <ListItemIcon>
                         <Icon icon='fa-solid:hand-holding-medical' fontSize={20} />
@@ -825,7 +825,7 @@ const moduls = () => {
                       <ListItemText primary={t('Treatment Types')} />
                     </ListItemButton>
                   </ListItem>
-                  <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
+                  <ListItem disablePadding onClick={() => handleDropdownClose('../cac/resultado-final')}>
                     <ListItemButton>
                       <ListItemIcon>
                         <Icon icon='carbon:result-draft' fontSize={20} />
@@ -833,7 +833,7 @@ const moduls = () => {
                       <ListItemText primary={t('Final Result')} />
                     </ListItemButton>
                   </ListItem>
-                  <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
+                  <ListItem disablePadding onClick={() => handleDropdownClose('../cac/novedad-administrativa')}>
                     <ListItemButton>
                       <ListItemIcon>
                         <Icon icon='tabler:report' fontSize={20} />
@@ -841,7 +841,7 @@ const moduls = () => {
                       <ListItemText primary={t('Administrative Novelty')} />
                     </ListItemButton>
                   </ListItem>
-                  <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
+                  <ListItem disablePadding onClick={() => handleDropdownClose('../cac/novedad-clinica')}>
                     <ListItemButton>
                       <ListItemIcon>
                         <Icon icon='bi:file-medical' fontSize={20} />
@@ -849,7 +849,14 @@ const moduls = () => {
                       <ListItemText primary={t('Clinical novelty')} />
                     </ListItemButton>
                   </ListItem>
-                  <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
+                  <ListItem disablePadding onClick={() => handleDropdownClose('https://www.google.com.co')}>
+                    <ListItemButton>
+                      <ListItemIcon>
+                        <Icon icon='uil:medical' fontSize={20} />
+                      </ListItemIcon>
+                      <ListItemText primary={t('Rtx End Of Treatment States')} />
+                    </ListItemButton>
+                  </ListItem>    <ListItem disablePadding onClick={() => handleDropdownClose('../admisiones/admision')}>
                     <ListItemButton>
                       <ListItemIcon>
                         <Icon icon='uil:medical' fontSize={20} />
